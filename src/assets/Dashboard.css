@@ -3,13 +3,14 @@
 }
 
 .dashboard {
-    background-color: #efefef !important;
+    background-color: #fafafa !important;
 }
 
 .dashboard .card{
     margin-right: 10px;
     height: auto;
     padding: 20px;
+    margin-top: 10px;
     background-color: #fff !important;
 }
 
@@ -28,4 +29,13 @@
 .dashboard .MuiSvgIcon-root{
     font-size: 45px !important;
     color: silver;
+}
+
+.dashboard .card2{
+    margin-left: 10px;
+    margin-top: 13px;
+}
+
+.MuiPaper-root{
+    border: 1px solid rgb(235, 228, 228);
 }

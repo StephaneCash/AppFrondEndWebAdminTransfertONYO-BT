@@ -1,5 +1,5 @@
 import { Container, makeStyles } from "@material-ui/core";
-import { Dashboard} from "@material-ui/icons";
+import { Dashboard } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
@@ -26,8 +26,12 @@ const Leftbar = () => {
         <div className='leftbar'>
             <Container className={classes.container} id="conatiner">
                 <div className='d-flex menu'>
-                    <div className='icon'><Dashboard /></div>
-                    <div className='text'>Dashboard</div>
+                    <NavLink to='/dashboard'>
+                        <div className='d-flex'>
+                            <div className='icon'><Dashboard /></div>
+                            <div className='text'>Dashboard</div>
+                        </div>
+                    </NavLink>
                 </div>
 
                 <div className='d-flex menu'>

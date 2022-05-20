@@ -1,0 +1,5 @@
+.navbar .badgeRightt{
+    border: 1px solid #726969;
+    text-align: right !important;
+    flex: 1 !important;
+}

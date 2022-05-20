@@ -1,18 +1,23 @@
-.leftbar .text{
+.leftbar .text {
     align-items: center;
     margin-left: 7px;
 }
 
-.leftbar .icon{
+.leftbar .icon {
     font-size: 14px;
 }
 
-.leftbar .menu{
+.leftbar .menu {
     margin-bottom: 15px;
 }
 
-.leftbar #conatiner{    
+.leftbar #conatiner {
     width: 16.66666667%;
     background-color: rgb(99, 99, 224);
     color: #fff;
+}
+
+.leftbar a {
+    color: #fff !important;
+    text-decoration: none;
 }
