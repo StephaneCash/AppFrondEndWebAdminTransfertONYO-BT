@@ -44,8 +44,12 @@ const Leftbar = () => {
                 </div>
 
                 <div className='d-flex menu'>
-                    <div className='icon'><CoPresentIcon /></div>
-                    <div className='text'>Clients</div>
+                    <div className='d-flex'>
+                        <NavLink to='/clients'>
+                            <div className='icon'><CoPresentIcon /></div>
+                            <div className='text'>Clients</div>
+                        </NavLink>
+                    </div>
                 </div>
 
                 <div className='d-flex menu'>
