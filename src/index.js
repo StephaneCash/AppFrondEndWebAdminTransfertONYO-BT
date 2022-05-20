@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
 import App from "./App.js"
 
 document.title = "Admin | transfert ONYO-BT"
@@ -12,4 +11,3 @@ root.render(
   </React.StrictMode>
 );
 
-reportWebVitals();
