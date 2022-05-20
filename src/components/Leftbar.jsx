@@ -35,8 +35,12 @@ const Leftbar = () => {
                 </div>
 
                 <div className='d-flex menu'>
-                    <div className='icon'><AttachMoneyIcon /></div>
-                    <div className='text'>Transaction</div>
+                    <NavLink to='/transaction'>
+                        <div className='d-flex'>
+                            <div className='icon'><AttachMoneyIcon /></div>
+                            <div className='text'>Transaction</div>
+                        </div>
+                    </NavLink>
                 </div>
 
                 <div className='d-flex menu'>

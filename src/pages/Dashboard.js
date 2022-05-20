@@ -9,9 +9,9 @@ import { Chart, registerables } from 'chart.js';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import AppsIcon from '@mui/icons-material/Apps';
+
 import PublicIcon from '@mui/icons-material/Public';
-import SoapIcon from '@mui/icons-material/Soap';
 
 import '../assets/Dashboard.css';
 Chart.register(...registerables);
@@ -19,11 +19,11 @@ Chart.register(...registerables);
 function Dashboard() {
 
     const data4 = {
-        labels: ['Nov 01', 'Nov 02', 'Nov 03', 'Nov 04', 'Nov 05', 'Nov 06', 'Nov 07'],
+        labels: ['Nov 01', 'Nov 02', 'Nov 03', 'Nov 04', 'Nov 05', 'Nov 06', 'Nov 07', "Dec 1", "Dec4", 'Dec 6', 'Dec 7', 'Dec 8', 'Dec 9', 'Jan 1'],
         datasets: [
             {
                 label: 'Statistics',
-                data: [2, 9, 3, 5, 2, 3, 6],
+                data: [21, 9, 3, 15, 2, 3, 6, 11, 9, 1, 2, 7, 8, 22],
                 backgroundColor: [
                     'silver',
                 ],
@@ -73,6 +73,7 @@ function Dashboard() {
                 <div className='d-flex'>
                     <div className='col-2'><Leftbar /></div>
                     <div className='col-10 col10 dashboard' style={{ marginTop: '70px' }}>
+                        <h4 className='mt-2' style={{ marginLeft: '10px' }}>Dashboard <AppsIcon id='AppIcon'/></h4>
                         <div className='d-flex card1'>
                             <div className='col-3'>
                                 <Card className="card">
@@ -135,7 +136,7 @@ function Dashboard() {
 
                         <div className='d-flex card2'>
                             <div className='col-6'>
-                                <Card className='card'>
+                                <Card className='card22'>
                                     <CardContent>
                                         <h5>Statistics</h5>
                                     </CardContent>
@@ -145,7 +146,7 @@ function Dashboard() {
                                 </Card>
                             </div>
                             <div className='col-6'>
-                                <Card className='card'>
+                                <Card className='card22'>
                                     <CardContent>
                                         <h5>Transactions Semestrielles</h5>
                                     </CardContent>

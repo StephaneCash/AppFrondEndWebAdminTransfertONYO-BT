@@ -3,3 +3,9 @@
     text-align: right !important;
     flex: 1 !important;
 }
+
+.navbar .logoMenu img{
+    width: 40px;
+    margin-right: 5px;
+    margin-left: 10px;
+}
