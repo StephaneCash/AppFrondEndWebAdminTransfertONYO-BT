@@ -1,0 +1,17 @@
+.dashboard .card1{
+    align-items: center;
+}
+
+.dashboard .col10{
+}
+
+.dashboard .card{
+    margin-right: 10px;
+    height: 100px;
+    
+}
+
+.dashboard .iconCard{
+    flex: 1;
+    text-align: right;
+}
