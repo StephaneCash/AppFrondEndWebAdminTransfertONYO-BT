@@ -1,13 +1,13 @@
 import React from 'react'
 import AppBar from '@mui/material/AppBar';
-import { Toolbar,  } from "@material-ui/core";
+import { Toolbar, } from "@material-ui/core";
 
 function Navbar() {
   return (
     <>
-      <AppBar>
+      <AppBar style={{ backgroundColor: '#fff' }}>
         <Toolbar>
-        
+
         </Toolbar>
       </AppBar>
     </>

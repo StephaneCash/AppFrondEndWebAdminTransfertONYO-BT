@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from "./App.js"
+import './assets/Index.css'
 
 document.title = "Admin | transfert ONYO-BT"
 

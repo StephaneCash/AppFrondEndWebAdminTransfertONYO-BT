@@ -14,9 +14,7 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(10),
         backgroundColor: "#efefef",
         height: "100vh",
-        color: '#333',
         position: "fixed",
-        width: "15%",
     }
 }));
 
@@ -25,7 +23,7 @@ const Leftbar = () => {
     const classes = useStyles();
 
     return (
-        <>
+        <div className='leftbar'>
             <Container className={classes.container} id="conatiner">
                 <div className='d-flex menu'>
                     <div className='icon'><Dashboard /></div>
@@ -39,7 +37,7 @@ const Leftbar = () => {
 
                 <div className='d-flex menu'>
                     <div className='icon'><CoPresentIcon /></div>
-                    <div className='text'>Expéditeurs</div>
+                    <div className='text'>Clients</div>
                 </div>
 
                 <div className='d-flex menu'>
@@ -62,7 +60,7 @@ const Leftbar = () => {
                     <div className='text'>Users</div>
                 </div>
             </Container>
-        </>
+        </div>
     );
 }
 
