@@ -1,0 +1,16 @@
+.transaction{
+    margin-left: 10px;
+    margin-right: 10px !important;
+}
+
+.transaction .card{
+    margin-right: 20px !important;
+}
+
+.transaction th{
+    color: #333;
+}
+
+.transaction td{
+    color: #333;
+}
