@@ -21,3 +21,8 @@
     color: #fff !important;
     text-decoration: none;
 }
+
+.leftbar .active{
+    box-shadow: 1px 1px 1px red;
+    padding: 2px
+}

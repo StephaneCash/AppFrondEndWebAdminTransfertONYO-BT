@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import Clients from "../pages/Clients";
 import Login from '../pages/Login';
 import Transactions from '../pages/Transactions';
+import AddTransaction from "../dialogs/AddTransaction";
 
 function RoutesElements() {
     return (
@@ -13,6 +14,7 @@ function RoutesElements() {
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/transaction' element={<Transactions />} />
                 <Route path='/clients' element={<Clients />} />
+                <Route path='/addTransaction' element={<AddTransaction />} />
             </Routes>
         </BrowserRouter>
     )

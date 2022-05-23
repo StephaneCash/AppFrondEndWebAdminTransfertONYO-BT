@@ -1,16 +1,53 @@
-.transaction{
+.transaction {
     margin-left: 10px;
+}
+
+.transaction .card {
     margin-right: 10px !important;
 }
 
-.transaction .card{
-    margin-right: 20px !important;
+.transaction th {
+    color: #333;
 }
 
-.transaction th{
+.transaction td {
     color: #333;
+}
+
+.transaction .addTransactionIcon {
+    margin-left: auto !important;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.transaction .iconAddTr {
+    font-size: 35px;
+    color: red;
+    cursor: pointer;
+}
+
+.transaction .iconAddTr:hover{
+    
+}
+
+.transaction .textAddTransaction {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.transaction .content_code{
+    border: none;
+}
+
+.transaction .textPasData{
+    text-align: center;
+    font-size: 14px;
+}
+
+.transaction .MuiOutlinedInput-input{
+    padding: 8px 10px;
 }
 
 .transaction td{
-    color: #333;
+    font-size: 15px;
 }
