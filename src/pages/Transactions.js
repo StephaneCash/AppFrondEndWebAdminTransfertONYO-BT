@@ -40,6 +40,7 @@ function Transactions() {
     setCode(code);
     setId(id);
     setShowModalVerif(true);
+    setEtat(1);
   }
 
   const onChange = (e) => {
