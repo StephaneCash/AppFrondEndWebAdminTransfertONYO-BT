@@ -15,6 +15,10 @@ const VerifCodeTransaction = (props) => {
 
     const closeModalVerif = props.closeModal;
 
+    const confirmVerif = props.confirmVerif;
+    const etat = props.etat;
+    const onChange = props.onChange;
+
     const classes = useStyles();
 
     return (
@@ -42,11 +46,13 @@ const VerifCodeTransaction = (props) => {
 
                     <TextField variant='outlined' className='mb-3'
                         placeholder="Entrer le code à vérifier"
-                        helperText="d"
+                        helperText={etat === 3 ? "Code invalide" : ""}
+                        onChange={e => onChange(e)}
                         style={{ width: "100%" }}
                     />
 
                     <Button variant='contained'
+                        onClick={confirmVerif}
                         style={{
                             marginTop: '-5px',
                             backgroundColor: "#6363e0", color: 'white', width: "100%",

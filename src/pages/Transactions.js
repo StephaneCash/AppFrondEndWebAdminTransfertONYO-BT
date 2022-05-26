@@ -17,10 +17,9 @@ function Transactions() {
 
   const [data, setData] = useState([]);
   const [valSearch, setValSearch] = useState('');
-  const [affBtnVerif, setAffBtnVerif] = useState(false);
   const [code, setCode] = useState('');
-  const [valCode, setValCode] = useState('');
   const [id, setId] = useState('');
+  const [valueInputCode, setValueInputCode] = useState('');
 
   const [etat, setEtat] = useState(0);
   const [showModalVerif, setShowModalVerif] = useState(false);
@@ -38,15 +37,19 @@ function Transactions() {
   const navigate = useNavigate();
 
   const verifCode = (code, id) => {
-    setAffBtnVerif(true);
     setCode(code);
     setId(id);
     setShowModalVerif(true);
   }
 
+  const onChange = (e) => {
+    setValueInputCode(e.target.value);
+  }
+
   const confirmVerif = () => {
-    if (code === valCode) {
+    if (code === valueInputCode) {
       setEtat(2);
+      setShowModalVerif(false);
     } else {
       setEtat(3)
     }
@@ -82,30 +85,6 @@ function Transactions() {
               <TextField type="search" placeholder='Rechercher' variant='outlined' style={{ marginRight: "25px" }}
                 className="searchTransition mb-3" onChange={(e) => setValSearch(e.target.value)} />
 
-              {
-                affBtnVerif ? (
-                  <>
-                    <TextField variant='outlined' className='mb-3'
-                      placeholder="Entrer le code à vérifier"
-                      helperText={
-                        etat === 3 ? "Code invalide" : etat === 2 && "Code valide"
-                      }
-                      onChange={(e) => setValCode(e.target.value)}
-                    />
-
-                    <Button variant='contained'
-                      onClick={confirmVerif}
-                      style={{
-                        marginTop: '-5px',
-                        backgroundColor: "#6363e0", padding: "7px", marginLeft: '10px'
-                      }}>
-                      Vérifier
-                      <Done />
-                    </Button>
-                  </>
-                ) : ''
-              }
-
               <Card className='card'>
                 <table className='table table-striped table-borderless'>
                   <thead>
@@ -133,7 +112,7 @@ function Transactions() {
                                 <td>{val.id_trans}</td>
                                 <td>
                                   {
-                                    etat === 2 && id === val.id_trans && code === valCode ? val.content_code : "***************"
+                                    etat === 2 && id === val.id_trans && code === valueInputCode ? val.content_code : "***************"
                                   }
                                 </td>
                                 <td>{val.exp_name}</td>
@@ -146,7 +125,7 @@ function Transactions() {
                                   {val.statut === 0 && <>Bloquée. <Close style={{ color: "red", marginLeft: '20px' }} /></>}
                                 </td>
                                 <td>
-                                  {etat === 2 && id === val.id_trans && code === valCode ? val.montant : "***********"}
+                                  {etat === 2 && id === val.id_trans && code === valueInputCode ? val.montant : "***********"}
                                 </td>
                                 <td>{val.dateCreate}</td>
                                 <td style={{ width: '120px' }}>
@@ -177,6 +156,9 @@ function Transactions() {
       <VerifCodeTransaction
         show={showModalVerif}
         closeModal={closeModalVerif}
+        confirmVerif={confirmVerif}
+        onChange={onChange}
+        etat={etat}
       />
     </div>
   )
