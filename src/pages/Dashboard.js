@@ -48,7 +48,7 @@ function Dashboard() {
         datasets: [
             {
                 label: 'Transactions ',
-                data: [19, 15, 14, 9, 8, 9, 11, 11, 12, 9, 5, 6, 13, 7, 8, 12, 3, 12, 14, 14, 14, 11, 9, 7, 5],
+                data: [19, 15, 14, 9, 8, 9, 11, 11, 12, 9, 5, 6, 5, 7, 8, 7, 5, 5, 4, 4, 2, 1, 4, 7, 5],
                 fill: false,
                 backgroundColor: 'silver',
                 borderColor: 'red',
