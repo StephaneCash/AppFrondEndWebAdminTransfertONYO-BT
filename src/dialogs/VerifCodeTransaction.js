@@ -19,7 +19,7 @@ const VerifCodeTransaction = (props) => {
 
     return (
         <div className="verifTransaction">
-            <Modal show={props.show} className={classes.modal} style={{ marginTop: "100px" }}>
+            <Modal show={props.show} className={classes.modal} style={{ marginTop: "80px" }}>
                 <Modal.Header>
                     <div className="col-12">
                         <div className='d-flex'>
@@ -27,7 +27,8 @@ const VerifCodeTransaction = (props) => {
                                 <h5>Vérification de code</h5>
                             </div>
                             <div className="col-2">
-                                <Button 
+                                <Button
+                                    style={{ float: 'right' }}
                                     variant="outlined"
                                     onClick={closeModalVerif}
                                 >
@@ -42,13 +43,13 @@ const VerifCodeTransaction = (props) => {
                     <TextField variant='outlined' className='mb-3'
                         placeholder="Entrer le code à vérifier"
                         helperText="d"
-                        style={{width:"100%"}}
+                        style={{ width: "100%" }}
                     />
 
                     <Button variant='contained'
                         style={{
                             marginTop: '-5px',
-                            backgroundColor: "#6363e0", color: 'white', width:"100%",
+                            backgroundColor: "#6363e0", color: 'white', width: "100%",
                         }}>
                         Vérifier
                     </Button>
