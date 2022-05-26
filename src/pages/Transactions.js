@@ -5,12 +5,13 @@ import '../assets/Transactions.css'
 import { Card, TextField } from '@material-ui/core'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { Check, CheckCircleTwoTone, Delete, DoneAll, Pending, StopCircle } from '@mui/icons-material'
+import { CheckCircleTwoTone, Delete, DoneAll, Pending, StopCircle } from '@mui/icons-material'
 import { Edit, Info, AddCircle, Done, Close } from '@material-ui/icons'
 import CancelScheduleSendIcon from '@mui/icons-material/CancelScheduleSend';
 import { Button } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useNavigate } from 'react-router-dom'
+import VerifCodeTransaction from '../dialogs/VerifCodeTransaction'
 
 function Transactions() {
 
@@ -22,6 +23,7 @@ function Transactions() {
   const [id, setId] = useState('');
 
   const [etat, setEtat] = useState(0);
+  const [showModalVerif, setShowModalVerif] = useState(false);
 
   const getAllTransaction = () => {
     axios.get("http://localhost:5000/api/transactions").then(res => {
@@ -39,6 +41,7 @@ function Transactions() {
     setAffBtnVerif(true);
     setCode(code);
     setId(id);
+    setShowModalVerif(true);
   }
 
   const confirmVerif = () => {
@@ -47,6 +50,10 @@ function Transactions() {
     } else {
       setEtat(3)
     }
+  }
+
+  const closeModalVerif = () => {
+    setShowModalVerif(false);
   }
 
   useEffect(() => {
@@ -166,6 +173,11 @@ function Transactions() {
           </div>
         </div>
       </div>
+
+      <VerifCodeTransaction
+        show={showModalVerif}
+        closeModal={closeModalVerif}
+      />
     </div>
   )
 }
