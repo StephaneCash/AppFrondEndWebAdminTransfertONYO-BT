@@ -10,7 +10,7 @@ import { Edit, Info, AddCircle, Done, Close } from '@material-ui/icons'
 import CancelScheduleSendIcon from '@mui/icons-material/CancelScheduleSend';
 import { Button } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import VerifCodeTransaction from '../dialogs/VerifCodeTransaction'
 
 function Transactions() {
@@ -35,8 +35,6 @@ function Transactions() {
       console.log(error)
     })
   }
-
-  const navigate = useNavigate();
 
   const verifCode = (code, id) => {
     setCode(code);
@@ -88,9 +86,11 @@ function Transactions() {
                 <h4>Transactions <AttachMoneyIcon /></h4>
                 <div className="addTransactionIcon">
                   <span className="textAddTransaction">Créer une transaction</span>
-                  <Button variant='outlined' onClick={() => navigate('/addTransaction')}>
-                    <AddCircle className='iconAddTr' />
-                  </Button>
+                  <NavLink to='addTransaction'>
+                    <Button variant='outlined'>
+                      <AddCircle className='iconAddTr' />
+                    </Button>
+                  </NavLink>
                 </div>
               </div>
 

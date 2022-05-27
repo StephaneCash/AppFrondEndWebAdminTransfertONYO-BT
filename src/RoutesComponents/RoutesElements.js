@@ -15,7 +15,7 @@ function RoutesElements() {
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/transaction' element={<Transactions />} />
                 <Route path='/clients' element={<Clients />} />
-                <Route path='/addTransaction' element={<AddTransaction />} />
+                <Route path='/transaction/addTransaction' element={<AddTransaction />} />
                 <Route path='/users' element={<Users />} />
             </Routes>
         </BrowserRouter>

@@ -51,3 +51,27 @@
 .transaction td{
     font-size: 15px;
 }
+
+.toggleBtn{
+    float: right;
+    cursor: pointer;
+}
+
+.card p{
+    flex: 1;
+    padding-right: -3px !important;
+}
+
+.valueCompte{
+    margin-top: 25px !important;
+    font-weight: bold !important;
+}
+
+.blocDevise h6, .blocDevise .textBloc{
+    display: inline-block;
+}
+
+.transaction a{
+    text-decoration: none
+}
+
