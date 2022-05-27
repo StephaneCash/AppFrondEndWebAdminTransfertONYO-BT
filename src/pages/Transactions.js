@@ -24,6 +24,8 @@ function Transactions() {
   const [etat, setEtat] = useState(0);
   const [showModalVerif, setShowModalVerif] = useState(false);
 
+  const [verifInput, setVerifInput] = useState(false)
+
   const getAllTransaction = () => {
     axios.get("http://localhost:5000/api/transactions").then(res => {
       if (res.status === 200) {
@@ -44,15 +46,24 @@ function Transactions() {
   }
 
   const onChange = (e) => {
-    setValueInputCode(e.target.value);
+    if (e.target.value === "") {
+      setVerifInput(true)
+    } else {
+      setValueInputCode(e.target.value);
+      setVerifInput(false)
+    }
   }
 
   const confirmVerif = () => {
-    if (code === valueInputCode) {
-      setEtat(2);
-      setShowModalVerif(false);
+    if (verifInput) {
+      setEtat(4);
     } else {
-      setEtat(3)
+      if (code === valueInputCode) {
+        setEtat(2);
+        setShowModalVerif(false);
+      } else {
+        setEtat(3)
+      }
     }
   }
 

@@ -29,6 +29,9 @@ const VerifCodeTransaction = (props) => {
                         <div className='d-flex'>
                             <div className="col-10">
                                 <h5>Vérification de code</h5>
+                                <h6 style={{ marginTop: "30px" }}>
+                                    Entrer votre code pour afficher le montant et autoriser le virement.
+                                </h6>
                             </div>
                             <div className="col-2">
                                 <Button
@@ -46,7 +49,9 @@ const VerifCodeTransaction = (props) => {
 
                     <TextField variant='outlined' className='mb-3'
                         placeholder="Entrer le code à vérifier"
-                        helperText={etat === 3 ? "Code invalide" : ""}
+                        helperText={
+                            etat === 3 ? "Code invalide" : etat === 4 && "Ce champ ne doit être vdie"
+                        }
                         onChange={e => onChange(e)}
                         style={{ width: "100%" }}
                     />

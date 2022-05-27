@@ -68,8 +68,12 @@ const Leftbar = () => {
                 </div>
 
                 <div className='d-flex menu'>
-                    <div className='icon'><PeopleAltIcon /></div>
-                    <div className='text'>Users</div>
+                    <NavLink to='/users'>
+                        <div className='d-flex'>
+                            <div className='icon'><PeopleAltIcon /></div>
+                            <div className='text ml-4'>Users</div>
+                        </div>
+                    </NavLink>
                 </div>
             </Container>
         </div>
