@@ -40,12 +40,12 @@ function AddTransaction() {
                                             Compte ONYO-BT
 
                                             <br />
-                                            <h3 className='valueCompte mt-3'>
+                                            <h5 className='valueCompte'>
                                                 {
                                                     etatClic === false ? "******"
                                                         : "3500 FC"
                                                 }
-                                            </h3>
+                                            </h5>
                                         </h6>
 
                                         <p>
@@ -65,7 +65,7 @@ function AddTransaction() {
                                             }
                                         </p>
                                     </div>
-                                    <hr />
+                                    <hr style={{ marginTop: '-10px' }} />
                                     <div className="col-12 blocDevise">
                                         <div className='col-2 textBloc'>
                                             <label>Choisir la devise</label>
@@ -82,7 +82,7 @@ function AddTransaction() {
                                     </div>
                                 </Card>
 
-                                <Card className='card p-3 mt-4'>
+                                <Card className='card p-3 mt-2'>
                                     <h5>Identités du bénéficiaire</h5><br />
                                     <label>Entrer un numéro de téléphone du bénéficiaire</label>
                                     <TextField variant='outlined' className='mb-3 mt-3' placeholder='Entrer un numéro de téléphone' />
@@ -91,7 +91,7 @@ function AddTransaction() {
                                     <TextField variant='outlined' className="mt-3 mb-4" placeholder='Entrer un montant' />
 
                                     <div className='col-4'>
-                                        <Button variant="contained" className="mb-2" 
+                                        <Button variant="contained" className="mb-2"
                                             style={{ color: 'white', backgroundColor: "red" }}>
                                             Continuer <TrendingFlatIcon />
                                         </Button>
