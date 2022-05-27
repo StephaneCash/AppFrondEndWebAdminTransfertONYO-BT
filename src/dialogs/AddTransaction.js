@@ -83,7 +83,7 @@ function AddTransaction() {
                                 </Card>
 
                                 <Card className='card p-3 mt-2'>
-                                    <h5>Identités du bénéficiaire</h5><br />
+                                    <h5>Identités du bénéficiaire</h5>
                                     <label>Entrer un numéro de téléphone du bénéficiaire</label>
                                     <TextField variant='outlined' className='mb-3 mt-3' placeholder='Entrer un numéro de téléphone' />
 
