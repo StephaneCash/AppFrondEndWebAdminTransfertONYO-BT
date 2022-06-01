@@ -47,8 +47,8 @@ const VerifCodeTransaction = (props) => {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <TextField variant='outlined' className='mb-3'
-                        placeholder="Entrer le code à vérifier"
+                    <TextField variant='filled' className='mb-3'
+                        label="Entrer le code à vérifier"
                         helperText={
                             etat === 3 ? "Code invalide" : etat === 4 && "Ce champ ne doit être vdie"
                         }

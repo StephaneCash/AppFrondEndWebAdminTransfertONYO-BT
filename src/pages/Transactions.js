@@ -94,7 +94,7 @@ function Transactions() {
                 </div>
               </div>
 
-              <TextField type="search" placeholder='Rechercher' variant='outlined' style={{ marginRight: "25px" }}
+              <TextField type="search" label='Rechercher' variant='filled' style={{ marginRight: "25px" }}
                 className="searchTransition mb-3" onChange={(e) => setValSearch(e.target.value)} />
 
               <Card className='card'>

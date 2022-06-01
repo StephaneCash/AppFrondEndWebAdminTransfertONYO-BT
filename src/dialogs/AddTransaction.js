@@ -3,7 +3,7 @@ import Leftbar from '../components/Leftbar'
 import Navbar from '../components/Navbar'
 import '../assets/Transactions.css'
 import { Button, Card, TextField } from '@material-ui/core'
-import { ToggleOff } from '@material-ui/icons'
+import { Check, ToggleOff } from '@material-ui/icons'
 import { ToggleOn } from '@mui/icons-material'
 import { useState } from "react";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -13,10 +13,48 @@ import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 function AddTransaction() {
 
     const [etatClic, setEtatClic] = useState(false);
+    const [validNum, setValidNum] = useState(false);
+    const [validMontant, setValidMontant] = useState(false);
+    const [clicBtn, setClicBtn] = useState(false);
+    const [valueSelect, setValueSelect] = useState("CDF");
+    const [pattNum, setPattNum] = useState(false);
 
-    // Visualiser le code
+    let pattern = /[0-9]/;
+
     const handleClick = () => {
         setEtatClic(!etatClic);
+    }
+
+    const handleNumPhone = (e) => {
+        if (e.target.value === "") {
+            setValidNum(false)
+        } else {
+            if (e.target.value.match(pattern)) {
+                setValidNum(true)
+            } else {
+                setPattNum(true)
+                setValidNum(false)
+            }
+        }
+    }
+
+    const handleMontant = (e) => {
+        if (e.target.value === "") {
+            setValidMontant(false)
+        } else {
+            setValidMontant(true)
+        }
+    }
+
+    const handleSubmit = (e) => {
+        setClicBtn(true)
+        if (validNum && validMontant) {
+            alert('Bon')
+        }
+    }
+
+    const handleSelect = (e) => {
+        setValueSelect(e.target.value)
     }
 
     return (
@@ -69,7 +107,9 @@ function AddTransaction() {
                                     <div className="col-12 blocDevise">
                                         <div className='col-2 textBloc'>
                                             <label>Choisir la devise</label>
-                                            <select className="form-control">
+                                            <select className="form-control"
+                                                onChange={handleSelect}
+                                                style={{ boxShadow: 'none', border: '2px solid blue' }}>
                                                 <option>CDF</option>
                                                 <option>USD</option>
                                             </select>
@@ -77,7 +117,7 @@ function AddTransaction() {
 
                                         <h6 style={{ marginLeft: '10px' }}>
                                             Devise courante <br />
-                                            <h6 style={{ fontWeight: 'bold' }}>CDF Compte</h6>
+                                            <h6 style={{ fontWeight: 'bold', marginTop: '10px' }}>{valueSelect} </h6>
                                         </h6>
                                     </div>
                                 </Card>
@@ -85,14 +125,35 @@ function AddTransaction() {
                                 <Card className='card p-3 mt-2'>
                                     <h5>Identités du bénéficiaire</h5>
                                     <label>Entrer un numéro de téléphone du bénéficiaire</label>
-                                    <TextField variant='outlined' className='mb-3 mt-3' placeholder='Entrer un numéro de téléphone' />
+                                    <TextField variant='outlined' onChange={handleNumPhone}
+                                        helperText={
+                                            clicBtn === true && (
+                                                <>
+                                                    {validNum ?
+                                                        "" : pattNum === false ? "Veuillez renseigner un numéro de téléphone svp" :
+                                                            "Entrer un numéro de téléphone valide"
+                                                    }
+                                                </>
+                                            )
+                                        }
+                                        className='mb-3 mt-3' placeholder='Entrer un numéro de téléphone' />
 
                                     <label>Montant</label>
-                                    <TextField variant='outlined' className="mt-3 mb-4" placeholder='Entrer un montant' />
+                                    <TextField variant='outlined' onChange={handleMontant}
+                                        helperText={
+                                            clicBtn === true && (
+                                                <>
+                                                    {validMontant === false ?
+                                                        "Veuillez renseigner un montant svp !" :
+                                                        <Check style={{ fontSize: '15px', color: 'green', }} />}
+                                                </>
+                                            )
+                                        }
+                                        className="mt-3 mb-4" placeholder='Entrer un montant' />
 
-                                    <div className='col-4'>
-                                        <Button variant="contained" className="mb-2"
-                                            style={{ color: 'white', backgroundColor: "red" }}>
+                                    <div className='col-12'>
+                                        <Button variant="contained" className="mb-2" onClick={handleSubmit}
+                                            style={{ color: 'white', backgroundColor: "red", float: 'right' }}>
                                             Continuer <TrendingFlatIcon />
                                         </Button>
                                     </div>
