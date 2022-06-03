@@ -18,7 +18,7 @@ function Login() {
  
   return (
     <div className="login">
-      <Grid>
+      <Grid> 
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center">
             <Avatar style={backgroundColorAvatar}> <LockIcon /></Avatar>
