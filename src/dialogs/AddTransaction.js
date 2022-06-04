@@ -58,6 +58,15 @@ function AddTransaction() {
         }
     }
 
+    // Compte à rebours 
+    const now = new Date().getTime();
+    const countDownDate = new Date('Jun 9, 2022').getTime();
+
+    const distanceBase = countDownDate - now;
+    const days = distanceBase / (1000 * 60 * 60 * 24);
+
+    console.log("JOURS ::  " , days);
+
     const handleSubmit = (e) => {
         setClicBtn(true)
 
