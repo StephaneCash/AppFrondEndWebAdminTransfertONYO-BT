@@ -9,6 +9,7 @@ import { useState } from "react";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { NavLink } from 'react-router-dom'
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
+import axios from 'axios';
 
 function AddTransaction() {
 
@@ -18,6 +19,12 @@ function AddTransaction() {
     const [clicBtn, setClicBtn] = useState(false);
     const [valueSelect, setValueSelect] = useState("CDF");
     const [pattNum, setPattNum] = useState(false);
+
+    // Data récupérés dans les inputs
+
+    const [dataForm, setDataForm] = useState({});
+    const [numTel, setNumTel] = useState(0);
+    const [montant, setMontant] = useState(0);
 
     let pattern = /[0-9]/;
 
@@ -31,6 +38,8 @@ function AddTransaction() {
         } else {
             if (e.target.value.match(pattern)) {
                 setValidNum(true)
+                setNumTel(e.target.value)
+                setDataForm({ ...dataForm, "numTel": e.target.value })
             } else {
                 setPattNum(true)
                 setValidNum(false)
@@ -43,13 +52,23 @@ function AddTransaction() {
             setValidMontant(false)
         } else {
             setValidMontant(true)
+            setMontant(e.target.value)
+            setDataForm({ ...dataForm, "montant": e.target.value });
+            setDataForm({ ...dataForm, "annulation": 0, "reception": 0, "suppression": 0, "exp_name": "Cash", "statut": 0 })
         }
     }
 
     const handleSubmit = (e) => {
         setClicBtn(true)
+
         if (validNum && validMontant) {
-            alert('Bon')
+            /* axios.post(`http://localhost:5000/api/transactions`).then((response) => {
+                 alert('Transaction créée avec succès')
+             }).catch((error) => {
+                 console.error(error)
+             })*/
+
+            console.log('DAta :: ', dataForm)
         }
     }
 

@@ -28,7 +28,7 @@ function Transactions() {
 
   const getAllTransaction = () => {
     axios.get("http://localhost:5000/api/transactions").then(res => {
-      if (res.status === 200) {
+      if (res.data.status === 200) {
         setData(res.data)
       }
     }).catch(error => {
@@ -113,9 +113,9 @@ function Transactions() {
                   </thead>
                   <tbody>
                     {
-                      data.data ?
+                      data.transactions ?
 
-                        data.data.filter(val => {
+                        data.transactions.filter(val => {
                           return val.exp_name.toLowerCase().includes(valSearch);
                         })
                           .map((val, key) => {
