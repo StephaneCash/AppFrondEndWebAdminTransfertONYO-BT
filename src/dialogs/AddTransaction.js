@@ -53,30 +53,41 @@ function AddTransaction() {
         } else {
             setValidMontant(true)
             setMontant(e.target.value)
-            setDataForm({ ...dataForm, "annulation": 0, "reception": 0, "suppression": 0, "exp_name": "Cash", 
-            "statut": 0, "content_code": "steph4522-yygh", "montant": e.target.value})
+            setDataForm({
+                ...dataForm, "annulation": 0, "reception": 0, "suppression": 0, "exp_name": "Cash",
+                "statut": 0, "content_code": "steph4522-yygh", "montant": e.target.value
+            })
         }
     }
 
     // Compte à rebours 
-    const now = new Date().getTime();
-    const countDownDate = new Date('Jun 9, 2022').getTime();
+    function chrono() {
+        const now = new Date().getTime();
+        const countDownDate = new Date('Jun 6, 2022').getTime();
 
-    const distanceBase = countDownDate - now;
-    const days = distanceBase / (1000 * 60 * 60 * 24);
+        const distanceBase = countDownDate - now;
+        const days = Math.floor(distanceBase / (1000 * 60 * 60 * 24));
+        const heures = Math.floor((distanceBase % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const min = Math.floor((distanceBase % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distanceBase % (1000 * 60)) / (1000))
+        console.log(days, heures, min, seconds);
+    }
 
-    console.log("JOURS ::  " , days);
+
+    const countDown = setInterval(() => {
+        chrono()
+    }, 1000);
 
     const handleSubmit = (e) => {
         setClicBtn(true)
 
-       /* if (validNum && validMontant) {
-            axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
-                alert('Transaction créée avec succès')
-            }).catch((error) => {
-                console.error(error.message)
-            })
-        } */
+        /* if (validNum && validMontant) {
+             axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
+                 alert('Transaction créée avec succès')
+             }).catch((error) => {
+                 console.error(error.message)
+             })
+         } */
     }
 
     const handleSelect = (e) => {
