@@ -3,25 +3,29 @@ import { Grid, Paper, Avatar, TextField, FormControlLabel, Button, Typography, L
 import LockIcon from '@mui/icons-material/Lock';
 import Checkbox from '@mui/material/Checkbox';
 import '../assets/Login.css';
+import logo from '../images/logo.jpeg';
+
 
 function Login() {
 
   const paperStyle = { padding: 20, height: '70vh', width: 340, margin: '20px auto' }
-  const backgroundColorAvatar = { background: 'blue' };
+  const backgroundColorAvatar = { 
+    width: "50px"
+  };
   const styleTextField = { marginBottom: '10px' }
   const ButtonStyle = { margin: '8px 0' }
 
   const formControlLabel = {
     marginLeft: 0,
     marginBottom: '15px'
-  } 
-  
-  return ( 
+  }
+
+  return (
     <div className="login">
-      <Grid> 
+      <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center">
-            <Avatar style={backgroundColorAvatar}> <LockIcon /></Avatar>
+            <img src={logo} style={backgroundColorAvatar}/>
             <h2 className='mt-3'>S'identifier</h2>
           </Grid>
 

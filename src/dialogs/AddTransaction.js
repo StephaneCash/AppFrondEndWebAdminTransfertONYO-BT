@@ -26,6 +26,8 @@ function AddTransaction() {
     const [numTel, setNumTel] = useState(0);
     const [montant, setMontant] = useState(0);
 
+    let dataRebours = []
+
     let pattern = /[0-9]/;
 
     const handleClick = () => {
@@ -63,14 +65,15 @@ function AddTransaction() {
     // Compte à rebours 
     function chrono() {
         const now = new Date().getTime();
-        const countDownDate = new Date('Jun 6, 2022').getTime();
+        const countDownDate = new Date('Jun 8, 2022').getTime();
 
         const distanceBase = countDownDate - now;
         const days = Math.floor(distanceBase / (1000 * 60 * 60 * 24));
         const heures = Math.floor((distanceBase % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const min = Math.floor((distanceBase % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distanceBase % (1000 * 60)) / (1000))
-        console.log(days, heures, min, seconds);
+
+       document.querySelector('h3').innerHTML = "Jours : " + days + ' Heures :  ' + heures + ' Min : ' + min + ' seconds : ' +seconds
     }
 
 
@@ -106,7 +109,8 @@ function AddTransaction() {
                             <NavLink to="/transaction">
                                 <KeyboardBackspaceIcon /> Retour
                             </NavLink>
-                            <h3 className="mt-3"> Créer une transaction</h3>
+                            <h3 className="mt-3"> Créer une transaction
+                            </h3>
 
                             <div className='col-12'>
                                 <Card className="p-3 card">
