@@ -26,7 +26,7 @@ function AddTransaction() {
     const [numTel, setNumTel] = useState(0);
     const [montant, setMontant] = useState(0);
 
-    let dataRebours = []
+    let dataRebours = {}
 
     let pattern = /[0-9]/;
 
@@ -65,9 +65,7 @@ function AddTransaction() {
     // Compte à rebours 
     function chrono() {
         const now = new Date().getTime();
-        const countDownDate =  250000000000
-
-        console.log(" DATA :::: DATA ::: DATE " +countDownDate)
+        const countDownDate = new Date('Jun 8, 2022').getTime();
 
         const distanceBase = countDownDate - now;
         const days = Math.floor(distanceBase / (1000 * 60 * 60 * 24));
@@ -75,7 +73,10 @@ function AddTransaction() {
         const min = Math.floor((distanceBase % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distanceBase % (1000 * 60)) / (1000))
 
-       document.querySelector('h3').innerHTML =  days + " : Jours, "  + heures  + ' :  Heures ' + ' Min : ' + min + ' seconds : ' +seconds
+       dataRebours.jours = days
+       dataRebours.heures = heures
+       dataRebours.min = min
+       dataRebours.seconds = seconds
     }
 
 
