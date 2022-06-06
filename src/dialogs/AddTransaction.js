@@ -65,7 +65,9 @@ function AddTransaction() {
     // Compte à rebours 
     function chrono() {
         const now = new Date().getTime();
-        const countDownDate = new Date('Jun 8, 2022').getTime();
+        const countDownDate =  250000000000
+
+        console.log(" DATA :::: DATA ::: DATE " +countDownDate)
 
         const distanceBase = countDownDate - now;
         const days = Math.floor(distanceBase / (1000 * 60 * 60 * 24));
@@ -73,7 +75,7 @@ function AddTransaction() {
         const min = Math.floor((distanceBase % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distanceBase % (1000 * 60)) / (1000))
 
-       document.querySelector('h3').innerHTML = "Jours : " + days + ' Heures :  ' + heures + ' Min : ' + min + ' seconds : ' +seconds
+       document.querySelector('h3').innerHTML =  days + " : Jours, "  + heures  + ' :  Heures ' + ' Min : ' + min + ' seconds : ' +seconds
     }
 
 
