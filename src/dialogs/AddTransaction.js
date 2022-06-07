@@ -85,7 +85,7 @@ function AddTransaction() {
     }, 1000);
 
     const handleSubmit = (e) => {
-        setClicBtn(true)
+        setClicBtn(true);
 
         let chars = "0123456789";
         let passwordLengh = 16;
