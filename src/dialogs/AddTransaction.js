@@ -106,7 +106,7 @@ function AddTransaction() {
         setDataForm({
             ...dataForm, "content_code": codeGenere 
         })
-
+ 
         //console.log( ' result : ' ,dataForm) 
 
        /* if (validNum && validMontant) {
