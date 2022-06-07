@@ -57,7 +57,7 @@ function AddTransaction() {
             setMontant(e.target.value)
             setDataForm({
                 ...dataForm, "annulation": 0, "reception": 0, "suppression": 0, "exp_name": "Cash",
-                "statut": 0, "content_code": "steph4522-yygh", "montant": e.target.value
+                "statut": 0, "montant": e.target.value
             })
         }
     }
@@ -87,14 +87,6 @@ function AddTransaction() {
     const handleSubmit = (e) => {
         setClicBtn(true)
 
-        /* if (validNum && validMontant) {
-             axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
-                 alert('Transaction créée avec succès')
-             }).catch((error) => {
-                 console.error(error.message)
-             })
-         } */
-
         let chars = "0123456789";
         let passwordLengh = 16;
         let password = "";
@@ -110,6 +102,20 @@ function AddTransaction() {
         tab[14] = '-'
 
         let codeGenere = tab.join().replace(/[,]/g, '');
+
+        setDataForm({
+            ...dataForm, "content_code": codeGenere
+        })
+
+        console.log( ' result : ' ,dataForm)
+
+       /* if (validNum && validMontant) {
+            axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
+                alert('Transaction créée avec succès')
+            }).catch((error) => {
+                console.error(error.message)
+            })
+        }*/
     }
 
     const handleSelect = (e) => {
