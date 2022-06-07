@@ -116,7 +116,7 @@ function AddTransaction() {
                 console.error(error.message)
             })
         }*/
-    }
+    } 
  
     const handleSelect = (e) => {
         setValueSelect(e.target.value);
