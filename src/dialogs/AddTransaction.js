@@ -119,7 +119,7 @@ function AddTransaction() {
     }
 
     const handleSelect = (e) => {
-        setValueSelect(e.target.value)
+        setValueSelect(e.target.value);
     }
 
     return (
