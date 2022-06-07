@@ -107,7 +107,7 @@ function AddTransaction() {
             ...dataForm, "content_code": codeGenere 
         })
 
-        //console.log( ' result : ' ,dataForm)
+        //console.log( ' result : ' ,dataForm) 
 
        /* if (validNum && validMontant) {
             axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
