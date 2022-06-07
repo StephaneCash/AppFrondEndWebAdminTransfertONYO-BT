@@ -114,7 +114,7 @@ function AddTransaction() {
                 alert('Transaction créée avec succès')
             }).catch((error) => {
                 console.error(error.message)
-            })
+            }) 
         }*/
     } 
  
