@@ -73,10 +73,10 @@ function AddTransaction() {
         const min = Math.floor((distanceBase % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distanceBase % (1000 * 60)) / (1000))
 
-       dataRebours.jours = days
-       dataRebours.heures = heures
-       dataRebours.min = min
-       dataRebours.seconds = seconds
+        dataRebours.jours = days
+        dataRebours.heures = heures
+        dataRebours.min = min
+        dataRebours.seconds = seconds
     }
 
 
@@ -94,6 +94,22 @@ function AddTransaction() {
                  console.error(error.message)
              })
          } */
+
+        let chars = "0123456789";
+        let passwordLengh = 16;
+        let password = "";
+
+        for (let i = 0; i <= passwordLengh; i++) {
+            let randomNumber = Math.floor(Math.random() * chars.length);
+            password += chars.substring(randomNumber, randomNumber + 1);
+        }
+
+        let tab = password.split('');
+        tab[4] = '-'
+        tab[9] = '-'
+        tab[14] = '-'
+
+        let codeGenere = tab.join().replace(/[,]/g, '');
     }
 
     const handleSelect = (e) => {
