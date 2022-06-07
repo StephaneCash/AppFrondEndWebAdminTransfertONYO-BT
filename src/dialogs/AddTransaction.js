@@ -97,7 +97,7 @@ function AddTransaction() {
         }
 
         let tab = password.split('');
-        tab[4] = '-'
+        tab[4] = '-';
         tab[9] = '-';
         tab[14] = '-';
 
