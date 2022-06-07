@@ -104,7 +104,7 @@ function AddTransaction() {
         let codeGenere = tab.join().replace(/[,]/g, '');
 
         setDataForm({
-            ...dataForm, "content_code": codeGenere
+            ...dataForm, "content_code": codeGenere 
         })
 
         console.log( ' result : ' ,dataForm)
