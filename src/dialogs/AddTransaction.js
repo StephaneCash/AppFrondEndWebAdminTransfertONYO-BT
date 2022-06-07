@@ -74,7 +74,7 @@ function AddTransaction() {
         const seconds = Math.floor((distanceBase % (1000 * 60)) / (1000))
 
         dataRebours.jours = days;
-        dataRebours.heures = heures;
+        dataRebours.heures = heures; 
         dataRebours.min = min;
         dataRebours.seconds = seconds;
     }
