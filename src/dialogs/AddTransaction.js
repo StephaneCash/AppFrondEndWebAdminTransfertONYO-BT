@@ -99,7 +99,7 @@ function AddTransaction() {
         let tab = password.split('');
         tab[4] = '-'
         tab[9] = '-'
-        tab[14] = '-'
+        tab[14] = '-';
 
         let codeGenere = tab.join().replace(/[,]/g, '');
 
