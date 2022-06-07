@@ -75,7 +75,7 @@ function AddTransaction() {
 
         dataRebours.jours = days; 
         dataRebours.heures = heures; 
-        dataRebours.min = min;
+        dataRebours.min = min; 
         dataRebours.seconds = seconds;
     }
 
