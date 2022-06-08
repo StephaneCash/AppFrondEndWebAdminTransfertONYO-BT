@@ -81,13 +81,13 @@ function AddTransaction() {
     const handleSubmit = (e) => {
         setClicBtn(true)
 
-        /* if (validNum && validMontant) {
-             axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
-                 alert('Transaction créée avec succès')
-             }).catch((error) => {
-                 console.error(error.message)
-             })
-         } */
+        if (validNum && validMontant) {
+            axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
+                alert('Transaction créée avec succès')
+            }).catch((error) => {
+                console.error(error.message)
+            })
+        }
     }
 
     const handleSelect = (e) => {
