@@ -12,6 +12,7 @@ import { Button } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { NavLink } from 'react-router-dom'
 import VerifCodeTransaction from '../dialogs/VerifCodeTransaction'
+import Load from '../components/Load'
 
 function Transactions() {
 
@@ -28,13 +29,17 @@ function Transactions() {
 
   const getAllTransaction = () => {
     axios.get("http://localhost:5000/api/transactions").then(res => {
+      
       if (res.data.status === 200) {
         setData(res.data)
+        console.log('result :: ', res.data)
       }
     }).catch(error => {
       console.log(error)
     })
   }
+
+  
 
   const verifCode = (code, id) => {
     setCode(code);
@@ -113,9 +118,9 @@ function Transactions() {
                   </thead>
                   <tbody>
                     {
-                      data.transactions ?
+                      data.data ?
 
-                        data.transactions.filter(val => {
+                        data.data.filter(val => {
                           return val.exp_name.toLowerCase().includes(valSearch);
                         })
                           .map((val, key) => {
@@ -131,7 +136,7 @@ function Transactions() {
 
                                 <td></td>
                                 <td>
-                                  {val.statut === 1 && <>`En cours...` <Pending style={{ color: 'orange' }} /> </>}
+                                  {val.statut === 1 && <>En cours... <Pending style={{ color: 'orange' }} /> </>}
                                   {val.statut === 2 && <>En pause...<StopCircle style={{ color: 'blue', marginLeft: '10px' }} /></>}
                                   {val.statut === 3 && <>Effectuée. <CheckCircleTwoTone style={{ color: 'green', marginLeft: '11px' }} /></>}
                                   {val.statut === 0 && <>Bloquée. <Close style={{ color: "red", marginLeft: '20px' }} /></>}
@@ -153,7 +158,9 @@ function Transactions() {
                           })
 
                         : <tr className="textPasData">
-                          <td colSpan='8px'>Pas de données disponibles.</td>
+                          <td colSpan='8px'>
+                            <Load />
+                          </td>
                         </tr>
 
                     }

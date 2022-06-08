@@ -26,6 +26,8 @@ function AddTransaction() {
     const [numTel, setNumTel] = useState(0);
     const [montant, setMontant] = useState(0);
 
+    let dataRebours = {}
+
     let pattern = /[0-9]/;
 
     const handleClick = () => {
@@ -55,7 +57,7 @@ function AddTransaction() {
             setMontant(e.target.value)
             setDataForm({
                 ...dataForm, "annulation": 0, "reception": 0, "suppression": 0, "exp_name": "Cash",
-                "statut": 0, "content_code": "steph4522-yygh", "montant": e.target.value
+                "statut": 0, "montant": e.target.value
             })
         }
     }
@@ -63,36 +65,61 @@ function AddTransaction() {
     // Compte à rebours 
     function chrono() {
         const now = new Date().getTime();
-        const countDownDate = new Date('Jun 6, 2022').getTime();
+        const countDownDate = new Date('Jun 8, 2022').getTime();
 
         const distanceBase = countDownDate - now;
         const days = Math.floor(distanceBase / (1000 * 60 * 60 * 24));
         const heures = Math.floor((distanceBase % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const min = Math.floor((distanceBase % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distanceBase % (1000 * 60)) / (1000))
-        console.log(days, heures, min, seconds);
-    }
 
+        dataRebours.jours = days; 
+        dataRebours.heures = heures; 
+        dataRebours.min = min; 
+        dataRebours.seconds = seconds;
+    }
 
     const countDown = setInterval(() => {
         chrono()
     }, 1000);
 
     const handleSubmit = (e) => {
-        setClicBtn(true)
+        setClicBtn(true);
 
-        if (validNum && validMontant) {
+        let chars = "0123456789";
+        let passwordLengh = 16;
+        let password = "";
+
+        for (let i = 0; i <= passwordLengh; i++) {
+            let randomNumber = Math.floor(Math.random() * chars.length);
+            password += chars.substring(randomNumber, randomNumber + 1);
+        }
+
+        let tab = password.split('');
+        tab[4] = '-';
+        tab[9] = '-';
+        tab[14] = '-';
+
+        let codeGenere = tab.join().replace(/[,]/g, '');
+
+        setDataForm({
+            ...dataForm, "content_code": codeGenere 
+        })   
+ 
+        //console.log( ' result : ' ,dataForm) 
+
+       /* if (validNum && validMontant) {
             axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
                 alert('Transaction créée avec succès')
             }).catch((error) => {
                 console.error(error.message)
-            })
-        }
-    }
-
+            })  
+        }*/
+    }  
+ 
     const handleSelect = (e) => {
-        setValueSelect(e.target.value)
-    }
+        setValueSelect(e.target.value); 
+    } 
 
     return (
         <div>
@@ -106,7 +133,8 @@ function AddTransaction() {
                             <NavLink to="/transaction">
                                 <KeyboardBackspaceIcon /> Retour
                             </NavLink>
-                            <h3 className="mt-3"> Créer une transaction</h3>
+                            <h3 className="mt-3"> Créer une transaction
+                            </h3>
 
                             <div className='col-12'>
                                 <Card className="p-3 card">
