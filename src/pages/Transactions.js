@@ -12,7 +12,8 @@ import { Button } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { NavLink } from 'react-router-dom'
 import VerifCodeTransaction from '../dialogs/VerifCodeTransaction'
-import Load from '../components/Load'
+import Load from '../components/Load';
+import authHeader from '../auth/auth-header';
 
 function Transactions() {
 
@@ -27,9 +28,11 @@ function Transactions() {
 
   const [verifInput, setVerifInput] = useState(false)
 
+  console.log("AUTH :: ", authHeader())
+
   const getAllTransaction = () => {
-    axios.get("http://localhost:5000/api/transactions/all").then(res => {
-      
+    axios.get("http://localhost:5000/api/transactions/all", { headers: authHeader() }).then(res => {
+
       if (res.data.status === 200) {
         setData(res.data)
         console.log('result :: ', res.data)
@@ -39,7 +42,7 @@ function Transactions() {
     })
   }
 
-  
+
 
   const verifCode = (code, id) => {
     setCode(code);
@@ -121,7 +124,9 @@ function Transactions() {
                       data.data ?
 
                         data.data.filter(val => {
-                          return val.exp_name.toLowerCase().includes(valSearch);
+                          return (
+                            val.exp_name.toLowerCase().includes(valSearch) ? val.exp_name.toLowerCase().includes(valSearch) : "Aucune donnée trouvée."
+                          )
                         })
                           .map((val, key) => {
                             return (

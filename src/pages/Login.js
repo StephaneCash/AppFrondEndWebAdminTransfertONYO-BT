@@ -13,10 +13,11 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [clic, setClic] = useState(false);
+  const [error, setError] = useState({})
 
   let navigate = useNavigate();
 
-  const paperStyle = { padding: 20, height: '70vh', width: 340, margin: '20px auto' }
+  const paperStyle = { padding: 20, height: 'auto', width: 340, margin: '20px auto' }
   const backgroundColorAvatar = {
     width: "50px"
   };
@@ -33,11 +34,18 @@ function Login() {
     try {
       const res = await axios.post('http://localhost:5000/api/login', { email, password });
       setUser(res.data);
+      if (res.data.jeton) {
+        localStorage.setItem('user', JSON.stringify(res.data))
+      }
+      console.log('RES : ', res.data);
       navigate('/dashboard', { state: res.data })
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      console.log(err)
+      setError(err.response);
     }
   }
+
+  console.log("USER : ", user)
 
   return (
     <div className="login">
@@ -80,6 +88,12 @@ function Login() {
               S'inscrire
             </Link>
           </Typography>
+          {
+            error.data ? <div className="alert alert-danger mt-1 mb-5">
+              {error.data.message ? <h6 style={{ fontSize: "14px" }}>{error.data.message}</h6> : ""}
+            </div> : <><div className='mt-5'></div><br /><br /></>
+          }
+
         </Paper>
       </Grid>
     </div>

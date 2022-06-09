@@ -21,7 +21,7 @@ function Dashboard() {
 
     const location = useLocation();
 
-    console.log('USER CONNECTED : ', location.state.data.nom)
+    //console.log('USER CONNECTED : ', location.state.data.nom)
 
     const data4 = {
         labels: ['Nov 01', 'Nov 02', 'Nov 03', 'Nov 04', 'Nov 05', 'Nov 06', 'Nov 07', "Dec 1", "Dec4", 'Dec 6', 'Dec 7', 'Dec 8', 'Dec 9', 'Jan 1'],
@@ -79,9 +79,6 @@ function Dashboard() {
                     <div className='col-2'><Leftbar /></div>
                     <div className='col-10 col10 dashboard' style={{ marginTop: '70px' }}>
                         <h4 className='mt-2' style={{ marginLeft: '10px' }}>Dashboard <AppsIcon id='AppIcon' />
-                            <br />
-                            <br />
-                            Salut {location.state ? location.state.data.nom : ""} ,
                         </h4>
                         <div className='d-flex card1'>
                             <div className='col-3'>
