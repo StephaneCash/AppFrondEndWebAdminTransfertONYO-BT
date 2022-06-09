@@ -12,7 +12,7 @@ function RoutesElements() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
-                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/dashboardTransfert' element={<Dashboard />} />
                 <Route path='/transaction' element={<Transactions />} />
                 <Route path='/clients' element={<Clients />} />
                 <Route path='/transaction/addTransaction' element={<AddTransaction />} />

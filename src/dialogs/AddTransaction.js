@@ -73,9 +73,9 @@ function AddTransaction() {
         const min = Math.floor((distanceBase % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distanceBase % (1000 * 60)) / (1000))
 
-        dataRebours.jours = days; 
-        dataRebours.heures = heures; 
-        dataRebours.min = min; 
+        dataRebours.jours = days;
+        dataRebours.heures = heures;
+        dataRebours.min = min;
         dataRebours.seconds = seconds;
     }
 
@@ -103,23 +103,23 @@ function AddTransaction() {
         let codeGenere = tab.join().replace(/[,]/g, '');
 
         setDataForm({
-            ...dataForm, "content_code": codeGenere 
-        })   
- 
+            ...dataForm, "content_code": codeGenere
+        })
+
         //console.log( ' result : ' ,dataForm) 
 
-       /* if (validNum && validMontant) {
-            axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
-                alert('Transaction créée avec succès')
-            }).catch((error) => {
-                console.error(error.message)
-            })  
-        }*/
-    }  
- 
+        /* if (validNum && validMontant) {
+             axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
+                 alert('Transaction créée avec succès')
+             }).catch((error) => {
+                 console.error(error.message)
+             })  
+         }*/
+    }
+
     const handleSelect = (e) => {
-        setValueSelect(e.target.value); 
-    } 
+        setValueSelect(e.target.value);
+    }
 
     return (
         <div>
@@ -189,32 +189,77 @@ function AddTransaction() {
 
                                 <Card className='card p-3 mt-2'>
                                     <h5>Identités du bénéficiaire</h5>
-                                    <label>Entrer un numéro de téléphone du bénéficiaire</label>
-                                    <TextField variant='outlined' onChange={handleNumPhone}
-                                        helperText={
-                                            clicBtn === true && (
-                                                <>
-                                                    {validNum ?
-                                                        "" : pattNum === false ? "Veuillez renseigner un numéro de téléphone svp" :
-                                                            "Entrer un numéro de téléphone valide"
-                                                    }
-                                                </>
-                                            )
-                                        }
-                                        className='mb-3 mt-3' placeholder='Entrer un numéro de téléphone' />
 
-                                    <label>Montant</label>
-                                    <TextField variant='outlined' onChange={handleMontant}
-                                        helperText={
-                                            clicBtn === true && (
-                                                <>
-                                                    {validMontant === false ?
-                                                        "Veuillez renseigner un montant svp !" :
-                                                        <Check style={{ fontSize: '15px', color: 'green', }} />}
-                                                </>
-                                            )
-                                        }
-                                        className="mt-3 mb-4" placeholder='Entrer un montant' />
+                                    <div className='row'>
+                                        <div className='col-6'>
+                                            <h6>Nom du bénéficiaire</h6>
+                                            <TextField variant='outlined' onChange={handleNumPhone}
+                                                style={{ width: "100%", }}
+                                                helperText={
+                                                    clicBtn === true && (
+                                                        <>
+                                                            {validNum ?
+                                                                "" : pattNum === false ? "Veuillez renseigner un nom" :
+                                                                    "Entrer un numéro de téléphone valide"
+                                                            }
+                                                        </>
+                                                    )
+                                                }
+                                                className='mb-3 mt-3' placeholder='Entrer le nom du bénéficiaire' />
+                                        </div>
+
+                                        <div className='col-6'>
+                                            <h6>Numéro de téléphone</h6>
+                                            <TextField variant='outlined' onChange={handleNumPhone}
+                                                style={{ width: "100%", }}
+                                                helperText={
+                                                    clicBtn === true && (
+                                                        <>
+                                                            {validNum ?
+                                                                "" : pattNum === false ? "Veuillez renseigner un numéro de téléphone svp" :
+                                                                    "Entrer un numéro de téléphone valide"
+                                                            }
+                                                        </>
+                                                    )
+                                                }
+                                                className='mb-3 mt-3' placeholder='Entrer un numéro de téléphone' />
+                                        </div>
+                                    </div>
+
+
+                                    <div className='row'>
+                                        <div className='col-6'>
+                                            <h6>Choisir un motif</h6>
+                                            <TextField variant='outlined' onChange={handleMontant}
+                                                style={{ width: "100%", }}
+                                                helperText={
+                                                    clicBtn === true && (
+                                                        <>
+                                                            {validMontant === false ?
+                                                                "Veuillez renseigner un montant svp !" :
+                                                                <Check style={{ fontSize: '15px', color: 'green', }} />}
+                                                        </>
+                                                    )
+                                                }
+                                                className="mt-3 mb-4" placeholder='Entrer un montant' />
+                                        </div>
+
+                                        <div className='col-6'>
+                                            <h6>Montant</h6>
+                                            <TextField variant='outlined' onChange={handleMontant}
+                                                style={{ width: "100%", }}
+                                                helperText={
+                                                    clicBtn === true && (
+                                                        <>
+                                                            {validMontant === false ?
+                                                                "Veuillez renseigner un montant svp !" :
+                                                                <Check style={{ fontSize: '15px', color: 'green', }} />}
+                                                        </>
+                                                    )
+                                                }
+                                                className="mt-3 mb-4" placeholder='Entrer un montant' />
+                                        </div>
+                                    </div>
 
                                     <div className='col-12'>
                                         <Button variant="contained" className="mb-2" onClick={handleSubmit}

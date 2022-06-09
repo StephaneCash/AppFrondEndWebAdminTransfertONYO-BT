@@ -7,10 +7,6 @@
     font-size: 14px;
 }
 
-.leftbar .menu {
-    margin-bottom: 15px;
-}
-
 .leftbar #conatiner {
     width: 16.66666667%;
     background-color: rgb(99, 99, 224);
@@ -20,9 +16,13 @@
 .leftbar a {
     color: #fff !important;
     text-decoration: none;
+    margin-bottom: 4px;
 }
 
 .leftbar .active{
-    box-shadow: 1px 1px 1px red;
-    padding: 2px
+    background-color: whitesmoke !important;
+    padding: 2px;
+    color: #333 !important;
+    border-right: 2px solid red;
+    width:100%
 }
