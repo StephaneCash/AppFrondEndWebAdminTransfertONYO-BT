@@ -126,10 +126,10 @@ function Transactions() {
                           .map((val, key) => {
                             return (
                               <tr key={key}>
-                                <td>{val.id_trans}</td>
+                                <td>{val.id}</td>
                                 <td>
                                   {
-                                    etat === 2 && id === val.id_trans && code === valueInputCode ? val.content_code : "***************"
+                                    etat === 2 && id === val.id && code === valueInputCode ? val.content_code : "***************"
                                   }
                                 </td>
                                 <td>{val.exp_name}</td>
@@ -142,12 +142,12 @@ function Transactions() {
                                   {val.statut === 0 && <>Bloquée. <Close style={{ color: "red", marginLeft: '20px' }} /></>}
                                 </td>
                                 <td>
-                                  {etat === 2 && id === val.id_trans && code === valueInputCode ? val.montant : "***********"}
+                                  {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " CDF" : "***********"}
                                 </td>
-                                <td>{val.dateCreate}</td>
+                                <td>{val.createdAt}</td>
                                 <td style={{ width: '120px' }}>
                                   <DoneAll style={{ fontSize: '20px', cursor: 'pointer' }}
-                                    onClick={() => verifCode(val.content_code, val.id_trans)} />
+                                    onClick={() => verifCode(val.content_code, val.id)} />
                                   <Edit style={{ fontSize: '20px' }} />
                                   <Info style={{ fontSize: '20px' }} />
                                   <CancelScheduleSendIcon style={{ fontSize: '20px' }} />
