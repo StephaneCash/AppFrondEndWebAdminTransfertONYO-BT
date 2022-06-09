@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Grid, Paper, Avatar, TextField, FormControlLabel, Button, Typography, Link } from "@material-ui/core"
-import LockIcon from '@mui/icons-material/Lock';
 import Checkbox from '@mui/material/Checkbox';
 import '../assets/Login.css';
 import logo from '../images/logo.jpeg';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 function Login() {
@@ -12,9 +12,9 @@ function Login() {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [clic, setClic] = useState(false)
+  const [clic, setClic] = useState(false);
+
+  let navigate = useNavigate();
 
   const paperStyle = { padding: 20, height: '70vh', width: 340, margin: '20px auto' }
   const backgroundColorAvatar = {
@@ -33,7 +33,7 @@ function Login() {
     try {
       const res = await axios.post('http://localhost:5000/api/login', { email, password });
       setUser(res.data);
-      console.log('USER :: ', res.data)
+      navigate('/dashboard', { state: res.data })
     } catch (error) {
       console.log(error)
     }

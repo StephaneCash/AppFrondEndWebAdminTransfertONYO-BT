@@ -28,7 +28,7 @@ function Transactions() {
   const [verifInput, setVerifInput] = useState(false)
 
   const getAllTransaction = () => {
-    axios.get("http://localhost:5000/api/transactions").then(res => {
+    axios.get("http://localhost:5000/api/transactions/all").then(res => {
       
       if (res.data.status === 200) {
         setData(res.data)
