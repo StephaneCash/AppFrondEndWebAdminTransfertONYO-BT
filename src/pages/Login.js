@@ -12,7 +12,6 @@ function Login() {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [clic, setClic] = useState(false);
   const [error, setError] = useState({})
 
   let navigate = useNavigate();
@@ -22,7 +21,7 @@ function Login() {
     width: "50px"
   };
   const styleTextField = { marginBottom: '10px' }
-  const ButtonStyle = { margin: '8px 0' }
+  const ButtonStyle = { margin: '8px 0', backgroundColor: '#0071c0', color: '#fff' }
 
   const formControlLabel = {
     marginLeft: 0,
@@ -30,7 +29,6 @@ function Login() {
   }
 
   const handleSubmit = async (e) => {
-    setClic(true);
     try {
       const res = await axios.post('http://localhost:5000/api/login', { email, password });
       setUser(res.data);
@@ -38,14 +36,12 @@ function Login() {
         localStorage.setItem('user', JSON.stringify(res.data))
       }
       console.log('RES : ', res.data);
-      navigate('/dashboard', { state: res.data })
+      navigate('/dashboardTransfert', { state: res.data })
     } catch (err) {
       console.log(err)
       setError(err.response);
     }
   }
-
-  console.log("USER : ", user)
 
   return (
     <div className="login">
@@ -74,8 +70,8 @@ function Login() {
             label="Se souvenir de moi"
           />
 
-          <Button type="submit" variant="contained" onClick={handleSubmit} style={ButtonStyle} color='primary' fullWidth>
-            {clic ? "Se connecter..." : "Se connecter"}
+          <Button type="submit" variant="contained" onClick={handleSubmit} style={ButtonStyle} fullWidth>
+            Se connecter
           </Button>
           <Typography>
             <Link href="#">

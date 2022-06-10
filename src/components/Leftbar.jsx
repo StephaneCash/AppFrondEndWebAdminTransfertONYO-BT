@@ -41,7 +41,7 @@ const Leftbar = () => {
         handleTransfert()
     }, showTransfet)
 
-    console.log('TRANSFERT ICON ETAT ::: ', showTransfet)
+    //console.log('TRANSFERT ICON ETAT ::: ', showTransfet)
 
     return (
         <div className='leftbar'>

@@ -28,10 +28,8 @@ function Transactions() {
 
   const [verifInput, setVerifInput] = useState(false)
 
-  console.log("AUTH :: ", authHeader())
-
   const getAllTransaction = () => {
-    axios.get("http://localhost:5000/api/transactions/all", { headers: authHeader() }).then(res => {
+    axios.get("http://localhost:5000/api/transactions", { headers: authHeader() }).then(res => {
 
       if (res.data.status === 200) {
         setData(res.data)
@@ -41,8 +39,6 @@ function Transactions() {
       console.log(error)
     })
   }
-
-
 
   const verifCode = (code, id) => {
     setCode(code);

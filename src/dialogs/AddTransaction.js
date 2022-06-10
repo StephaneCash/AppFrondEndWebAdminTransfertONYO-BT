@@ -5,11 +5,14 @@ import '../assets/Transactions.css'
 import { Button, Card, TextField } from '@material-ui/core'
 import { Check, ToggleOff } from '@material-ui/icons'
 import { ToggleOn } from '@mui/icons-material'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { NavLink } from 'react-router-dom'
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
+import authHeader from '../auth/auth-header';
+import swal from "sweetalert";
 import axios from 'axios';
+
 
 function AddTransaction() {
 
@@ -25,6 +28,22 @@ function AddTransaction() {
     const [dataForm, setDataForm] = useState({});
     const [numTel, setNumTel] = useState(0);
     const [montant, setMontant] = useState(0);
+
+    const [categories, setCategories] = useState([]);
+
+    const getAllCategories = () => {
+        axios.get('http://localhost:5000/api/categories', { headers: authHeader() }).then(res => {
+            setCategories(res.data)
+        }).catch(err => {
+            console.log('ERROR : ', err)
+        })
+    }
+
+    //console.log('CATEGORIES : ', categories[0].id);
+
+    useEffect(() => {
+        getAllCategories()
+    }, [])
 
     let dataRebours = {}
 
@@ -49,16 +68,21 @@ function AddTransaction() {
         }
     }
 
+    const handleCategory = (e) => {
+        setDataForm({ ...dataForm, "categoryId": e.target.value });
+    }
+
+    const handleNomBenef = (e) => {
+        setDataForm({ ...dataForm, "exp_name": e.target.value });
+    }
+
     const handleMontant = (e) => {
         if (e.target.value === "") {
             setValidMontant(false)
         } else {
             setValidMontant(true)
             setMontant(e.target.value)
-            setDataForm({
-                ...dataForm, "annulation": 0, "reception": 0, "suppression": 0, "exp_name": "Cash",
-                "statut": 0, "montant": e.target.value
-            })
+            setDataForm({ ...dataForm, "montant": e.target.value })
         }
     }
 
@@ -85,36 +109,16 @@ function AddTransaction() {
 
     const handleSubmit = (e) => {
         setClicBtn(true);
+        console.log(' result : ', dataForm);
 
-        let chars = "0123456789";
-        let passwordLengh = 16;
-        let password = "";
 
-        for (let i = 0; i <= passwordLengh; i++) {
-            let randomNumber = Math.floor(Math.random() * chars.length);
-            password += chars.substring(randomNumber, randomNumber + 1);
+        if (validNum && validMontant) {
+            axios.post("http://localhost:5000/api/transactions", dataForm, { headers: authHeader() }).then((response) => {
+                swal({ title: "Succès", icon: 'success', text: `Transaction effectuée avec succès` });
+            }).catch((error) => {
+                console.error(error.message)
+            })
         }
-
-        let tab = password.split('');
-        tab[4] = '-';
-        tab[9] = '-';
-        tab[14] = '-';
-
-        let codeGenere = tab.join().replace(/[,]/g, '');
-
-        setDataForm({
-            ...dataForm, "content_code": codeGenere
-        })
-
-        //console.log( ' result : ' ,dataForm) 
-
-        /* if (validNum && validMontant) {
-             axios.post("http://localhost:5000/api/transactions/add", dataForm).then((response) => {
-                 alert('Transaction créée avec succès')
-             }).catch((error) => {
-                 console.error(error.message)
-             })  
-         }*/
     }
 
     const handleSelect = (e) => {
@@ -174,7 +178,7 @@ function AddTransaction() {
                                             <label>Choisir la devise</label>
                                             <select className="form-control"
                                                 onChange={handleSelect}
-                                                style={{ boxShadow: 'none', border: '2px solid blue' }}>
+                                                style={{ boxShadow: 'none', border: '2px solid #0071c0' }}>
                                                 <option>CDF</option>
                                                 <option>USD</option>
                                             </select>
@@ -193,15 +197,14 @@ function AddTransaction() {
                                     <div className='row'>
                                         <div className='col-6'>
                                             <h6>Nom du bénéficiaire</h6>
-                                            <TextField variant='outlined' onChange={handleNumPhone}
+                                            <TextField variant='outlined' onChange={handleNomBenef}
                                                 style={{ width: "100%", }}
                                                 helperText={
                                                     clicBtn === true && (
                                                         <>
-                                                            {validNum ?
-                                                                "" : pattNum === false ? "Veuillez renseigner un nom" :
-                                                                    "Entrer un numéro de téléphone valide"
-                                                            }
+                                                            {validMontant === false ?
+                                                                "Veuillez renseigner un le nom du bénéficiaire svp !" :
+                                                                <Check style={{ fontSize: '15px', color: 'green', }} />}
                                                         </>
                                                     )
                                                 }
@@ -210,7 +213,7 @@ function AddTransaction() {
 
                                         <div className='col-6'>
                                             <h6>Numéro de téléphone</h6>
-                                            <TextField variant='outlined' onChange={handleNumPhone}
+                                            <TextField variant='outlined' onChange={handleNumPhone} type="text"
                                                 style={{ width: "100%", }}
                                                 helperText={
                                                     clicBtn === true && (
@@ -230,18 +233,14 @@ function AddTransaction() {
                                     <div className='row'>
                                         <div className='col-6'>
                                             <h6>Choisir un motif</h6>
-                                            <TextField variant='outlined' onChange={handleMontant}
-                                                style={{ width: "100%", }}
-                                                helperText={
-                                                    clicBtn === true && (
-                                                        <>
-                                                            {validMontant === false ?
-                                                                "Veuillez renseigner un montant svp !" :
-                                                                <Check style={{ fontSize: '15px', color: 'green', }} />}
-                                                        </>
-                                                    )
+                                            <select className='form-control' onChange={handleCategory} style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '19px' }}>
+
+                                                {
+                                                    categories ? categories.map((value) => {
+                                                        return <option key={value.id} value={value.id}>{value.nom}</option>
+                                                    }) : <option>Aucune catégorie trouvée</option>
                                                 }
-                                                className="mt-3 mb-4" placeholder='Entrer un montant' />
+                                            </select>
                                         </div>
 
                                         <div className='col-6'>
