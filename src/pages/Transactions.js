@@ -29,11 +29,10 @@ function Transactions() {
   const [verifInput, setVerifInput] = useState(false)
 
   const getAllTransaction = () => {
-    axios.get("http://localhost:5000/api/transactions", { headers: authHeader() }).then(res => {
+    axios.get("http://localhost:5000/api/transactions/v1/categories", { headers: authHeader() }).then(res => {
 
-      if (res.data.status === 200) {
+      if (res.data) {
         setData(res.data)
-        console.log('result :: ', res.data)
       }
     }).catch(error => {
       console.log(error)
@@ -63,6 +62,11 @@ function Transactions() {
       if (code === valueInputCode) {
         setEtat(2);
         setShowModalVerif(false);
+        axios.put(`http://localhost:5000/api/transactions/${id}`, { statut: 1 }, { headers: authHeader() }).then(res => {
+          getAllTransaction()
+        }).catch(err => {
+          console.log('ERROR : ', err);
+        })
       } else {
         setEtat(3)
       }
@@ -107,7 +111,7 @@ function Transactions() {
                     <tr>
                       <th>Id</th>
                       <th>Code</th>
-                      <th>Expéditeur</th>
+                      <th>Bénéficiaire</th>
                       <th>Dévise</th>
                       <th>Statut</th>
                       <th>Montant</th>
@@ -137,10 +141,10 @@ function Transactions() {
 
                                 <td></td>
                                 <td>
-                                  {val.statut === 1 && <>En cours... <Pending style={{ color: 'orange' }} /> </>}
+                                  {val.statut === 0 && <>En cours... <Pending style={{ color: 'orange' }} /> </>}
                                   {val.statut === 2 && <>En pause...<StopCircle style={{ color: 'blue', marginLeft: '10px' }} /></>}
-                                  {val.statut === 3 && <>Effectuée. <CheckCircleTwoTone style={{ color: 'green', marginLeft: '11px' }} /></>}
-                                  {val.statut === 0 && <>Bloquée. <Close style={{ color: "red", marginLeft: '20px' }} /></>}
+                                  {val.statut === 1 && <>Effectuée. <CheckCircleTwoTone style={{ color: 'green', marginLeft: '11px' }} /></>}
+                                  {val.statut === 3 && <>Bloquée. <Close style={{ color: "red", marginLeft: '20px' }} /></>}
                                 </td>
                                 <td>
                                   {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " CDF" : "***********"}

@@ -7,7 +7,7 @@ import { Check, ToggleOff } from '@material-ui/icons'
 import { ToggleOn } from '@mui/icons-material'
 import { useState, useEffect } from "react";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import authHeader from '../auth/auth-header';
 import swal from "sweetalert";
@@ -26,10 +26,12 @@ function AddTransaction() {
     // Data récupérés dans les inputs
 
     const [dataForm, setDataForm] = useState({});
-    const [numTel, setNumTel] = useState(0);
-    const [montant, setMontant] = useState(0);
 
     const [categories, setCategories] = useState([]);
+    const [isValdCategory, setIsValdCategory] = useState(false);
+    const [validBenif, setValidBenif] = useState(false);
+
+    let navigate = useNavigate();
 
     const getAllCategories = () => {
         axios.get('http://localhost:5000/api/categories', { headers: authHeader() }).then(res => {
@@ -38,8 +40,6 @@ function AddTransaction() {
             console.log('ERROR : ', err)
         })
     }
-
-    //console.log('CATEGORIES : ', categories[0].id);
 
     useEffect(() => {
         getAllCategories()
@@ -59,7 +59,6 @@ function AddTransaction() {
         } else {
             if (e.target.value.match(pattern)) {
                 setValidNum(true)
-                setNumTel(e.target.value)
                 setDataForm({ ...dataForm, "numTel": e.target.value })
             } else {
                 setPattNum(true)
@@ -69,19 +68,29 @@ function AddTransaction() {
     }
 
     const handleCategory = (e) => {
-        setDataForm({ ...dataForm, "categoryId": e.target.value });
+        if (dataForm.categoryId) {
+            if (dataForm.categoryId !== '0') {
+                setIsValdCategory(false);
+            } else {
+                setIsValdCategory(true);
+            }
+        }
     }
 
     const handleNomBenef = (e) => {
-        setDataForm({ ...dataForm, "exp_name": e.target.value });
+        if (e.target.value === "") {
+            setValidBenif(false);
+        } else {
+            setValidBenif(true);
+            setDataForm({ ...dataForm, "exp_name": e.target.value });
+        }
     }
 
     const handleMontant = (e) => {
         if (e.target.value === "") {
             setValidMontant(false)
         } else {
-            setValidMontant(true)
-            setMontant(e.target.value)
+            setValidMontant(true);
             setDataForm({ ...dataForm, "montant": e.target.value })
         }
     }
@@ -109,20 +118,25 @@ function AddTransaction() {
 
     const handleSubmit = (e) => {
         setClicBtn(true);
-        console.log(' result : ', dataForm);
 
-/*
-        if (validNum && validMontant) {
+        if (validNum && validMontant && isValdCategory) {
             axios.post("http://localhost:5000/api/transactions", dataForm, { headers: authHeader() }).then((response) => {
                 swal({ title: "Succès", icon: 'success', text: `Transaction effectuée avec succès` });
+                navigate('/transaction');
             }).catch((error) => {
                 console.error(error.message)
             })
-        }*/
+        }
     }
 
     const handleSelect = (e) => {
         setValueSelect(e.target.value);
+    }
+
+    const errSelectCategory = {
+        fontSize: "12.5px",
+        marginLeft: "15px",
+        color: 'gray'
     }
 
     return (
@@ -202,7 +216,7 @@ function AddTransaction() {
                                                 helperText={
                                                     clicBtn === true && (
                                                         <>
-                                                            {validMontant === false ?
+                                                            {validBenif === false ?
                                                                 "Veuillez renseigner un le nom du bénéficiaire svp !" :
                                                                 <Check style={{ fontSize: '15px', color: 'green', }} />}
                                                         </>
@@ -231,22 +245,40 @@ function AddTransaction() {
 
 
                                     <div className='row'>
+
                                         <div className='col-6'>
                                             <h6>Choisir un motif</h6>
-                                            <select className='form-control' onChange={handleCategory} style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '19px' }}>
-
+                                            <select className='form-control'
+                                                onChange={(e) => (setDataForm({ ...dataForm, 'categoryId': e.target.value }),
+                                                    handleCategory(e))} style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '19px' }}>
+                                                <option value={0}>--Choisir une option--</option>
                                                 {
-                                                    categories ? categories.map((value) => {
-                                                        return <option key={value.id} value={value.id}>{value.nom}</option>
-                                                    }) : <option>Aucune catégorie trouvée</option>
+
+                                                    categories ?
+                                                        categories.map(val => {
+                                                            return (
+                                                                <>
+                                                                    <option key={val.id} value={val.id}>{val.nom}</option>
+                                                                </>
+                                                            )
+                                                        })
+                                                        : ""
                                                 }
                                             </select>
+                                            {
+                                                clicBtn ?
+                                                    dataForm.categoryId == '0' || !dataForm.categoryId ?
+                                                        <span style={errSelectCategory}>Veuillez sélectionner une catégorie svp</span>
+                                                        : ""
+                                                    : ""
+                                            }
+
                                         </div>
 
                                         <div className='col-6'>
                                             <h6>Montant</h6>
                                             <TextField variant='outlined' onChange={handleMontant}
-                                                style={{ width: "100%", }}
+                                                style={{ width: "100%", }} type='number'
                                                 helperText={
                                                     clicBtn === true && (
                                                         <>
