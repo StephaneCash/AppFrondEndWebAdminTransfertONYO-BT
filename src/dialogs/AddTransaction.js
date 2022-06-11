@@ -111,14 +111,14 @@ function AddTransaction() {
         setClicBtn(true);
         console.log(' result : ', dataForm);
 
-
+/*
         if (validNum && validMontant) {
             axios.post("http://localhost:5000/api/transactions", dataForm, { headers: authHeader() }).then((response) => {
                 swal({ title: "Succès", icon: 'success', text: `Transaction effectuée avec succès` });
             }).catch((error) => {
                 console.error(error.message)
             })
-        }
+        }*/
     }
 
     const handleSelect = (e) => {
