@@ -5,11 +5,11 @@ import '../assets/Transactions.css'
 import { Card, TextField } from '@material-ui/core'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { CheckCircleTwoTone, Delete, DoneAll, Pending, StopCircle } from '@mui/icons-material'
-import { Edit, Info, AddCircle, Done, Close } from '@material-ui/icons'
-import CancelScheduleSendIcon from '@mui/icons-material/CancelScheduleSend';
-import { Button } from '@mui/material';
+import { Close, Delete, DoneAll, Pending, StopCircle } from '@mui/icons-material'
+import { Edit, Info, AddCircle, } from '@material-ui/icons'
+import { Button, } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import MoreVert from '@mui/icons-material/MoreVert';
 import { NavLink } from 'react-router-dom'
 import VerifCodeTransaction from '../dialogs/VerifCodeTransaction'
 import Load from '../components/Load';
@@ -30,7 +30,6 @@ function Transactions() {
 
   const getAllTransaction = () => {
     axios.get("http://localhost:5000/api/transactions/v1/categories", { headers: authHeader() }).then(res => {
-
       if (res.data) {
         setData(res.data)
       }
@@ -73,6 +72,12 @@ function Transactions() {
     }
   }
 
+  // Mettre à jour une transaction
+
+  const handleUpdateTransaction = (id) => {
+    alert(id)
+  }
+
   const closeModalVerif = () => {
     setShowModalVerif(false);
   }
@@ -102,7 +107,7 @@ function Transactions() {
                 </div>
               </div>
 
-              <TextField type="search" label='Rechercher' variant='filled' style={{ marginRight: "25px" }}
+              <TextField type="search" label='Rechercher'
                 className="searchTransition mb-3" onChange={(e) => setValSearch(e.target.value)} />
 
               <Card className='card'>
@@ -112,7 +117,6 @@ function Transactions() {
                       <th>Id</th>
                       <th>Code</th>
                       <th>Bénéficiaire</th>
-                      <th>Dévise</th>
                       <th>Statut</th>
                       <th>Montant</th>
                       <th>Date création</th>
@@ -138,25 +142,41 @@ function Transactions() {
                                   }
                                 </td>
                                 <td>{val.exp_name}</td>
-
-                                <td></td>
                                 <td>
-                                  {val.statut === 0 && <>En cours... <Pending style={{ color: 'orange' }} /> </>}
-                                  {val.statut === 2 && <>En pause...<StopCircle style={{ color: 'blue', marginLeft: '10px' }} /></>}
-                                  {val.statut === 1 && <>Effectuée. <CheckCircleTwoTone style={{ color: 'green', marginLeft: '11px' }} /></>}
-                                  {val.statut === 3 && <>Bloquée. <Close style={{ color: "red", marginLeft: '20px' }} /></>}
+                                  {val.statut === 0 && <span style={{ color: 'orange', fontWeight: 'bold' }}>En cours...</span>}
+                                  {val.statut === 2 && <span style={{ color: 'blue', fontWeight: 'bold' }}>En pause.</span>}
+                                  {val.statut === 1 && <span style={{ color: 'green', fontWeight: 'bold' }}>Effectuée. </span>}
+                                  {val.statut === 3 && <span style={{ color: "red", fontWeight: 'bold' }}>Bloquée. </span>}
                                 </td>
                                 <td>
-                                  {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " CDF" : "***********"}
+                                  {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " " + val.devise : "***********"}
                                 </td>
                                 <td>{val.createdAt}</td>
-                                <td style={{ width: '120px' }}>
-                                  <DoneAll style={{ fontSize: '20px', cursor: 'pointer' }}
-                                    onClick={() => verifCode(val.content_code, val.id)} />
-                                  <Edit style={{ fontSize: '20px' }} />
-                                  <Info style={{ fontSize: '20px' }} />
-                                  <CancelScheduleSendIcon style={{ fontSize: '20px' }} />
-                                  <Delete style={{ fontSize: '20px' }} />
+                                <td style={{ maxWidth: '350px' }}>
+
+                                  <div className="box">
+                                    <input type='checkbox' id='checkbox' />
+
+                                    <div className="menu">
+                                      <div className="menuItems" onClick={() => verifCode(val.content_code, val.id)} style={{ cursor: 'pointer' }}>
+                                        <DoneAll className="iconAction"
+                                        /> Vérifier
+                                      </div>
+                                      <div className="menuItems" style={{ cursor: 'pointer' }} onClick={() => handleUpdateTransaction(val.id)}>
+                                        <Edit className="iconAction" />
+                                        Editer
+                                      </div>
+                                      <div className="menuItems" style={{ cursor: 'pointer' }}>
+                                        <Close className="iconAction" />
+                                        Stopper
+                                      </div>
+                                      <div className="menuItems" style={{ cursor: 'pointer' }}>
+                                        <Delete className="iconAction" /> Supprimer
+                                      </div>
+
+                                    </div>
+                                  </div>
+
                                 </td>
                               </tr>
                             )

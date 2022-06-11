@@ -75,3 +75,80 @@
     text-decoration: none
 }
 
+.transaction td{
+    font-size: 14px;
+}
+
+.transaction th{
+    font-size: 14px;
+}
+
+
+.transaction .box{
+    display: flex;
+}
+
+.transaction #checkbox{
+    width: 35px;
+    height: 35px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background:white;
+    cursor: pointer;
+    border : 1px solid rgba(165, 165, 165);
+    position: relative;
+    border-radius:4px;
+}
+
+.transaction #checkbox:hover{
+    background: rgba(255, 255, 255, .7)
+}
+
+.transaction #checkbox:checked::before{
+    content: "x";
+    font-size:1.5rem;
+    font-weight: bold;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+}
+
+.transaction #checkbox:checked ~ .menu{
+    width: auto;
+}
+
+.transaction #checkbox::before{
+    content: "...";
+    font-size:2.5rem;
+    font-weight: bold;
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.transaction .menu{
+    width: 0;
+    overflow: hidden;
+    display: flex;
+    transition: all .5s;
+}
+
+.transaction .menu .menuItems{
+    width: 100px;
+    border-radius:4px;
+    height: 35px;
+    background-color: white;
+    border : 1px solid rgba(165, 165, 165);
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    justify-content: center;
+    padding: 2px;
+}
+
+.transaction .iconAction{
+    color: gray;
+}

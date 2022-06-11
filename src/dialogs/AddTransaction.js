@@ -68,12 +68,10 @@ function AddTransaction() {
     }
 
     const handleCategory = (e) => {
-        if (dataForm.categoryId) {
-            if (dataForm.categoryId !== '0') {
-                setIsValdCategory(false);
-            } else {
-                setIsValdCategory(true);
-            }
+        if (e.target.value !== '0') {
+            setIsValdCategory(true);
+        } else {
+            setIsValdCategory(false);
         }
     }
 
@@ -118,7 +116,6 @@ function AddTransaction() {
 
     const handleSubmit = (e) => {
         setClicBtn(true);
-
         if (validNum && validMontant && isValdCategory) {
             axios.post("http://localhost:5000/api/transactions", dataForm, { headers: authHeader() }).then((response) => {
                 swal({ title: "Succès", icon: 'success', text: `Transaction effectuée avec succès` });
@@ -131,6 +128,7 @@ function AddTransaction() {
 
     const handleSelect = (e) => {
         setValueSelect(e.target.value);
+        setDataForm({ ...dataForm, 'devise': e.target.value })
     }
 
     const errSelectCategory = {
