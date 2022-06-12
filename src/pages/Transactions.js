@@ -14,6 +14,8 @@ import { NavLink } from 'react-router-dom'
 import VerifCodeTransaction from '../dialogs/VerifCodeTransaction'
 import Load from '../components/Load';
 import authHeader from '../auth/auth-header';
+import swal from "sweetalert";
+
 
 function Transactions() {
 
@@ -76,6 +78,31 @@ function Transactions() {
 
   const handleUpdateTransaction = (id) => {
     alert(id)
+  }
+
+  const stopperTransaction = (id) => {
+
+    swal({
+      title: "Avertissement.",
+      text: "Etes-vous sûr de vouloir bloquer cette transaction ?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios.put(`http://localhost:5000/api/transactions/${id}`, { statut: 3 }, { headers: authHeader() }).then(res => {
+          getAllTransaction()
+        }).catch(err => {
+          console.log('ERROR : ', err);
+        })
+        swal('Transaction bloquée avec succès', {
+          icon: "success",
+        });
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+
   }
 
   const closeModalVerif = () => {
@@ -152,7 +179,7 @@ function Transactions() {
                                   {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " " + val.devise : "***********"}
                                 </td>
                                 <td>{val.createdAt}</td>
-                                <td style={{ maxWidth: '350px' }}>
+                                <td style={{ maxWidth: '190px' }}>
 
                                   <div className="box">
                                     <input type='checkbox' id='checkbox' />
@@ -162,16 +189,10 @@ function Transactions() {
                                         <DoneAll className="iconAction"
                                         /> Vérifier
                                       </div>
-                                      <div className="menuItems" style={{ cursor: 'pointer' }} onClick={() => handleUpdateTransaction(val.id)}>
-                                        <Edit className="iconAction" />
-                                        Editer
-                                      </div>
-                                      <div className="menuItems" style={{ cursor: 'pointer' }}>
+
+                                      <div className="menuItems" style={{ cursor: 'pointer' }} onClick={(e) => stopperTransaction(val.id)}>
                                         <Close className="iconAction" />
                                         Stopper
-                                      </div>
-                                      <div className="menuItems" style={{ cursor: 'pointer' }}>
-                                        <Delete className="iconAction" /> Supprimer
                                       </div>
 
                                     </div>

@@ -1,0 +1,13 @@
+.ressources {
+    padding-left: 10px !important;
+    padding-right: 10px;
+}
+
+.ressources th,
+td {
+    font-size: 14px;
+}
+
+.ressources a{
+    text-decoration: none;
+}

@@ -97,7 +97,7 @@ const Leftbar = () => {
                             </div>
 
                             <div className='d-flex menu'>
-                                <NavLink to='/'>
+                                <NavLink to='/ressources'>
                                     <div className='d-flex'>
                                         <div className='icon iconNav'><SoapIcon /></div>
                                         <div className='text'>Ressources</div>

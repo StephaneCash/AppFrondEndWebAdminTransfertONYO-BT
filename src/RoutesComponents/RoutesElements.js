@@ -6,6 +6,8 @@ import Login from '../pages/Login';
 import Transactions from '../pages/Transactions';
 import AddTransaction from "../dialogs/AddTransaction";
 import Users from "../pages/Users";
+import Ressources from '../pages/Ressources';
+import AddCode from '../dialogs/AddCode';
 
 function RoutesElements() {
     return (
@@ -17,6 +19,8 @@ function RoutesElements() {
                 <Route path='/clients' element={<Clients />} />
                 <Route path='/transaction/addTransaction' element={<AddTransaction />} />
                 <Route path='/users' element={<Users />} />
+                <Route path='/ressources' element={<Ressources />} />
+                <Route path='/ressources/add' element={<AddCode />} />
             </Routes>
         </BrowserRouter>
     )
