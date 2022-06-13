@@ -12,55 +12,9 @@ import AddCode from '../dialogs/AddCode';
 import swal from "sweetalert";
 
 
-function Ressources() {
+function Partenaires() {
 
-    const [codes, setCodes] = useState([]);
-    const [etatModal, setEtatModal] = useState(false);
-
-    const getAllCodes = () => {
-        axios.get('http://localhost:5000/api/generates/', { headers: authHeader() }).then(res => {
-            setCodes(res.data.data)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-
-    const deleteCodeHandle = (id) => {
-
-        swal({
-            title: "Avertissement.",
-            text: "Etes-vous sûr de vouloir supprimer ce code ?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then((willDelete) => {
-            if (willDelete) {
-                axios.delete(`http://localhost:5000/api/generates/${id}`, { headers: authHeader() }).then(res => {
-                    getAllCodes();
-                }).catch(err => {
-                    console.log(err)
-                })
-                swal('Code supprimé avec succès', {
-                    icon: "success",
-                });
-            }
-        }).catch((error) => {
-            console.log(error);
-        })
-
-    }
-
-    const showModalAddCode = () => {
-        setEtatModal(true)
-    }
-
-    const closeModal = () => {
-        setEtatModal(false);
-    }
-
-    useEffect(() => {
-        getAllCodes();
-    }, [])
+   
 
     return (
         <div>
@@ -106,7 +60,7 @@ function Ressources() {
                                                                     val.statut === '1' && <span style={{ fontWeight: 'bold', color: 'green' }}>Déjà utilisé</span>
                                                             }
                                                         </td>
-                                                        <td>Ojours Oh OOmin</td>
+                                                        <td>1h 48min</td>
                                                         <td style={{ width: '80px' }}>
                                                             <Button variant='contained' onClick={(e) => deleteCodeHandle(val.id)}>
                                                                 <Delete />
@@ -140,4 +94,4 @@ function Ressources() {
     )
 }
 
-export default Ressources
+export default Partenaires
