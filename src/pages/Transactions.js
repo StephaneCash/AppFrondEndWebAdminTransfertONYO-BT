@@ -5,11 +5,10 @@ import '../assets/Transactions.css'
 import { Card, TextField } from '@material-ui/core'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { Close, Delete, DoneAll, Pending, StopCircle } from '@mui/icons-material'
+import { Close, DoneAll, Pending } from '@mui/icons-material'
 import { Edit, Info, AddCircle, } from '@material-ui/icons'
 import { Button, } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import MoreVert from '@mui/icons-material/MoreVert';
 import { NavLink } from 'react-router-dom'
 import VerifCodeTransaction from '../dialogs/VerifCodeTransaction'
 import Load from '../components/Load';
@@ -171,7 +170,6 @@ function Transactions() {
                                 <td>{val.exp_name}</td>
                                 <td>
                                   {val.statut === 0 && <span style={{ color: 'orange', fontWeight: 'bold' }}>En cours...</span>}
-                                  {val.statut === 2 && <span style={{ color: 'blue', fontWeight: 'bold' }}>En pause.</span>}
                                   {val.statut === 1 && <span style={{ color: 'green', fontWeight: 'bold' }}>Effectuée. </span>}
                                   {val.statut === 3 && <span style={{ color: "red", fontWeight: 'bold' }}>Bloquée. </span>}
                                 </td>
