@@ -8,11 +8,13 @@ import { Button, Card } from '@material-ui/core';
 import Load from '../components/Load';
 import { Add } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
+import AddCode from '../dialogs/AddCode';
 
 
 function Ressources() {
 
     const [codes, setCodes] = useState([]);
+    const [etatModal, setEtatModal] = useState(false);
 
     const getAllCodes = () => {
         axios.get('http://localhost:5000/api/generates/', { headers: authHeader() }).then(res => {
@@ -20,6 +22,14 @@ function Ressources() {
         }).catch(err => {
             console.log(err)
         })
+    }
+
+    const showModalAddCode = () =>{
+        setEtatModal(true)
+    }
+
+    const closeModal = () =>{
+        setEtatModal(false);
     }
 
     useEffect(() => {
@@ -36,10 +46,8 @@ function Ressources() {
                     <div className='col-10 ressources' style={{ marginTop: '70px' }}>
                         <h6>Codes pour accéder dans les contenus ONYO-BT</h6>
 
-                        <Button variant='contined' style={{ border: "1px solid #0071c0", color: "blue" }}>
-                            <Link to='/ressources/add'>
-                                <span style={{ color: 'red' }}>Créer un code</span>
-                            </Link>
+                        <Button onClick={showModalAddCode} variant='contined' style={{ border: "1px solid #0071c0", color: "blue" }}>
+                            <span style={{ color: 'red' }}>Créer un code</span>
                         </Button>
 
                         <Card className='card mt-4'>
@@ -87,6 +95,11 @@ function Ressources() {
                     </div>
                 </div>
             </div>
+
+            <AddCode
+                show={etatModal}
+                close={closeModal}
+            />
         </div>
     )
 }
