@@ -21,7 +21,7 @@ function Login() {
     width: "50px"
   };
   const styleTextField = { marginBottom: '10px' }
-  const ButtonStyle = { margin: '8px 0', backgroundColor: '#0071c0', color: '#fff' }
+  const ButtonStyle = { margin: '8px 0', backgroundColor: '#fd0707', color: '#fff' }
 
   const formControlLabel = {
     marginLeft: 0,
@@ -56,7 +56,7 @@ function Login() {
             label="Username" fullWidth required
             className='mt-2' onChange={(e) => setEmail(e.target.value)}
           />
-          <TextField style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
+          <TextField className='mt-3' style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
             label="Mot de passe" type="password" fullWidth required />
 
           <FormControlLabel
