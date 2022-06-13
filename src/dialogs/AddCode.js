@@ -6,6 +6,8 @@ import { Close, Done } from '@material-ui/icons'
 import axios from "axios";
 import { useState, useEffect } from 'react'
 import authHeader from '../auth/auth-header';
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +22,11 @@ const AddCode = (props) => {
     const [montant, setMontant] = useState(0);
     const [etat, setEtat] = useState(false)
 
-    const [clic, setClic] = useState(false)
+    const [nbr, setNbr] = useState(1)
+
+    const [clic, setClic] = useState(false);
+
+    let getAllCodes = props.getAllCodes;
 
     const onChange = (e) => {
         if (e.target.value === "") {
@@ -32,16 +38,25 @@ const AddCode = (props) => {
     }
 
     const ajouterCode = () => {
+        
         setClic(true)
-        axios.post('http://localhost:5000/api/generates/', { montant }, { headers: authHeader() }).then(res => {
-            console.log(res, ' RESULT')
-        }).catch(err => {
-            console.log(err)
-        })
-        //closeModalVerif()
+        if (etat) {
+            for (let i = 1; i <= nbr; i++) {
+                axios.post('http://localhost:5000/api/generates/', { montant }, { headers: authHeader() }).then(res => {
+                    swal({ title: "Succès", icon: 'success', text: `${nbr} ${nbr > 1 ? ' codes ajoutés' : 'code ajouté'} avec succès` });
+                    closeModalVerif()
+                    getAllCodes()
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        }
+
     }
 
-    let array = [1, 4, 0, 0, 8, 6, 8, 8, 9, 0]
+    function handleSelected(e) {
+        setNbr(e.target.value)
+    }
 
     const classes = useStyles();
 
@@ -53,7 +68,7 @@ const AddCode = (props) => {
                         <div className='d-flex'>
                             <div className="col-10">
                                 <h5>Création du code</h5>
-                                <h6 style={{ marginTop: "30px" }}>
+                                <h6 style={{ marginTop: "30px" }} id="h6">
                                     Entrer le montant pour le code
                                 </h6>
                             </div>
@@ -73,10 +88,12 @@ const AddCode = (props) => {
 
                     <div className="row">
                         <div className="col-6">
-                            <select className="form-control" style={{ boxShadow: 'none' }}>
-                                <option>
-                                    1
-                                </option>
+                            <select className="form-control" style={{ boxShadow: 'none' }} onChange={handleSelected} >
+                                <option id="">1</option>
+                                <option id="">5</option>
+                                <option id="">10</option>
+                                <option id="">15</option>
+                                <option id="">20</option>
                             </select>
                         </div>
                         <div className="col-6">

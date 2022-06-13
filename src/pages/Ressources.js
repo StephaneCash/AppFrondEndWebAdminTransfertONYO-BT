@@ -6,9 +6,10 @@ import '../assets/Ressources.css';
 import authHeader from '../auth/auth-header';
 import { Button, Card } from '@material-ui/core';
 import Load from '../components/Load';
-import { Add } from '@material-ui/icons';
+import { Delete } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import AddCode from '../dialogs/AddCode';
+import swal from "sweetalert";
 
 
 function Ressources() {
@@ -24,11 +25,36 @@ function Ressources() {
         })
     }
 
-    const showModalAddCode = () =>{
+    const deleteCodeHandle = (id) => {
+
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer ce code ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                axios.delete(`http://localhost:5000/api/generates/${id}`, { headers: authHeader() }).then(res => {
+                    getAllCodes();
+                }).catch(err => {
+                    console.log(err)
+                })
+                swal('Code supprimé avec succès', {
+                    icon: "success",
+                });
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+
+    }
+
+    const showModalAddCode = () => {
         setEtatModal(true)
     }
 
-    const closeModal = () =>{
+    const closeModal = () => {
         setEtatModal(false);
     }
 
@@ -44,7 +70,10 @@ function Ressources() {
                 <div className='d-flex'>
                     <div className='col-2'><Leftbar /></div>
                     <div className='col-10 ressources' style={{ marginTop: '70px' }}>
-                        <h6>Codes pour accéder dans les contenus ONYO-BT</h6>
+                        <h5>Codes pour accéder dans les contenus ONYO-BT</h5>
+                        <h6>
+                            Il y a {codes ? codes.length + " codes générés" : "0 Code"}
+                        </h6>
 
                         <Button onClick={showModalAddCode} variant='contined' style={{ border: "1px solid #0071c0", color: "blue" }}>
                             <span style={{ color: 'red' }}>Créer un code</span>
@@ -58,6 +87,7 @@ function Ressources() {
                                         <th>Code</th>
                                         <th>Statut</th>
                                         <th>Validité</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,7 +97,7 @@ function Ressources() {
                                             codes.map((val, key) => {
                                                 return (
                                                     <tr key={key}>
-                                                        <td>{val.id}</td>
+                                                        <td>{key + 1}</td>
 
                                                         <td>{val.content}</td>
                                                         <td>
@@ -77,6 +107,11 @@ function Ressources() {
                                                             }
                                                         </td>
                                                         <td>1h 48min</td>
+                                                        <td style={{ width: '80px' }}>
+                                                            <Button variant='contained' onClick={(e) => deleteCodeHandle(val.id)}>
+                                                                <Delete />
+                                                            </Button>
+                                                        </td>
 
                                                     </tr>
                                                 )
@@ -99,6 +134,7 @@ function Ressources() {
             <AddCode
                 show={etatModal}
                 close={closeModal}
+                getAllCodes={getAllCodes}
             />
         </div>
     )
