@@ -58,6 +58,10 @@ function Ressources() {
         setEtatModal(false);
     }
 
+    const handlePrint = () =>{
+        alert('Vous ne pouvez pas encore imprimer')
+    }
+
     useEffect(() => {
         getAllCodes();
     }, [])
@@ -71,13 +75,26 @@ function Ressources() {
                     <div className='col-2'><Leftbar /></div>
                     <div className='col-10 ressources' style={{ marginTop: '70px' }}>
                         <h5>Codes pour accéder dans les contenus ONYO-BT</h5>
+
                         <h6>
                             Il y a {codes ? codes.length + " codes générés" : "0 Code"}
                         </h6>
+                        <div className="row">
 
-                        <Button onClick={showModalAddCode} variant='contined' style={{ border: "1px solid #0071c0", color: "blue" }}>
-                            <span style={{ color: 'red' }}>Créer un code</span>
-                        </Button>
+                            <div className='col-2'>
+                                <Button onClick={showModalAddCode} variant='contined' style={{ border: "1px solid #0071c0", color: "blue" }}>
+                                    <span style={{ color: 'red' }}>Créer un code</span>
+                                </Button>
+                            </div>
+                            <div className='col-1'>
+                                <Button variant='outlined' onClick={handlePrint}>
+                                    <i className='fa fa-print'></i> Imprimer
+                                </Button>
+                            </div>
+
+                        </div>
+
+
 
                         <Card className='card mt-4'>
                             <table className='table table-striped table-borderless'>
@@ -112,7 +129,6 @@ function Ressources() {
                                                                 <Delete />
                                                             </Button>
                                                         </td>
-
                                                     </tr>
                                                 )
                                             })

@@ -7,7 +7,9 @@ import Transactions from '../pages/Transactions';
 import AddTransaction from "../dialogs/AddTransaction";
 import Users from "../pages/Users";
 import Ressources from '../pages/Ressources';
+import Partenaires from '../pages/Partenaires';
 import AddCode from '../dialogs/AddCode';
+
 
 function RoutesElements() {
     return (
@@ -21,6 +23,7 @@ function RoutesElements() {
                 <Route path='/users' element={<Users />} />
                 <Route path='/ressources' element={<Ressources />} />
                 <Route path='/ressources/add' element={<AddCode />} />
+                <Route path='/partenaires' element={<Partenaires />} />
             </Routes>
         </BrowserRouter>
     )

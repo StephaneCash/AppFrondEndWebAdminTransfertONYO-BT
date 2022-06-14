@@ -14,7 +14,19 @@ import swal from "sweetalert";
 
 function Partenaires() {
 
-   
+    const [data, setData] = useState([]);
+
+    const getAllPartenaires = () => {
+        axios.get('http://localhost:5000/api/partenaires/v1/categories', { headers: authHeader() }).then(res => {
+            setData(res.data.data)
+        })
+    }
+
+    useEffect(() => {
+        getAllPartenaires()
+    }, [])
+
+    console.log(data)
 
     return (
         <div>
@@ -24,59 +36,27 @@ function Partenaires() {
                 <div className='d-flex'>
                     <div className='col-2'><Leftbar /></div>
                     <div className='col-10 ressources' style={{ marginTop: '70px' }}>
-                        <h5>Codes pour accéder dans les contenus ONYO-BT</h5>
-                        <h6>
-                            Il y a {codes ? codes.length + " codes générés" : "0 Code"}
-                        </h6>
+                        0 Partenaires trouvés
 
-                        <Button onClick={showModalAddCode} variant='contined' style={{ border: "1px solid #0071c0", color: "blue" }}>
-                            <span style={{ color: 'red' }}>Créer un code</span>
-                        </Button>
-
-                        <Card className='card mt-4'>
-                            <table className='table table-striped table-borderless'>
+                        <Card>
+                            <table className='table'>
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Code</th>
-                                        <th>Statut</th>
-                                        <th>Validité</th>
-                                        <th>Actions</th>
+                                        <th>Nom</th>
+                                        <th>Catégorie</th>
+                                        <th>Description</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
-                                        codes ?
-
-                                            codes.map((val, key) => {
-                                                return (
-                                                    <tr key={key}>
-                                                        <td>{key + 1}</td>
-
-                                                        <td>{val.content}</td>
-                                                        <td>
-                                                            {
-                                                                val.statut === '0' ? <span style={{ fontWeight: 'bold', color: "orange" }}>Non utilisé</span> :
-                                                                    val.statut === '1' && <span style={{ fontWeight: 'bold', color: 'green' }}>Déjà utilisé</span>
-                                                            }
-                                                        </td>
-                                                        <td>1h 48min</td>
-                                                        <td style={{ width: '80px' }}>
-                                                            <Button variant='contained' onClick={(e) => deleteCodeHandle(val.id)}>
-                                                                <Delete />
-                                                            </Button>
-                                                        </td>
-
-                                                    </tr>
-                                                )
-                                            })
-
-                                            : <tr className="textPasData">
-                                                <td colSpan='8px'>
-                                                    <Load />
-                                                </td>
+                                        data.map((val, index) => {
+                                            <tr>
+                                                <td>{index}</td>
+                                                <td>{val.nom}</td>
                                             </tr>
-
+                                        })
                                     }
                                 </tbody>
                             </table>
@@ -84,12 +64,6 @@ function Partenaires() {
                     </div>
                 </div>
             </div>
-
-            <AddCode
-                show={etatModal}
-                close={closeModal}
-                getAllCodes={getAllCodes}
-            />
         </div>
     )
 }
