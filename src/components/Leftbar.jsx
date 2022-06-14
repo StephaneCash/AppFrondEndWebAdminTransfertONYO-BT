@@ -53,74 +53,76 @@ const Leftbar = () => {
                             {changeBtn ? <KeyboardControlKeyIcon className='iconTransf' onClick={handleTransfert} />
                                 : <KeyboardArrowRightIcon className='iconTransf' onClick={handleTransfert} />}
                         </div>
-                        <div className='text textTransfert' style={{fontSize: '20px' }}>Transfert</div>
+                        <div className='text textTransfert' style={{ fontSize: '20px' }}>Transfert</div>
                     </div>
                 </div>
 
                 {
                     showTransfet ?
                         <>
-                            <div className='d-flex menu'>
-                                <NavLink to='/dashboardTransfert'>
-                                    <div className='d-flex'>
-                                        <div className='icon iconNav'><Dashboard /></div>
-                                        <div className='text'>Dashboard</div>
-                                    </div>
-                                </NavLink>
-                            </div>
+                            <div className='subMenu'>
+                                <div className='d-flex menu'>
+                                    <NavLink to='/dashboardTransfert'>
+                                        <div className='d-flex'>
+                                            <div className='icon iconNav'><Dashboard /></div>
+                                            <div className='text'>Dashboard</div>
+                                        </div>
+                                    </NavLink>
+                                </div>
 
-                            <div className='d-flex menu'>
-                                <NavLink to='/transaction'>
-                                    <div className='d-flex'>
-                                        <div className='icon iconNav'><AttachMoneyIcon /></div>
-                                        <div className='text'>Transaction</div>
-                                    </div>
-                                </NavLink>
-                            </div>
+                                <div className='d-flex menu'>
+                                    <NavLink to='/transaction'>
+                                        <div className='d-flex'>
+                                            <div className='icon iconNav'><AttachMoneyIcon /></div>
+                                            <div className='text'>Transaction</div>
+                                        </div>
+                                    </NavLink>
+                                </div>
 
-                            <div className='d-flex menu'>
-                                <NavLink to='/clients'>
-                                    <div className='d-flex'>
-                                        <div className='icon iconNav'><CoPresentIcon /></div>
-                                        <div className='text'>Clients</div>
-                                    </div>
-                                </NavLink>
-                            </div>
+                                <div className='d-flex menu'>
+                                    <NavLink to='/clients'>
+                                        <div className='d-flex'>
+                                            <div className='icon iconNav'><CoPresentIcon /></div>
+                                            <div className='text'>Clients</div>
+                                        </div>
+                                    </NavLink>
+                                </div>
 
-                            <div className='d-flex menu'>
-                                <NavLink to='/partenaires'>
-                                    <div className='d-flex'>
-                                        <div className='icon iconNav'><PublicIcon /></div>
-                                        <div className='text'>Parténaires</div>
-                                    </div>
-                                </NavLink>
-                            </div>
+                                <div className='d-flex menu'>
+                                    <NavLink to='/partenaires'>
+                                        <div className='d-flex'>
+                                            <div className='icon iconNav'><PublicIcon /></div>
+                                            <div className='text'>Parténaires</div>
+                                        </div>
+                                    </NavLink>
+                                </div>
 
-                            <div className='d-flex menu'>
-                                <NavLink to='/ressources'>
-                                    <div className='d-flex'>
-                                        <div className='icon iconNav'><SoapIcon /></div>
-                                        <div className='text'>Ressources</div>
-                                    </div>
-                                </NavLink>
-                            </div>
+                                <div className='d-flex menu'>
+                                    <NavLink to='/ressources'>
+                                        <div className='d-flex'>
+                                            <div className='icon iconNav'><SoapIcon /></div>
+                                            <div className='text'>Ressources</div>
+                                        </div>
+                                    </NavLink>
+                                </div>
 
-                            <div className='d-flex menu'>
-                                <NavLink to='/'>
-                                    <div className='d-flex'>
-                                        <div className='icon iconNav'><CircleNotificationsIcon /></div>
-                                        <div className='text'>Notifications</div>
-                                    </div>
-                                </NavLink>
-                            </div>
+                                <div className='d-flex menu'>
+                                    <NavLink to='/'>
+                                        <div className='d-flex'>
+                                            <div className='icon iconNav'><CircleNotificationsIcon /></div>
+                                            <div className='text'>Notifications</div>
+                                        </div>
+                                    </NavLink>
+                                </div>
 
-                            <div className='d-flex menu'>
-                                <NavLink to='/users'>
-                                    <div className='d-flex'>
-                                        <div className='icon iconNav'><PeopleAltIcon /></div>
-                                        <div className='text ml-4'>Users</div>
-                                    </div>
-                                </NavLink>
+                                <div className='d-flex menu'>
+                                    <NavLink to='/users'>
+                                        <div className='d-flex'>
+                                            <div className='icon iconNav'><PeopleAltIcon /></div>
+                                            <div className='text ml-4'>Users</div>
+                                        </div>
+                                    </NavLink>
+                                </div>
                             </div>
                         </> : ''
 
@@ -133,7 +135,7 @@ const Leftbar = () => {
                             {changeBtn ? <KeyboardControlKeyIcon className='iconTransf' onClick={handleTransfert} />
                                 : <KeyboardArrowRightIcon className='iconTransf' onClick={handleTransfert} />}
                         </div>
-                        <div className='text textTransfert' style={{fontSize: '20px' }}>Vidéos</div>
+                        <div className='text textTransfert' style={{ fontSize: '20px' }}>Vidéos</div>
                     </div>
                 </div>
 
@@ -178,15 +180,15 @@ const Leftbar = () => {
                             </div>
                         </> : ''}
 
-                        <hr />
+                <hr />
 
-                        <div className='d-flex menu'>
+                <div className='d-flex menu'>
                     <div className='d-flex'>
                         <div className='icon iconTransfert'>
                             {changeBtn ? <KeyboardControlKeyIcon className='iconTransf' onClick={handleTransfert} />
                                 : <KeyboardArrowRightIcon className='iconTransf' onClick={handleTransfert} />}
                         </div>
-                        <div className='text textTransfert' style={{fontSize: '20px' }}>Live streaming</div>
+                        <div className='text textTransfert' style={{ fontSize: '20px' }}>Live streaming</div>
                     </div>
                 </div>
 

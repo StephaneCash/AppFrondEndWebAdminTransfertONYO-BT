@@ -21,7 +21,7 @@ function Login() {
     width: "50px"
   };
   const styleTextField = { marginBottom: '10px' }
-  const ButtonStyle = { margin: '8px 0', backgroundColor: '#fd0707', color: '#fff' }
+  const ButtonStyle = { margin: '8px 0', backgroundColor: '#fd07070', color: '#fff' }
 
   const formControlLabel = {
     marginLeft: 0,
