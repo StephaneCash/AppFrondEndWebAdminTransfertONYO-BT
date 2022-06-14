@@ -30,7 +30,7 @@ function Partenaires() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar /> 
 
             <div className='col-12'>
                 <div className='d-flex'>
