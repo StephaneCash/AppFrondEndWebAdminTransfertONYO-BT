@@ -11,6 +11,7 @@
     width: 16.66666667%;
     background-color: #0071c0;
     color: #fff;
+    position:fixed;
 }
 
 .leftbar a {
