@@ -24,5 +24,10 @@
     padding: 2px;
     color: #333 !important;
     border-right: 2px solid red;
-    width:100%
+    width:80%
+}
+
+.leftbar .subMenu{
+    font-size: 14px;
+    margin-left: 1.8rem;
 }

@@ -3,7 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import { Toolbar, Badge, makeStyles, Avatar } from "@material-ui/core";
 import { Menu, Mail, Notifications } from "@material-ui/icons";
 import '../assets/Navbar.css';
-import logo from '../images/logo.jpeg';
+import logo from '../images/logo.jpeg'
 
 const useStyles = makeStyles((theme) => ({
   tooBar: {

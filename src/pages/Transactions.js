@@ -114,103 +114,109 @@ function Transactions() {
 
   return (
     <div>
-      <Navbar />
 
       <div className='col-12'>
-        <div className='d-flex'>
-          <div className='col-2'><Leftbar /></div>
-          <div className='col-10' style={{ marginTop: '70px' }}>
-            <div className='transaction'>
-              <div className='d-flex'>
-                <h4>Transactions <AttachMoneyIcon /></h4>
-                <div className="addTransactionIcon">
-                  <span className="textAddTransaction">Créer une transaction</span>
-                  <NavLink to='addTransaction'>
-                    <Button variant='outlined'>
-                      <AddCircle className='iconAddTr' />
-                    </Button>
-                  </NavLink>
+        <div className="d-flex">
+          <div className="col-2">
+            <Leftbar />
+          </div>
+          <div className="col-10">
+            <div className="col-12">
+              <Navbar />
+            </div>
+            <div className="col-12">
+              <div className='transaction'>
+                <div className='d-flex'>
+                  <h4>Transactions <AttachMoneyIcon /></h4>
+                  <div className="addTransactionIcon">
+                    <span className="textAddTransaction">Créer une transaction</span>
+                    <NavLink to='addTransaction'>
+                      <Button variant='outlined'>
+                        <AddCircle className='iconAddTr' />
+                      </Button>
+                    </NavLink>
+                  </div>
                 </div>
-              </div>
 
-              <TextField type="search" label='Rechercher'
-                className="searchTransition mb-3" onChange={(e) => setValSearch(e.target.value)} />
+                <TextField type="search" label='Rechercher'
+                  className="searchTransition mb-3" onChange={(e) => setValSearch(e.target.value)} />
 
-              <Card className='card'>
-                <table className='table table-striped table-borderless'>
-                  <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Code</th>
-                      <th>Bénéficiaire</th>
-                      <th>Statut</th>
-                      <th>Montant</th>
-                      <th>Date création</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      data.data ?
+                <Card className='card'>
+                  <table className='table table-striped table-borderless'>
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Code</th>
+                        <th>Bénéficiaire</th>
+                        <th>Statut</th>
+                        <th>Montant</th>
+                        <th>Date création</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        data.data ?
 
-                        data.data.filter(val => {
-                          return (
-                            val.exp_name.toLowerCase().includes(valSearch) ? val.exp_name.toLowerCase().includes(valSearch) : "Aucune donnée trouvée."
-                          )
-                        })
-                          .map((val, key) => {
+                          data.data.filter(val => {
                             return (
-                              <tr key={key}>
-                                <td>{val.id}</td>
-                                <td>
-                                  {
-                                    etat === 2 && id === val.id && code === valueInputCode ? val.content_code : "***************"
-                                  }
-                                </td>
-                                <td>{val.exp_name}</td>
-                                <td>
-                                  {val.statut === 0 && <span style={{ color: 'orange', fontWeight: 'bold' }}>En cours...</span>}
-                                  {val.statut === 1 && <span style={{ color: 'green', fontWeight: 'bold' }}>Effectuée. </span>}
-                                  {val.statut === 3 && <span style={{ color: "red", fontWeight: 'bold' }}>Bloquée. </span>}
-                                </td>
-                                <td>
-                                  {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " " + val.devise : "***********"}
-                                </td>
-                                <td>{val.createdAt}</td>
-                                <td style={{ maxWidth: '190px' }}>
-
-                                  <div className="box">
-                                    <input type='checkbox' id='checkbox' />
-
-                                    <div className="menu">
-                                      <div className="menuItems" onClick={() => verifCode(val.content_code, val.id)} style={{ cursor: 'pointer' }}>
-                                        <DoneAll className="iconAction"
-                                        /> Vérifier
-                                      </div>
-
-                                      <div className="menuItems" style={{ cursor: 'pointer' }} onClick={(e) => stopperTransaction(val.id)}>
-                                        <Close className="iconAction" />
-                                        Stopper
-                                      </div>
-
-                                    </div>
-                                  </div>
-
-                                </td>
-                              </tr>
+                              val.exp_name.toLowerCase().includes(valSearch) ? val.exp_name.toLowerCase().includes(valSearch) : "Aucune donnée trouvée."
                             )
                           })
+                            .map((val, key) => {
+                              return (
+                                <tr key={key}>
+                                  <td>{val.id}</td>
+                                  <td>
+                                    {
+                                      etat === 2 && id === val.id && code === valueInputCode ? val.content_code : "***************"
+                                    }
+                                  </td>
+                                  <td>{val.exp_name}</td>
+                                  <td>
+                                    {val.statut === 0 && <span style={{ color: 'orange', fontWeight: 'bold' }}>En cours...</span>}
+                                    {val.statut === 1 && <span style={{ color: 'green', fontWeight: 'bold' }}>Effectuée. </span>}
+                                    {val.statut === 3 && <span style={{ color: "red", fontWeight: 'bold' }}>Bloquée. </span>}
+                                  </td>
+                                  <td>
+                                    {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " " + val.devise : "***********"}
+                                  </td>
+                                  <td>{val.createdAt}</td>
+                                  <td style={{ maxWidth: '190px' }}>
 
-                        : <tr className="textPasData">
-                          <td colSpan='8px'>
-                            <Load />
-                          </td>
-                        </tr>
+                                    <div className="box">
+                                      <input type='checkbox' id='checkbox' />
 
-                    }
-                  </tbody>
-                </table>
-              </Card>
+                                      <div className="menu">
+                                        <div className="menuItems" onClick={() => verifCode(val.content_code, val.id)} style={{ cursor: 'pointer' }}>
+                                          <DoneAll className="iconAction"
+                                          /> Vérifier
+                                        </div>
+
+                                        <div className="menuItems" style={{ cursor: 'pointer' }} onClick={(e) => stopperTransaction(val.id)}>
+                                          <Close className="iconAction" />
+                                          Stopper
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+                                  </td>
+                                </tr>
+                              )
+                            })
+
+                          : <tr className="textPasData">
+                            <td colSpan='8px'>
+                              <Load />
+                            </td>
+                          </tr>
+
+                      }
+                    </tbody>
+                  </table>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
