@@ -35,8 +35,14 @@ function Login() {
       if (res.data.jeton) {
         localStorage.setItem('user', JSON.stringify(res.data))
       }
-      console.log('RES : ', res.data);
-      navigate('/dashboardTransfert', { state: res.data })
+
+      if (res.data.role === 'admin') {
+        //navigate('/dashboardTransfert', { state: res.data })
+        //alert('admin')
+      } else {
+        navigate('/accueil')
+      }
+      //console.log('RES : ', res.data);
     } catch (err) {
       console.log(err)
       setError(err.response);
@@ -58,7 +64,7 @@ function Login() {
               className='form-control mt-1' onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          
+
           <div className="form-group mt-2">
             <label>Votre mot de passe</label>
             <input className='form-control mt-1' style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}

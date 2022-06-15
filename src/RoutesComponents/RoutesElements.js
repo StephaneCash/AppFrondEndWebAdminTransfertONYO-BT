@@ -10,6 +10,7 @@ import Ressources from '../pages/Ressources';
 import Partenaires from '../pages/Partenaires';
 import AddCode from '../dialogs/AddCode';
 import Inscription from '../pages/Inscription';
+import AccueilPartenaire from '../pages/AccueilPartenaire';
 
 
 function RoutesElements() {
@@ -26,6 +27,7 @@ function RoutesElements() {
                 <Route path='/ressources/add' element={<AddCode />} />
                 <Route path='/partenaires' element={<Partenaires />} />
                 <Route path='/inscription' element={<Inscription />} />
+                <Route path='/accueil' element={<AccueilPartenaire />} />
             </Routes>
         </BrowserRouter>
     )
