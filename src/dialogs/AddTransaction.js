@@ -2,7 +2,7 @@ import React from 'react'
 import Leftbar from '../components/Leftbar'
 import Navbar from '../components/Navbar'
 import '../assets/Transactions.css'
-import { Button, Card, TextField } from '@material-ui/core'
+import { Button, Card, input } from '@material-ui/core'
 import { Check, ToggleOff } from '@material-ui/icons'
 import { ToggleOn } from '@mui/icons-material'
 import { useState, useEffect } from "react";
@@ -209,7 +209,7 @@ function AddTransaction() {
                                     <div className='row'>
                                         <div className='col-6'>
                                             <h6>Nom du bénéficiaire</h6>
-                                            <TextField variant='outlined' onChange={handleNomBenef}
+                                            <input onChange={handleNomBenef}
                                                 style={{ width: "100%", }}
                                                 helperText={
                                                     clicBtn === true && (
@@ -220,12 +220,12 @@ function AddTransaction() {
                                                         </>
                                                     )
                                                 }
-                                                className='mb-3 mt-3' placeholder='Entrer le nom du bénéficiaire' />
+                                                className='mb-2 form-control mt-1' placeholder='Entrer le nom du bénéficiaire' />
                                         </div>
 
                                         <div className='col-6'>
                                             <h6>Numéro de téléphone</h6>
-                                            <TextField variant='outlined' onChange={handleNumPhone} type="text"
+                                            <input  onChange={handleNumPhone} type="text"
                                                 style={{ width: "100%", }}
                                                 helperText={
                                                     clicBtn === true && (
@@ -237,7 +237,7 @@ function AddTransaction() {
                                                         </>
                                                     )
                                                 }
-                                                className='mb-3 mt-3' placeholder='Entrer un numéro de téléphone' />
+                                                className='mb-2 form-control mt-1' placeholder='Entrer un numéro de téléphone' />
                                         </div>
                                     </div>
 
@@ -248,7 +248,7 @@ function AddTransaction() {
                                             <h6>Choisir un motif</h6>
                                             <select className='form-control'
                                                 onChange={(e) => (setDataForm({ ...dataForm, 'categoryId': e.target.value }),
-                                                    handleCategory(e))} style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '19px' }}>
+                                                    handleCategory(e))} style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '5px' }}>
                                                 <option value={0}>--Choisir une option--</option>
                                                 {
 
@@ -275,7 +275,7 @@ function AddTransaction() {
 
                                         <div className='col-6'>
                                             <h6>Montant</h6>
-                                            <TextField variant='outlined' onChange={handleMontant}
+                                            <input  onChange={handleMontant}
                                                 style={{ width: "100%", }} type='number'
                                                 helperText={
                                                     clicBtn === true && (
@@ -286,7 +286,7 @@ function AddTransaction() {
                                                         </>
                                                     )
                                                 }
-                                                className="mt-3 mb-4" placeholder='Entrer un montant' />
+                                                className="mt-1 mb-2 form-control" placeholder='Entrer un montant' />
                                         </div>
                                     </div>
 
