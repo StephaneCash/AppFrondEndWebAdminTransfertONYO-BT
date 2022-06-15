@@ -4,7 +4,7 @@ import Checkbox from '@mui/material/Checkbox';
 import '../assets/Login.css';
 import logo from '../images/logo.jpeg';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 
 function Login() {
@@ -16,12 +16,12 @@ function Login() {
 
   let navigate = useNavigate();
 
-  const paperStyle = { padding: 20, height: 'auto', width: 340, margin: '20px auto' }
+  const paperStyle = { padding: 20, height: 'auto', width: 340, margin: '20px auto', backgroundColor: 'white' }
   const backgroundColorAvatar = {
     width: "50px"
   };
   const styleTextField = { marginBottom: '10px' }
-  const ButtonStyle = { margin: '8px 0', backgroundColor: '#fd07070', color: '#fff' }
+  const ButtonStyle = { margin: '8px 0', backgroundColor: 'red', color: '#fff', boxShadow: 'none', content: 'Se connecter' }
 
   const formControlLabel = {
     marginLeft: 0,
@@ -47,17 +47,23 @@ function Login() {
     <div className="login">
       <Grid>
         <Paper elevation={10} style={paperStyle}>
-          <Grid align="center">
+          <Grid align="center" style={{ backgroundColor: 'white' }}>
             <img src={logo} style={backgroundColorAvatar} />
-            <h2 className='mt-3'>S'identifier</h2>
+            <h4 className='mt-3'>S'identifier</h4>
           </Grid>
 
-          <TextField placeholder="Nom d'utilisateur ou email"
-            label="Username" fullWidth required
-            className='mt-2' onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField className='mt-3' style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
-            label="Mot de passe" type="password" fullWidth required />
+          <div className="form-group mt-4">
+            <label className="mt-1">Entrer votre adresse email</label>
+            <input placeholder="Nom d'utilisateur ou email" required
+              className='form-control mt-1' onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          
+          <div className="form-group mt-2">
+            <label>Votre mot de passe</label>
+            <input className='form-control mt-1' style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
+              required />
+          </div>
 
           <FormControlLabel
             style={formControlLabel}
@@ -70,22 +76,22 @@ function Login() {
             label="Se souvenir de moi"
           />
 
-          <Button type="submit" variant="contained" onClick={handleSubmit} style={ButtonStyle} fullWidth>
-            Se connecter
-          </Button>
+          <input type="submit" className='form-control' value="Se connecter" onClick={handleSubmit} style={ButtonStyle} />
+
           <Typography>
             <Link href="#">
               Mot de passe oublié ?
             </Link>
           </Typography>
 
-          <Typography> Avez-vous un compte ?
-            <Link href="#">
+
+          <Typography>
+            N'avez-vous pas un compte ? <NavLink to="/inscription">
               S'inscrire
-            </Link>
+            </NavLink>
           </Typography>
           {
-            error.data ? <div className="alert alert-danger mt-1 mb-5">
+            error.data ? <div className="alert alert-danger mt-1 mb-5" style={{ backgroundColor: 'white', color: 'red' }}>
               {error.data.message ? <h6 style={{ fontSize: "14px" }}>{error.data.message}</h6> : ""}
             </div> : <><div className='mt-5'></div><br /><br /></>
           }

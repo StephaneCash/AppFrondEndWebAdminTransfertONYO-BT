@@ -1,0 +1,13 @@
+a {
+    text-decoration: none;
+}
+
+input {
+    box-shadow: none !important;
+    border: 1px solid #0071c0 !important; 
+}
+
+select {
+    box-shadow: none !important;
+    border: 1px solid #0071c0 !important; 
+}

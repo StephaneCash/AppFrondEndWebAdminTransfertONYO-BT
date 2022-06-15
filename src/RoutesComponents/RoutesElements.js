@@ -9,6 +9,7 @@ import Users from "../pages/Users";
 import Ressources from '../pages/Ressources';
 import Partenaires from '../pages/Partenaires';
 import AddCode from '../dialogs/AddCode';
+import Inscription from '../pages/Inscription';
 
 
 function RoutesElements() {
@@ -24,6 +25,7 @@ function RoutesElements() {
                 <Route path='/ressources' element={<Ressources />} />
                 <Route path='/ressources/add' element={<AddCode />} />
                 <Route path='/partenaires' element={<Partenaires />} />
+                <Route path='/inscription' element={<Inscription />} />
             </Routes>
         </BrowserRouter>
     )
