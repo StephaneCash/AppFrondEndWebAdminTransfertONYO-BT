@@ -39,8 +39,10 @@ function Login() {
       if (res.data.role === 'admin') {
         //navigate('/dashboardTransfert', { state: res.data })
         //alert('admin')
-      } else {
+      } else if (res.data.role === 'Partenaire') {
         navigate('/accueil')
+      } else if (res.data.role === 'User-streaming') {
+        alert('hh')
       }
       //console.log('RES : ', res.data);
     } catch (err) {

@@ -4,7 +4,9 @@
     height: 100vh;
     background-color: #0071c1;
     position: fixed;
-}
+    justify-content: center;
+    align-items: center;
+}   
 
 .vertical-menu a {
     color: #fff !important;
@@ -14,6 +16,8 @@
     padding-left: 15px;
     padding-top: 6px;
     text-decoration: none;
+    justify-content: center;
+    align-items: center;
     transition: all 0.3s ease;
 }
 
@@ -25,5 +29,18 @@
     background: #eee;
     /* Add a green color to the "active/current" link */
     color: #333 !important;
-    width: auto
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+}
+
+.menuLeft .icon {
+   width: 20px; 
+}
+
+.menuLeft .text{
+    width: 100%;
+    margin-left: 10px;
+    margin-top: 0;
 }

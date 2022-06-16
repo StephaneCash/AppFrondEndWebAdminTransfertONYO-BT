@@ -38,7 +38,7 @@ const AddCode = (props) => {
     }
 
     const ajouterCode = () => {
-        
+
         setClic(true)
         if (etat) {
             for (let i = 1; i <= nbr; i++) {
@@ -55,7 +55,7 @@ const AddCode = (props) => {
     }
 
     function handleSelected(e) {
-        setNbr(e.target.value)
+        setNbr(parseInt(e.target.value))
     }
 
     const classes = useStyles();
@@ -73,13 +73,13 @@ const AddCode = (props) => {
                                 </h6>
                             </div>
                             <div className="col-2">
-                                <Button
-                                    style={{ float: 'right' }}
-                                    variant="outlined"
+                                <button
+                                    style={{ float: 'right', boxShadow: 'none', border: '1px solid silver'}}
+                                    className='btn'
                                     onClick={closeModalVerif}
                                 >
                                     <Close />
-                                </Button>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -88,13 +88,7 @@ const AddCode = (props) => {
 
                     <div className="row">
                         <div className="col-6">
-                            <select className="form-control" style={{ boxShadow: 'none' }} onChange={handleSelected} >
-                                <option id="">1</option>
-                                <option id="">5</option>
-                                <option id="">10</option>
-                                <option id="">15</option>
-                                <option id="">20</option>
-                            </select>
+                            <input className="form-control" placeholder="Entrer le nombre de fois" style={{ boxShadow: 'none' }} onChange={handleSelected} />
                         </div>
                         <div className="col-6">
                             <input className=' form-control'
@@ -111,14 +105,14 @@ const AddCode = (props) => {
                         </div>
                     </div>
 
-                    <Button variant='contained'
+                    <button className="btn"
                         onClick={ajouterCode}
                         style={{
                             marginTop: '10px',
-                            backgroundColor: "#6363e0", color: 'white', width: "100%",
+                            backgroundColor: "red", color: 'white', width: "100%",
                         }}>
                         Ajouter
-                    </Button>
+                    </button>
 
                 </Modal.Body>
                 <Modal.Footer style={{ paddingRight: "30px" }}>
