@@ -14,10 +14,15 @@
     color: #333;
 }
 
+.searchTransition {
+  width: 50% !important;
+  margin-right: 10px !important;
+  float: right;
+}
+
 .transaction .addTransactionIcon {
-    margin-left: 10px !important;
-    margin-right: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 .transaction .iconAddTr {
@@ -31,93 +36,94 @@
     margin-right: 10px;
 }
 
-.transaction .content_code{
+.transaction .content_code {
     border: none;
 }
 
-.transaction .textPasData{
+.transaction .textPasData {
     text-align: center;
     font-size: 14px;
 }
 
-.transaction .MuiOutlinedInput-input{
+.transaction .MuiOutlinedInput-input {
     padding: 8px 10px;
 }
 
-.transaction td{
+.transaction td {
     font-size: 15px;
 }
 
-.toggleBtn{
+.toggleBtn {
     float: right;
     cursor: pointer;
 }
 
-.card p{
+.card p {
     flex: 1;
     padding-right: -3px !important;
 }
 
-.valueCompte{
+.valueCompte {
     margin-top: 25px !important;
     font-weight: bold !important;
 }
 
-.blocDevise h6, .blocDevise .textBloc{
+.blocDevise h6,
+.blocDevise .textBloc {
     display: inline-block;
 }
 
-.transaction a{
+.transaction a {
     text-decoration: none
 }
 
-.transaction td{
+.transaction td {
     font-size: 15px;
 }
 
-.transaction th{
+.transaction th {
     font-size: 15px;
 }
 
 
-.transaction .box{
+.transaction .box {
     display: flex;
 }
 
-.transaction #checkbox{
+.transaction #checkbox {
     width: 35px;
     height: 35px;
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    background:white;
+    background: white;
     cursor: pointer;
-    border : 1px solid rgba(165, 165, 165);
+    border: 1px solid rgba(165, 165, 165);
     position: relative;
-    border-radius:4px;
+    border-radius: 4px;
 }
 
-.transaction #checkbox:hover{
+.transaction #checkbox:hover {
     background: rgba(255, 255, 255, .7)
 }
 
-.transaction #checkbox:checked::before{
+.transaction #checkbox:checked::before {
     content: "x";
-    font-size:1.5rem;
+    font-size: 1.5rem;
     font-weight: bold;
     position: absolute;
     top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);  
+    transform: translate(-50%, -50%);
 }
 
-.transaction #checkbox:checked ~ .menu{
+.transaction #checkbox:checked~.menu {
     width: auto;
 }
 
-.transaction #checkbox::before{
+.transaction #checkbox::before {
     content: "...";
-    font-size:2.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
     position: absolute;
     top: 18%;
@@ -125,19 +131,19 @@
     transform: translate(-50%, -50%);
 }
 
-.transaction .menu{
+.transaction .menu {
     width: 0;
     overflow: hidden;
     display: flex;
     transition: all .5s;
 }
 
-.transaction .menu .menuItems{
+.transaction .menu .menuItems {
     width: 100px;
-    border-radius:4px;
+    border-radius: 4px;
     height: 35px;
     background-color: white;
-    border : 1px solid rgba(165, 165, 165);
+    border: 1px solid rgba(165, 165, 165);
     display: flex;
     align-items: center;
     margin-left: 10px;
@@ -145,6 +151,6 @@
     padding: 2px;
 }
 
-.transaction .iconAction{
+.transaction .iconAction {
     color: gray;
 }

@@ -30,37 +30,46 @@ function Partenaires() {
 
     return (
         <div>
-            <Navbar /> 
+
 
             <div className='col-12'>
-                <div className='d-flex'>
-                    <div className='col-2'><Leftbar /></div>
-                    <div className='col-10 ressources' style={{ marginTop: '70px' }}>
-                        0 Partenaires trouvés
+                <div className="d-flex">
+                    <div className="col-2">
+                        <Leftbar />
+                    </div>
+                    <div className="col-10">
+                        <div className="col-12">
+                            <Navbar />
+                        </div>
+                        <div className="col-12" style={{ marginTop: '80px' }}>
+                            <div className='col-12 ressources' style={{ marginTop: '70px' }}>
+                                0 Partenaires trouvés
 
-                        <Card>
-                            <table className='table'>
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Nom</th>
-                                        <th>Catégorie</th>
-                                        <th>Description</th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        data.map((val, index) => {
+                                <div className='card'>
+                                    <table className='table'>
+                                        <thead>
                                             <tr>
-                                                <td>{index}</td>
-                                                <td>{val.nom}</td>
+                                                <th>Id</th>
+                                                <th>Nom</th>
+                                                <th>Catégorie</th>
+                                                <th>Description</th>
+                                                <th>Options</th>
                                             </tr>
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </Card>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                data.map((val, index) => {
+                                                    <tr>
+                                                        <td>{index}</td>
+                                                        <td>{val.nom}</td>
+                                                    </tr>
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

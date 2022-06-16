@@ -126,24 +126,31 @@ function Transactions() {
             </div>
             <div className="col-12" style={{ marginTop: '80px' }}>
               <div className='transaction'>
-                <div className='d-flex'>
-                  <h4>Transactions </h4>
 
-                  <div className="addTransactionIcon">
-                    <NavLink to='addTransaction'>
-                      <input className='form-control' style={{ background: 'red', color: 'white', cursor: 'pointer' }} value='Créer une transaction' />
-                    </NavLink>
-                  </div>
+                <div className='col-12'>
+                  <div className='d-flex'>
+                    <div className='col-2'>
+                      <h4>Transactions </h4>
+                    </div>
+                    <div className='col-2'>
+                      <div className="addTransactionIcon">
+                        <NavLink to='addTransaction'>
+                          <input className='form-control' style={{ background: 'red', color: 'white', cursor: 'pointer' }} value='Créer une transaction' />
+                        </NavLink>
+                      </div>
+                    </div>
+                    <div className='col-8'>
+                      <div className='col-12'>
+                        <input type="search" label='Rechercher' placeholder='Rechercher'
+                          className="searchTransition mb-3 form-control" onChange={(e) => setValSearch(e.target.value)} />
 
-                  <div className='col-3'>
-                    <input type="search" label='Rechercher' placeholder='Rechercher'
-                      className="searchTransition mb-3 form-control" onChange={(e) => setValSearch(e.target.value)} />
-
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 <hr style={{ marginRight: '10px' }} />
-                <Card className='card'>
+                <div className='card'>
                   <table className='table table-striped table-borderless'>
                     <thead>
                       <tr>
@@ -217,7 +224,7 @@ function Transactions() {
                       }
                     </tbody>
                   </table>
-                </Card>
+                </div>
               </div>
             </div>
           </div>

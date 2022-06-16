@@ -46,9 +46,13 @@ const Leftbar = () => {
     return (
         <div className="menuLeft">
             <div className="vertical-menu">
-                <NavLink to="/dashboardTransfert" > <i className="fa fa-dashboard"></i> Dashboard</NavLink>
-                <NavLink to="/transaction"><i className="fa fa-user-secret"></i>Transaction</NavLink>
-                <NavLink to="/config"> <i className="fa fa-gear"></i> Configuration</NavLink>
+                <NavLink to="/dashboardTransfert" >
+                    <div className='d-flex'>
+                        <i className="fa fa-dashboard"></i> <span> Dashboard</span>
+                    </div>
+                </NavLink>
+                <NavLink to="/transaction"><i className="fa fa-usd"></i>    Transaction</NavLink>
+                <NavLink to="/partenaires"> <i className="fa fa-users"></i> Partenaires</NavLink>
                 <NavLink to="/"><i className="fa fa-sign-out"></i> Déconnection</NavLink>
             </div>
         </div>
