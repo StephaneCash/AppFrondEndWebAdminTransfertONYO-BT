@@ -69,7 +69,7 @@ function Login() {
 
           <div className="form-group mt-2">
             <label>Votre mot de passe</label>
-            <input className='form-control mt-1' style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
+            <input className='form-control mt-1' type="password" style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
               required />
           </div>
 
