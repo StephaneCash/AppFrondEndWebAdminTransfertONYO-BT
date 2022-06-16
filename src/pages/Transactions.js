@@ -151,7 +151,7 @@ function Transactions() {
 
                 <hr style={{ marginRight: '10px' }} />
                 <div className='card'>
-                  <table className='table table-striped table-borderless'>
+                  <table className='table table-borderless'>
                     <thead>
                       <tr>
                         <th>Id</th>
@@ -183,9 +183,9 @@ function Transactions() {
                                   </td>
                                   <td>{val.exp_name}</td>
                                   <td>
-                                    {val.statut === 0 && <span style={{ color: 'orange', fontWeight: 'bold' }}>En cours...</span>}
-                                    {val.statut === 1 && <span style={{ color: 'green', fontWeight: 'bold' }}>Effectuée. </span>}
-                                    {val.statut === 3 && <span style={{ color: "red", fontWeight: 'bold' }}>Bloquée. </span>}
+                                    {val.statut === 0 && <span style={{ color: 'orane' }}>En cours...</span>}
+                                    {val.statut === 1 && <span style={{ color: 'green', }}>Effectuée. </span>}
+                                    {val.statut === 3 && <span style={{ color: "red", }}>Bloquée. </span>}
                                   </td>
                                   <td>
                                     {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " " + val.devise : "***********"}
