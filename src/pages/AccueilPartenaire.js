@@ -14,8 +14,10 @@ function AccueilPartenaire() {
     const [desc, setDesc] = useState('')
     const [etat, setEtat] = useState(false)
 
+    const [nomC, setNomC] = useState('');
+    const [devise, setDevise] = useState('');
+
     const submitData = () => {
-        console.log('submit')
         if (nom) {
             axios.post('http://localhost:5000/api/partenaires/', { nom, adresse, numTel, desc }, { headers: authHeader() }).then(res => {
                 swal({ title: "Succès", icon: 'success', text: `Vos données ont été soumises avec succès` });
@@ -27,7 +29,18 @@ function AccueilPartenaire() {
     }
 
     const submitCompte = () => {
-        
+
+        let user = JSON.parse(localStorage.getItem('user'));
+        if (user.role === "Partenaire") {
+            if (nom) {
+                axios.post('http://localhost:5000/api/comptes/', { nom: nomC, devise }, { headers: authHeader() }).then(res => {
+                    swal({ title: "Succès", icon: 'success', text: `Compte configuré avec succès` });
+                    setEtat(true)
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        }
     }
 
     return (
@@ -93,12 +106,12 @@ function AccueilPartenaire() {
                                                     <h3>Informations sur le compte</h3>
                                                     <div className='form-group'>
                                                         <label>Nom</label>
-                                                        <input type="text" className="form-control" placeholder="Entrer un nom" />
+                                                        <input type="text" onChange={(e) => setNomC(e.target.value)} className="form-control" placeholder="Entrer un nom" />
                                                     </div>
 
                                                     <div className='form-group mt-1'>
                                                         <label>Devise</label>
-                                                        <select className='form-control'>
+                                                        <select className='form-control' onChange={(e) => setDevise(e.target.value)}>
                                                             <option>CDF</option>
                                                             <option>USD</option>
                                                             <option>Les deux</option>
