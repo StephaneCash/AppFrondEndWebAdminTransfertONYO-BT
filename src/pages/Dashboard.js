@@ -15,6 +15,7 @@ import AppsIcon from '@mui/icons-material/Apps';
 import PublicIcon from '@mui/icons-material/Public';
 
 import '../assets/Dashboard.css';
+import Navbar from '../components/Navbar';
 Chart.register(...registerables);
 
 function Dashboard() {
@@ -72,95 +73,103 @@ function Dashboard() {
 
     return (
         <>
-            <NavBar />
 
             <div className='col-12'>
-                <div className='d-flex'>
-                    <div className='col-2'><Leftbar /></div>
-                    <div className='col-10 col10 dashboard' style={{ marginTop: '70px' }}>
-                        <h4 className='mt-2' style={{ marginLeft: '10px' }}>Dashboard <AppsIcon id='AppIcon' />
-                        </h4>
-                        <div className='d-flex card1'>
-                            <div className='col-3'>
-                                <Card className="card">
-                                    <div className='d-flex'>
-                                        <div className='textCard'>
-                                            <h6>
-                                                <Link to='/transaction'>Transactions</Link>
-                                            </h6>
-                                            <hr />
-                                            <h4>12</h4>
-                                        </div>
-                                        <div className='iconCard'>
-                                            <AttachMoneyIcon />
-                                        </div>
-                                    </div>
-                                </Card>
-                            </div>
-                            <div className='col-3'>
-                                <Card className="card">
-                                    <div className='d-flex'>
-                                        <div className='textCard'>
-                                            <h6>Clients</h6>
-                                            <hr />
-                                            <h4>17</h4>
-                                        </div>
-                                        <div className='iconCard'>
-                                            <CoPresentIcon />
-                                        </div>
-                                    </div>
-                                </Card>
-                            </div>
-                            <div className='col-3'>
-                                <Card className="card">
-                                    <div className='d-flex'>
-                                        <div className='textCard'>
-                                            <h6>Parténaires</h6>
-                                            <hr />
-                                            <h4>6</h4>
-                                        </div>
-                                        <div className='iconCard'>
-                                            <PublicIcon />
-                                        </div>
-                                    </div>
-                                </Card>
-                            </div>
-
-                            <div className='col-3'>
-                                <Card className="card">
-                                    <div className='d-flex'>
-                                        <div className='textCard'>
-                                            <h6>Notifications</h6>
-                                            <hr />
-                                            <h4>2</h4>
-                                        </div>
-                                        <div className='iconCard'>
-                                            <CircleNotificationsIcon />
-                                        </div>
-                                    </div>
-                                </Card>
-                            </div>
+                <div className="d-flex">
+                    <div className="col-2">
+                        <Leftbar />
+                    </div>
+                    <div className="col-10 dashboard">
+                        <div className="col-12">
+                            <Navbar />
                         </div>
+                        <div className="col-12" style={{ marginTop: '80px' }}>
 
-                        <div className='d-flex card2'>
-                            <div className='col-6'>
-                                <Card className='card22'>
-                                    <h5 style={{ marginLeft: '15px', marginTop: '10px' }}>Statistics</h5>
-                                    <CardContent>
-                                        <Bar data={data4} options={options2} />
-                                    </CardContent>
-                                </Card>
+
+                            <h4 className='mt-2' style={{ marginLeft: '10px' }}>Dashboard <AppsIcon id='AppIcon' />
+                            </h4>
+                            <div className='d-flex card1'>
+                                <div className='col-3'>
+                                    <Card className="card">
+                                        <div className='d-flex'>
+                                            <div className='textCard'>
+                                                <h6>
+                                                    <Link to='/transaction'>Transactions</Link>
+                                                </h6>
+                                                <hr />
+                                                <h4>12</h4>
+                                            </div>
+                                            <div className='iconCard'>
+                                                <AttachMoneyIcon />
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </div>
+                                <div className='col-3'>
+                                    <Card className="card">
+                                        <div className='d-flex'>
+                                            <div className='textCard'>
+                                                <h6>Clients</h6>
+                                                <hr />
+                                                <h4>17</h4>
+                                            </div>
+                                            <div className='iconCard'>
+                                                <CoPresentIcon />
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </div>
+                                <div className='col-3'>
+                                    <Card className="card">
+                                        <div className='d-flex'>
+                                            <div className='textCard'>
+                                                <h6>Parténaires</h6>
+                                                <hr />
+                                                <h4>6</h4>
+                                            </div>
+                                            <div className='iconCard'>
+                                                <PublicIcon />
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </div>
+
+                                <div className='col-3'>
+                                    <Card className="card">
+                                        <div className='d-flex'>
+                                            <div className='textCard'>
+                                                <h6>Notifications</h6>
+                                                <hr />
+                                                <h4>2</h4>
+                                            </div>
+                                            <div className='iconCard'>
+                                                <CircleNotificationsIcon />
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </div>
                             </div>
-                            <div className='col-6'>
-                                <Card className='card22'>
-                                    <h5 style={{ marginLeft: '15px', marginTop: '10px' }}>Transactions Semestrielles</h5>
-                                    <CardContent>
-                                        <Line
-                                            data={data5}
-                                            options={options}
-                                        />
-                                    </CardContent>
-                                </Card>
+
+                            <div className='d-flex card2'>
+                                <div className='col-6'>
+                                    <Card className='card22'>
+                                        <h5 style={{ marginLeft: '15px', marginTop: '10px' }}>Statistics</h5>
+                                        <CardContent>
+                                            <Bar data={data4} options={options2} />
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                                <div className='col-6'>
+                                    <Card className='card22'>
+                                        <h5 style={{ marginLeft: '15px', marginTop: '10px' }}>Transactions Semestrielles</h5>
+                                        <CardContent>
+                                            <Line
+                                                data={data5}
+                                                options={options}
+                                            />
+                                        </CardContent>
+                                    </Card>
+                                </div>
                             </div>
                         </div>
                     </div>

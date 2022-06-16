@@ -15,7 +15,7 @@
 }
 
 .transaction .addTransactionIcon {
-    margin-left: auto !important;
+    margin-left: 10px !important;
     margin-right: 10px;
     margin-bottom: 10px;
 }

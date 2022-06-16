@@ -6,7 +6,7 @@ import { Card } from '@material-ui/core'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { Close, DoneAll } from '@mui/icons-material'
-import {  AddCircle, } from '@material-ui/icons'
+import { AddCircle, } from '@material-ui/icons'
 import { Button, } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { NavLink } from 'react-router-dom'
@@ -127,23 +127,22 @@ function Transactions() {
             <div className="col-12" style={{ marginTop: '80px' }}>
               <div className='transaction'>
                 <div className='d-flex'>
-                  <h4>Transactions <AttachMoneyIcon /></h4>
+                  <h4>Transactions </h4>
+
                   <div className="addTransactionIcon">
-                    <span className="textAddTransaction">Créer une transaction</span>
                     <NavLink to='addTransaction'>
-                      <Button variant='outlined'>
-                        <AddCircle className='iconAddTr' />
-                      </Button>
+                      <input className='form-control' style={{ background: 'red', color: 'white', cursor: 'pointer' }} value='Créer une transaction' />
                     </NavLink>
+                  </div>
+
+                  <div className='col-3'>
+                    <input type="search" label='Rechercher' placeholder='Rechercher'
+                      className="searchTransition mb-3 form-control" onChange={(e) => setValSearch(e.target.value)} />
+
                   </div>
                 </div>
 
-                <div className='col-3'>
-                  <h6><label>Rechercher <i className='fa fa-search'></i></label></h6>
-                  <input type="search" label='Rechercher' placeholder='Rechercher'
-                    className="searchTransition mb-3 form-control" onChange={(e) => setValSearch(e.target.value)} />
-
-                </div>
+                <hr style={{ marginRight: '10px' }} />
                 <Card className='card'>
                   <table className='table table-striped table-borderless'>
                     <thead>
