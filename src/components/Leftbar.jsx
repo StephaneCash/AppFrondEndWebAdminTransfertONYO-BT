@@ -1,31 +1,11 @@
-import { Container, makeStyles } from "@material-ui/core";
 import { Dashboard } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
-import CoPresentIcon from '@mui/icons-material/CoPresent';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import PublicIcon from '@mui/icons-material/Public';
-import SoapIcon from '@mui/icons-material/Soap';
-import CameraIcon from '@mui/icons-material/Camera';
-import KeyboardControlKeyIcon from '@mui/icons-material/KeyboardControlKey';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import '../assets/Leftbar.css';
-import SettingsIcon from '@mui/icons-material/Settings';
 import { useState, useEffect } from "react";
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        paddingTop: theme.spacing(10),
-        backgroundColor: "#efefef",
-        height: "100vh",
-        position: "fixed",
-    }
-}));
+
 
 const Leftbar = () => {
-
-    const classes = useStyles();
 
     const [showTransfet, setShowTransfert] = useState(false)
     const [changeBtn, setChangeBtn] = useState(false)
@@ -46,14 +26,72 @@ const Leftbar = () => {
     return (
         <div className="menuLeft">
             <div className="vertical-menu">
-                <NavLink to="/dashboardTransfert" >
+                <NavLink to="/accueil" >
                     <div className='d-flex'>
-                        <i className="fa fa-dashboard"></i> <span> Dashboard</span>
+                        <div className="icon"><i className="fa fa-home"></i> </div>
+                        <div className="text"> Accueil</div>
                     </div>
                 </NavLink>
-                <NavLink to="/transaction"><i className="fa fa-usd"></i>    Transaction</NavLink>
-                <NavLink to="/partenaires"> <i className="fa fa-users"></i> Partenaires</NavLink>
-                <NavLink to="/"><i className="fa fa-sign-out"></i> Déconnection</NavLink>
+                <NavLink to="/dashboardTransfert" >
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-dashboard"></i> </div>
+                        <div className="text"> Dashboard</div>
+                    </div>
+                </NavLink>
+                <NavLink to="/transaction">
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-usd"></i></div>
+                        <div className="text">Transaction</div>
+                    </div>
+                </NavLink>
+                <NavLink to="/partenaires">
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-users"></i></div>
+                        <div className="text">Partenaires</div>
+                    </div>
+                </NavLink>
+
+                <NavLink to="/ressources">
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-key"></i></div>
+                        <div className="text">Générateur codes</div>
+                    </div>
+                </NavLink>
+
+                <NavLink to="/partenaires">
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-list-alt"></i></div>
+                        <div className="text">Catégories</div>
+                    </div>
+                </NavLink>
+
+                <NavLink to="/partenaires">
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-lock"></i></div>
+                        <div className="text">Comptes</div>
+                    </div>
+                </NavLink>
+
+                <NavLink to="/partenaires">
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-cog"></i></div>
+                        <div className="text">Configuration Vidéos</div>
+                    </div>
+                </NavLink>
+
+                <NavLink to="/partenaires">
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-user"></i></div>
+                        <div className="text">Users</div>
+                    </div>
+                </NavLink>
+
+                <NavLink to="/partenaires">
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-video-camera"></i></div>
+                        <div className="text">Vidéos</div>
+                    </div>
+                </NavLink>
             </div>
         </div>
     );

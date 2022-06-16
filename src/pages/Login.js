@@ -39,8 +39,10 @@ function Login() {
       if (res.data.role === 'admin') {
         //navigate('/dashboardTransfert', { state: res.data })
         //alert('admin')
-      } else {
+      } else if (res.data.role === 'Partenaire') {
         navigate('/accueil')
+      } else if (res.data.role === 'User-streaming') {
+        alert('hh')
       }
       //console.log('RES : ', res.data);
     } catch (err) {
@@ -67,7 +69,7 @@ function Login() {
 
           <div className="form-group mt-2">
             <label>Votre mot de passe</label>
-            <input className='form-control mt-1' style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
+            <input className='form-control mt-1' type="password" style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
               required />
           </div>
 

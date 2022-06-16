@@ -14,6 +14,7 @@ function Inscription() {
     const [passRepete, setPassRepete] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState({})
+    const [role, setRole] = useState('Partenaire');
 
     let navigate = useNavigate();
 
@@ -24,11 +25,15 @@ function Inscription() {
     const styleTextField = { marginBottom: '10px' }
     const ButtonStyle = { margin: '8px 0', backgroundColor: 'red', color: '#fff', boxShadow: 'none', content: 'Se connecter' }
 
+    const selectHandle = (e) => {
+        setRole(e.target.value)
+    }
+
 
     const handleSubmit = async (e) => {
 
         try {
-            const res = await axios.post('http://localhost:5000/api/users', { email, password, nom });
+            const res = await axios.post('http://localhost:5000/api/users', { email, password, nom, role });
             swal({ title: "Succès", icon: 'success', text: res.data.message });
             navigate('/');
         } catch (err) {
@@ -63,6 +68,14 @@ function Inscription() {
                         <input placeholder="Adresse email"
                             required className='form-control mt-1' onChange={(e) => setEmail(e.target.value)}
                         />
+                    </div>
+
+                    <div className='form-group'>
+                        <label>Choir le type de compte</label>
+                        <select className='form-control mt-1' onChange={selectHandle}>
+                            <option>Partenaire</option>
+                            <option>User-streaming</option>
+                        </select>
                     </div>
 
                     <div className='form-group'>
