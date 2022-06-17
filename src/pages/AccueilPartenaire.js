@@ -17,10 +17,21 @@ function AccueilPartenaire() {
 
     let navigate = useNavigate();
 
+    const [montant, setMontant] = useState(0);
+
+    const compteAdd = () => {
+        axios.post('http://localhost:5000/api/comptes/', { montant }, { headers: authHeader() }).then(res => {
+
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     const submitData = () => {
         if (nom) {
             axios.post('http://localhost:5000/api/partenaires/', { nom, adresse, numTel, desc }, { headers: authHeader() }).then(res => {
                 swal({ title: "Succès", icon: 'success', text: `Vos données ont été soumises avec succès` });
+                compteAdd()
                 if (res.data) {
                     navigate('/comptes');
                 }
