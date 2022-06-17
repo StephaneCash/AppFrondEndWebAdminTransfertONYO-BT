@@ -11,6 +11,8 @@ import Partenaires from '../pages/Partenaires';
 import AddCode from '../dialogs/AddCode';
 import Inscription from '../pages/Inscription';
 import AccueilPartenaire from '../pages/AccueilPartenaire';
+import Categories from '../pages/Categories';
+import Comptes from '../pages/Comptes';
 
 
 function RoutesElements() {
@@ -28,6 +30,8 @@ function RoutesElements() {
                 <Route path='/partenaires' element={<Partenaires />} />
                 <Route path='/inscription' element={<Inscription />} />
                 <Route path='/accueil' element={<AccueilPartenaire />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/comptes" element={<Comptes />} />
             </Routes>
         </BrowserRouter>
     )

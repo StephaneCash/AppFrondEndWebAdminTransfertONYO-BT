@@ -125,25 +125,18 @@ function Transactions() {
               <Navbar />
             </div>
             <div className="col-12" style={{ marginTop: '80px' }}>
-              <div className='transaction'>
+              <div className='transaction card'>
 
-                <div className='col-12'>
-                  <div className='d-flex'>
-                    <div className='col-2'>
-                      <h4>Transactions </h4>
-                    </div>
-                    <div className='col-2'>
-                      <div className="addTransactionIcon">
-                        <NavLink to='addTransaction'>
-                          <input className='form-control' style={{ background: 'red', color: 'white', cursor: 'pointer' }} value='Créer une transaction' />
-                        </NavLink>
+                <div className="card-body">
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-4">
+                        <input type="search" className="form-control" placeholder="Rechercher..." />
                       </div>
-                    </div>
-                    <div className='col-8'>
-                      <div className='col-12'>
-                        <input type="search" label='Rechercher' placeholder='Rechercher'
-                          className="searchTransition mb-3 form-control" onChange={(e) => setValSearch(e.target.value)} />
-
+                      <div className="col-4">
+                        <NavLink to='addTransaction'>
+                          <input className='btn btn-primary' style={{ width: "100%", cursor: 'pointer' }} value='Créer une transaction' />
+                        </NavLink>
                       </div>
                     </div>
                   </div>

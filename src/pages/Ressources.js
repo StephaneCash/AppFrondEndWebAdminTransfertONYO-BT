@@ -59,8 +59,8 @@ function Ressources() {
         setEtatModal(false);
     }
 
-    const handlePrint = () => {
-        alert('Vous ne pouvez pas encore imprimer')
+    const printHandle = () => {
+        return window.print()
     }
 
     useEffect(() => {
@@ -82,13 +82,18 @@ function Ressources() {
                             <div className="card ressources">
                                 <div className="card-body">
                                     <div className="col-12">
-                                        <div className="row" style={{ paddingLeft: '-15px' }}>
-                                            <div className="col-6">
+                                        <div className="row">
+                                            <div className="col-4">
                                                 <input type="search" className="form-control" placeholder="Rechercher..." />
                                             </div>
-                                            <div className="col-6">
-                                                <button className="btn btn-primary" onClick={showModalAddCode}>
+                                            <div className="col-4">
+                                                <button className="btn btn-primary" onClick={showModalAddCode} style={{ width: "100%" }}>
                                                     Ajouter un nouveau code
+                                                </button>
+                                            </div>
+                                            <div className="col-4">
+                                                <button className="btn btn-primary" onClick={printHandle} style={{ width: "100%" }}>
+                                                    Imprimer <i className='fa fa-print'></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -115,9 +120,13 @@ function Ressources() {
                                                         <>
                                                             <tr key={value.id}>
                                                                 <td>{index + 1}</td>
-                                                                <td>{value.content}</td>
+                                                                <td id="valContent">{value.content}</td>
                                                                 <td>{value.montant}</td>
-                                                                <td>{value.statut}</td>
+                                                                <td>
+                                                                    {
+                                                                        value.statut == 0 ? "Non utilisé" : "Utilisé"
+                                                                    }
+                                                                </td>
                                                                 <td style={{ width: "140px" }}>
                                                                     <button className="btn btn-danger" onClick={(e) => deleteCodeHandle(value.id)}>
                                                                         <i className="fa fa-trash"></i> Supprimer

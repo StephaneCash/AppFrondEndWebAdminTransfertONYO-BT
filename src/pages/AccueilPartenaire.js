@@ -16,12 +16,16 @@ function AccueilPartenaire() {
 
     const [nomC, setNomC] = useState('');
     const [devise, setDevise] = useState('');
+    const [clic, setClic] = useState(false)
 
     const submitData = () => {
+        setClic(true)
         if (nom) {
             axios.post('http://localhost:5000/api/partenaires/', { nom, adresse, numTel, desc }, { headers: authHeader() }).then(res => {
                 swal({ title: "Succès", icon: 'success', text: `Vos données ont été soumises avec succès` });
-                setEtat(true)
+                if (res.data) {
+                    setEtat(true)
+                }
             }).catch(err => {
                 console.log(err)
             })
@@ -35,7 +39,10 @@ function AccueilPartenaire() {
             if (nom) {
                 axios.post('http://localhost:5000/api/comptes/', { nom: nomC, devise }, { headers: authHeader() }).then(res => {
                     swal({ title: "Succès", icon: 'success', text: `Compte configuré avec succès` });
-                    setEtat(true)
+                    setNom('')
+                    setTel('')
+                    setDesc('')
+                    setAdresse('')
                 }).catch(err => {
                     console.log(err)
                 })
@@ -64,13 +71,16 @@ function AccueilPartenaire() {
                                         <div className='col-12'>
                                             <div className='d-flex'>
                                                 <div className='col-5'>
-                                                    <h3>Informations sur le partenaire</h3>
                                                     {
-                                                        etat ? <> <div className='form-group'>
-                                                            <label>Nom</label>
-                                                            <input type="text" className="form-control" placeholder="Entrer un nom"
-                                                                onChange={(e) => setNom(e.target.value)} />
-                                                        </div>
+
+                                                        <>
+                                                            <h3>Informations sur le partenaire</h3>
+
+                                                            <div className='form-group'>
+                                                                <label>Nom</label>
+                                                                <input type="text" className="form-control" placeholder="Entrer un nom"
+                                                                    onChange={(e) => setNom(e.target.value)} />
+                                                            </div>
 
                                                             <div className='form-group mt-1'>
                                                                 <label>Numéro de téléphone</label>
@@ -97,7 +107,8 @@ function AccueilPartenaire() {
                                                                         Soummettre
                                                                     </button>
                                                                 }
-                                                            </div></> : <div className="alert alert-success">Vos données ont été souvegardées avec succès</div>
+                                                            </div>
+                                                        </>
                                                     }
                                                 </div>
 

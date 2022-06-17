@@ -58,14 +58,14 @@ const Leftbar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink to="/partenaires">
+                <NavLink to="/categories">
                     <div className='d-flex'>
                         <div className="icon"><i className="fa fa-list-alt"></i></div>
                         <div className="text">Catégories</div>
                     </div>
                 </NavLink>
 
-                <NavLink to="/partenaires">
+                <NavLink to="/comptes">
                     <div className='d-flex'>
                         <div className="icon"><i className="fa fa-lock"></i></div>
                         <div className="text">Comptes</div>
