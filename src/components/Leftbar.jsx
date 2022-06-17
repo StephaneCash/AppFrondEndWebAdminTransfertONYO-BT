@@ -79,14 +79,14 @@ const Leftbar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink to="/partenaires">
+                <NavLink to="/users">
                     <div className='d-flex'>
                         <div className="icon"><i className="fa fa-user"></i></div>
                         <div className="text">Users</div>
                     </div>
                 </NavLink>
 
-                <NavLink to="/partenaires">
+                <NavLink to="/videos">
                     <div className='d-flex'>
                         <div className="icon"><i className="fa fa-video-camera"></i></div>
                         <div className="text">Vidéos</div>

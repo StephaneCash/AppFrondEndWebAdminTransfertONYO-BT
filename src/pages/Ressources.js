@@ -78,21 +78,19 @@ function Ressources() {
                         <div className="col-12" style={{ marginTop: '80px' }}>
                             <div className="card ressources">
                                 <div className="card-body">
-                                    <div className="col-12">
-                                        <div className="row">
-                                            <div className="col-4">
-                                                <input type="search" className="form-control" placeholder="Rechercher..." />
-                                            </div>
-                                            <div className="col-4">
-                                                <button className="btn btn-primary" onClick={showModalAddCode} style={{ width: "100%" }}>
-                                                    Ajouter un nouveau code
-                                                </button>
-                                            </div>
-                                            <div className="col-4">
-                                                <button className="btn btn-primary" onClick={printHandle} style={{ width: "100%" }}>
-                                                    Imprimer <i className='fa fa-print'></i>
-                                                </button>
-                                            </div>
+                                    <div className="d-flex">
+                                        <div style={{marginRight: '10px'}}>
+                                            <input type="search" className="form-control" placeholder="Rechercher..." />
+                                        </div>
+                                        <div style={{marginRight: '10px'}}>
+                                            <button className="btn btn-primary" onClick={showModalAddCode} style={{ width: "100%" }}>
+                                                Ajouter un nouveau code
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button className="btn btn-primary" onClick={printHandle} style={{ width: "100%" }}>
+                                                Imprimer <i className='fa fa-print'></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

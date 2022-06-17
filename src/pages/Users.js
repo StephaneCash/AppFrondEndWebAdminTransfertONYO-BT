@@ -122,23 +122,32 @@ function Users() {
                     <div className='col-2'><Leftbar /></div>
                     <div className='col-10' style={{ marginTop: '70px' }}>
                         <div className='transaction'>
-                            <div className='d-flex'>
-                                <h4>Utilisateurs <Group /></h4>
-                                <div className="addTransactionIcon">
-                                    <span className="textAddTransaction">Créer un utilisateur</span>
-                                    <NavLink to='add'>
-                                        <Button variant='outlined'>
-                                            <AddCircle className='iconAddTr' />
-                                        </Button>
-                                    </NavLink>
+
+                            <div className="card">
+                                <div className="card-body">
+
+                                    <div className='d-flex'>
+                                        <h4>Utilisateurs <Group /></h4>
+
+                                        <div style={{marginLeft: '10px'}}>
+                                            <input type="search" placeholder="Rechercher..." className="form-control" onChange={(e) => setValSearch(e.target.value)} />
+                                        </div>
+
+                                        <div className="addTransactionIcon">
+                                            <span className="textAddTransaction"></span>
+                                            <NavLink to='add'>
+                                                <button className="btn">
+                                                    Créer un utilisateur
+                                                </button>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
-                            <TextField type="search" label='Rechercher'
-                                className="searchTransition mb-3" onChange={(e) => setValSearch(e.target.value)} />
-
-                            <Card className='card'>
-                                <table className='table table-striped table-borderless'>
+                            <div className='card mt-2'>
+                                <table className='table table-borderless'>
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -167,10 +176,10 @@ function Users() {
                                                             }
                                                         </td>
                                                         <td>{val.createdAt}</td>
-                                                        <td style={{ width: '70px' }}>
-                                                            <Button variant='outlined'>
+                                                        <td style={{ width: '140px' }}>
+                                                            <button className="btn">
                                                                 <Close /> Bloquer
-                                                            </Button>
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 )
@@ -178,7 +187,7 @@ function Users() {
                                         }
                                     </tbody>
                                 </table>
-                            </Card>
+                            </div>
                         </div>
                     </div>
                 </div>

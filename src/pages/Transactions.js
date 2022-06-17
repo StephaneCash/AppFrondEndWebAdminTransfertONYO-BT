@@ -129,21 +129,16 @@ function Transactions() {
 
                 <div className="card">
                   <div className="card-body">
-                    <div className="card-body">
-                      <div className="col-12">
-                        <div className="row">
-                          <div className="col-4">
-                            <input type="search" className="form-control" placeholder="Rechercher..." />
-                          </div>
-                          <div className="col-4">
-                            <NavLink to='addTransaction'>
-                              <button className='btn btn-primary' style={{ width: "100%", cursor: 'pointer' }} >
-                                Créer une transaction
-                              </button>
-                            </NavLink>
-                          </div>
-                        </div>
+                    <div className="d-flex">
+                      <div style={{ marginRight: '10px' }}>
+                        <input type="search" className="form-control" placeholder="Rechercher..." />
                       </div>
+
+                      <NavLink to='addTransaction'>
+                        <button className='btn btn-primary' style={{ cursor: 'pointer' }} >
+                          Créer une transaction
+                        </button>
+                      </NavLink>
                     </div>
                   </div>
                 </div>
@@ -229,7 +224,7 @@ function Transactions() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
       <VerifCodeTransaction
         show={showModalVerif}
@@ -238,7 +233,7 @@ function Transactions() {
         onChange={onChange}
         etat={etat}
       />
-    </div>
+    </div >
   )
 }
 

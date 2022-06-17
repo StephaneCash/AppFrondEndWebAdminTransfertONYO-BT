@@ -1,15 +1,8 @@
 import { Modal } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles"
-import { Button, TextField } from "@material-ui/core";
 import "../assets/VerifCodeTransaction.css";
 import { Close, Done } from '@material-ui/icons'
 
-
-const useStyles = makeStyles((theme) => ({
-    modal: {
-
-    },
-}))
 
 const VerifCodeTransaction = (props) => {
 
@@ -19,11 +12,9 @@ const VerifCodeTransaction = (props) => {
     const etat = props.etat;
     const onChange = props.onChange;
 
-    const classes = useStyles();
-
     return (
         <div className="verifTransaction">
-            <Modal show={props.show} className={classes.modal} style={{ marginTop: "80px" }}>
+            <Modal show={props.show} style={{ marginTop: "80px" }}>
                 <Modal.Header>
                     <div className="col-12">
                         <div className='d-flex'>
@@ -34,36 +25,28 @@ const VerifCodeTransaction = (props) => {
                                 </h6>
                             </div>
                             <div className="col-2">
-                                <Button
+                                <button className="btn"
                                     style={{ float: 'right' }}
                                     variant="outlined"
                                     onClick={closeModalVerif}
                                 >
                                     <Close />
-                                </Button>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </Modal.Header>
                 <Modal.Body>
 
-                    <TextField variant='filled' className='mb-3'
-                        label="Entrer le code à vérifier"
-                        helperText={
-                            etat === 3 ? "Code invalide" : etat === 4 && "Ce champ ne doit être vdie"
-                        }
+                    <input variant='filled' className='form-control'
                         onChange={e => onChange(e)}
                         style={{ width: "100%" }}
                     />
+                    <span className="text-danger" style={{fontSize: "12px"}}>{etat === 3 ? "Code invalide" : etat === 4 && "Ce champ ne doit être vdie"}</span>
 
-                    <Button variant='contained'
-                        onClick={confirmVerif}
-                        style={{
-                            marginTop: '-5px',
-                            backgroundColor: "#6363e0", color: 'white', width: "100%",
-                        }}>
+                    <button onClick={confirmVerif} className='btn mt-2' style={{width: "100%"}}>
                         Vérifier
-                    </Button>
+                    </button>
 
                 </Modal.Body>
                 <Modal.Footer style={{ paddingRight: "30px" }}>

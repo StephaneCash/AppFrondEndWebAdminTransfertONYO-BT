@@ -10,11 +10,13 @@ import { Delete } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import AddCode from '../dialogs/AddCode';
 import swal from "sweetalert";
+import AddCategory from '../dialogs/AddCategory';
 
 
 function Categories() {
 
-    const [category, setCategory] = useState([])
+    const [category, setCategory] = useState([]);
+    const [show, setShow] = useState(false)
 
     const getAllCategory = () => {
         axios.get('http://localhost:5000/api/categories/', { headers: authHeader() }).then(res => {
@@ -32,6 +34,14 @@ function Categories() {
 
     }
 
+    const showModal = () => {
+        setShow(true)
+    }
+
+    const closeModal = () => {
+        setShow(false)
+    }
+
     return (
         <>
             <div className='col-12'>
@@ -46,16 +56,14 @@ function Categories() {
                         <div className="col-12" style={{ marginTop: '80px' }}>
                             <div className="card">
                                 <div className="card-body">
-                                    <div className="col-12">
-                                        <div className="row">
-                                            <div className="col-6">
-                                                <input type="search" className="form-control" placeholder="Rechercher..." />
-                                            </div>
-                                            <div className="col-6">
-                                                <button className="btn btn-primary">
-                                                    Ajouter une nouvelle catégorie
-                                                </button>
-                                            </div>
+                                    <div className="d-flex">
+                                        <div style={{marginRight: '10px'}}>
+                                            <input type="search" className="form-control" placeholder="Rechercher..." />
+                                        </div>
+                                        <div>
+                                            <button className="btn btn-primary" onClick={showModal}>
+                                                Ajouter une nouvelle catégorie
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +71,7 @@ function Categories() {
                             <div className="card ressource mt-2">
                                 <div className='card-header'> <h5>Catégories</h5> </div>
                                 <div className="card-body">
-                                    <table className='table'>
+                                    <table className='table table-borderless'>
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -101,6 +109,12 @@ function Categories() {
                     </div>
                 </div>
             </div>
+
+            <AddCategory
+                show={show}
+                close={closeModal}
+                getAllCategory={getAllCategory}
+            />
         </>
     )
 }
