@@ -142,171 +142,168 @@ function AddTransaction() {
     }
 
     return (
-        <div>
-
-            <div className='col-12'>
-                <div className="d-flex">
-                    <div className="col-2">
-                        <Leftbar />
+        <div className='col-12'>
+            <div className="d-flex">
+                <div className="col-2">
+                    <Leftbar />
+                </div>
+                <div className="col-10">
+                    <div className="col-12">
+                        <Navbar />
                     </div>
-                    <div className="col-10">
-                        <div className="col-12">
-                            <Navbar />
-                        </div>
-                        <div className="col-12" style={{ marginTop: '80px' }}>
-                            <div className='transaction'>
-                                <NavLink to="/transaction">
-                                    <KeyboardBackspaceIcon /> Retour
-                                </NavLink>
-                                <h5 className="mt-3"> Créer une transaction
-                                </h5>
+                    <div className="col-12" style={{ marginTop: '80px' }}>
+                        <div className='transaction'>
+                            <NavLink to="/transaction">
+                                <KeyboardBackspaceIcon /> Retour
+                            </NavLink>
+                            <h5 className="mt-3"> Créer une transaction
+                            </h5>
 
-                                <div className='col-12'>
-                                    <Card className="p-3 card">
-                                        <div className='d-flex'>
-                                            <h6>
-                                                Compte ONYO-BT
+                            <div className='col-12'>
+                                <Card className="p-3 card">
+                                    <div className='d-flex'>
+                                        <h6>
+                                            Compte ONYO-BT
 
-                                                <br />
-                                                <h5 className='valueCompte'>
-                                                    {
-                                                        etatClic === false ? "******"
-                                                            : "3500 FC"
-                                                    }
-                                                </h5>
-                                            </h6>
-
-                                            <p>
+                                            <br />
+                                            <h5 className='valueCompte'>
                                                 {
-                                                    etatClic === false ? <ToggleOff className='toggleBtn'
-                                                        onClick={handleClick}
-                                                        style={{
-                                                            fontSize: '40px', color: "#333", marginTop: '-10px'
-                                                        }}
-                                                    /> : <ToggleOn
-                                                        className='toggleBtn'
-                                                        onClick={handleClick}
-                                                        style={{
-                                                            fontSize: '40px', color: "#333", marginTop: '-10px'
-                                                        }}
-                                                    />
+                                                    etatClic === false ? "******"
+                                                        : "3500 FC"
                                                 }
-                                            </p>
-                                        </div>
-                                        <hr style={{ marginTop: '-10px' }} />
-                                        <div className="col-12 blocDevise">
-                                            <div className='col-2 textBloc'>
-                                                <label>Choisir la devise</label>
-                                                <select className="form-control"
-                                                    onChange={handleSelect}
-                                                    style={{ boxShadow: 'none', border: '2px solid #0071c0' }}>
-                                                    <option>CDF</option>
-                                                    <option>USD</option>
-                                                </select>
-                                            </div>
+                                            </h5>
+                                        </h6>
 
-                                            <h6 style={{ marginLeft: '10px' }}>
-                                                Devise courante <br />
-                                                <h6 style={{ fontWeight: 'bold', marginTop: '10px' }}>{valueSelect} </h6>
-                                            </h6>
-                                        </div>
-                                    </Card>
-
-                                    <Card className='card p-3 mt-2'>
-                                        <h5>Identités du bénéficiaire</h5>
-
-                                        <div className='row'>
-                                            <div className='col-6'>
-                                                <h6>Nom du bénéficiaire</h6>
-                                                <input onChange={handleNomBenef}
-                                                    style={{ width: "100%", }}
-                                                    helperText={
-                                                        clicBtn === true && (
-                                                            <>
-                                                                {validBenif === false ?
-                                                                    "Veuillez renseigner un le nom du bénéficiaire svp !" :
-                                                                    <Check style={{ fontSize: '15px', color: 'green', }} />}
-                                                            </>
-                                                        )
-                                                    }
-                                                    className='mb-2 form-control mt-1' placeholder='Entrer le nom du bénéficiaire' />
-                                            </div>
-
-                                            <div className='col-6'>
-                                                <h6>Numéro de téléphone</h6>
-                                                <input onChange={handleNumPhone} type="text"
-                                                    style={{ width: "100%", }}
-                                                    helperText={
-                                                        clicBtn === true && (
-                                                            <>
-                                                                {validNum ?
-                                                                    "" : pattNum === false ? "Veuillez renseigner un numéro de téléphone svp" :
-                                                                        "Entrer un numéro de téléphone valide"
-                                                                }
-                                                            </>
-                                                        )
-                                                    }
-                                                    className='mb-2 form-control mt-1' placeholder='Entrer un numéro de téléphone' />
-                                            </div>
+                                        <p>
+                                            {
+                                                etatClic === false ? <ToggleOff className='toggleBtn'
+                                                    onClick={handleClick}
+                                                    style={{
+                                                        fontSize: '40px', color: "#333", marginTop: '-10px'
+                                                    }}
+                                                /> : <ToggleOn
+                                                    className='toggleBtn'
+                                                    onClick={handleClick}
+                                                    style={{
+                                                        fontSize: '40px', color: "#333", marginTop: '-10px'
+                                                    }}
+                                                />
+                                            }
+                                        </p>
+                                    </div>
+                                    <hr style={{ marginTop: '-10px' }} />
+                                    <div className="col-12 blocDevise">
+                                        <div className='col-2 textBloc'>
+                                            <label>Choisir la devise</label>
+                                            <select className="form-control"
+                                                onChange={handleSelect}
+                                                style={{ boxShadow: 'none', border: '2px solid #0071c0' }}>
+                                                <option>CDF</option>
+                                                <option>USD</option>
+                                            </select>
                                         </div>
 
+                                        <h6 style={{ marginLeft: '10px' }}>
+                                            Devise courante <br />
+                                            <h6 style={{ fontWeight: 'bold', marginTop: '10px' }}>{valueSelect} </h6>
+                                        </h6>
+                                    </div>
+                                </Card>
 
-                                        <div className='row'>
+                                <Card className='card p-3 mt-2'>
+                                    <h5>Identités du bénéficiaire</h5>
 
-                                            <div className='col-6'>
-                                                <h6>Choisir un motif</h6>
-                                                <select className='form-control'
-                                                    onChange={(e) => (setDataForm({ ...dataForm, 'categoryId': e.target.value }),
-                                                        handleCategory(e))} style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '5px' }}>
-                                                    <option value={0}>--Choisir une option--</option>
-                                                    {
+                                    <div className='row'>
+                                        <div className='col-6'>
+                                            <h6>Nom du bénéficiaire</h6>
+                                            <input onChange={handleNomBenef}
+                                                style={{ width: "100%", }}
+                                                helperText={
+                                                    clicBtn === true && (
+                                                        <>
+                                                            {validBenif === false ?
+                                                                "Veuillez renseigner un le nom du bénéficiaire svp !" :
+                                                                <Check style={{ fontSize: '15px', color: 'green', }} />}
+                                                        </>
+                                                    )
+                                                }
+                                                className='mb-2 form-control mt-1' placeholder='Entrer le nom du bénéficiaire' />
+                                        </div>
 
-                                                        categories ?
-                                                            categories.map(val => {
-                                                                return (
-                                                                    <>
-                                                                        <option key={val.id} value={val.id}>{val.nom}</option>
-                                                                    </>
-                                                                )
-                                                            })
-                                                            : ""
-                                                    }
-                                                </select>
+                                        <div className='col-6'>
+                                            <h6>Numéro de téléphone</h6>
+                                            <input onChange={handleNumPhone} type="text"
+                                                style={{ width: "100%", }}
+                                                helperText={
+                                                    clicBtn === true && (
+                                                        <>
+                                                            {validNum ?
+                                                                "" : pattNum === false ? "Veuillez renseigner un numéro de téléphone svp" :
+                                                                    "Entrer un numéro de téléphone valide"
+                                                            }
+                                                        </>
+                                                    )
+                                                }
+                                                className='mb-2 form-control mt-1' placeholder='Entrer un numéro de téléphone' />
+                                        </div>
+                                    </div>
+
+
+                                    <div className='row'>
+
+                                        <div className='col-6'>
+                                            <h6>Choisir un motif</h6>
+                                            <select className='form-control'
+                                                onChange={(e) => (setDataForm({ ...dataForm, 'categoryId': e.target.value }),
+                                                    handleCategory(e))} style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '5px' }}>
+                                                <option value={0}>--Choisir une option--</option>
                                                 {
-                                                    clicBtn ?
-                                                        dataForm.categoryId == '0' || !dataForm.categoryId ?
-                                                            <span style={errSelectCategory}>Veuillez sélectionner une catégorie svp</span>
-                                                            : ""
+
+                                                    categories ?
+                                                        categories.map(val => {
+                                                            return (
+                                                                <>
+                                                                    <option key={val.id} value={val.id}>{val.nom}</option>
+                                                                </>
+                                                            )
+                                                        })
                                                         : ""
                                                 }
+                                            </select>
+                                            {
+                                                clicBtn ?
+                                                    dataForm.categoryId == '0' || !dataForm.categoryId ?
+                                                        <span style={errSelectCategory}>Veuillez sélectionner une catégorie svp</span>
+                                                        : ""
+                                                    : ""
+                                            }
 
-                                            </div>
-
-                                            <div className='col-6'>
-                                                <h6>Montant</h6>
-                                                <input onChange={handleMontant}
-                                                    style={{ width: "100%", }} type='number'
-                                                    helperText={
-                                                        clicBtn === true && (
-                                                            <>
-                                                                {validMontant === false ?
-                                                                    "Veuillez renseigner un montant svp !" :
-                                                                    <Check style={{ fontSize: '15px', color: 'green', }} />}
-                                                            </>
-                                                        )
-                                                    }
-                                                    className="mt-1 mb-2 form-control" placeholder='Entrer un montant' />
-                                            </div>
                                         </div>
 
-                                        <div className='col-12'>
-                                            <Button variant="contained" className="mb-2" onClick={handleSubmit}
-                                                style={{ color: 'white', backgroundColor: "red", float: 'right' }}>
-                                                Continuer <TrendingFlatIcon />
-                                            </Button>
+                                        <div className='col-6'>
+                                            <h6>Montant</h6>
+                                            <input onChange={handleMontant}
+                                                style={{ width: "100%", }} type='number'
+                                                helperText={
+                                                    clicBtn === true && (
+                                                        <>
+                                                            {validMontant === false ?
+                                                                "Veuillez renseigner un montant svp !" :
+                                                                <Check style={{ fontSize: '15px', color: 'green', }} />}
+                                                        </>
+                                                    )
+                                                }
+                                                className="mt-1 mb-2 form-control" placeholder='Entrer un montant' />
                                         </div>
-                                    </Card>
-                                </div>
+                                    </div>
+
+                                    <div className='col-12'>
+                                        <Button variant="contained" className="mb-2" onClick={handleSubmit}
+                                            style={{ color: 'white', backgroundColor: "red", float: 'right' }}>
+                                            Continuer <TrendingFlatIcon />
+                                        </Button>
+                                    </div>
+                                </Card>
                             </div>
                         </div>
                     </div>

@@ -72,7 +72,7 @@ const Leftbar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink to="/partenaires">
+                <NavLink to="/config">
                     <div className='d-flex'>
                         <div className="icon"><i className="fa fa-cog"></i></div>
                         <div className="text">Configuration Vidéos</div>
