@@ -7,7 +7,7 @@ import authHeader from '../auth/auth-header';
 import { Button, Card } from '@material-ui/core';
 import Load from '../components/Load';
 import { Delete } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import AddCode from '../dialogs/AddCode';
 import swal from "sweetalert";
 
@@ -26,8 +26,6 @@ function Partenaires() {
         getAllPartenaires()
     }, [])
 
-    console.log(data)
-
     return (
         <div>
 
@@ -43,26 +41,58 @@ function Partenaires() {
                         </div>
                         <div className="col-12" style={{ marginTop: '80px' }}>
                             <div className='col-12 ressources' style={{ marginTop: '70px' }}>
-                                0 Partenaires trouvés
+
+                                <div className="card">
+                                    <div className="card-body">
+                                        <div className="d-flex">
+                                            <div style={{ marginRight: '10px' }}>
+                                                <input type="search" className="form-control" placeholder="Rechercher..." />
+                                            </div>
+
+                                            <NavLink to='addTransaction'>
+                                                <button className='btn btn-primary' style={{ cursor: 'pointer' }} >
+                                                    Ajouter un partenaire
+                                                </button>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div className='card'>
-                                    <table className='table'>
+                                    <table className='table table-borderless'>
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Nom</th>
                                                 <th>Catégorie</th>
-                                                <th>Description</th>
+                                                <th>Numéro de téléphone</th>
+                                                <th>Adresse</th>
+                                                <th>Statut</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
-                                                data.map((val, index) => {
-                                                    <tr>
-                                                        <td>{index}</td>
-                                                        <td>{val.nom}</td>
-                                                    </tr>
+                                                data && data.map((val, key) => {
+                                                    return (
+                                                        <tr>
+                                                            <td>{key + 1}</td>
+                                                            <td>{val.nom}</td>
+                                                            <td>{val.categories ? val.categories.nom : 'Aucune catégorie assigée'} </td>
+                                                            <td>{val.numTel}</td>
+                                                            <td>{val.adresse}</td>
+                                                            <td>{val.statut === 0 ? "Non opérationnel" : "Opérationnel"}</td>
+                                                            <td style={{ width: '240px' }}>
+                                                                <button className="btn">
+                                                                    <i className="fa fa-trash"></i> Supprimer
+                                                                </button>
+                                                                <button className="btn" style={{ marginLeft: "10px" }}>
+                                                                    <i className="fa fa-edit"></i> Editer
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    )
                                                 })
                                             }
                                         </tbody>

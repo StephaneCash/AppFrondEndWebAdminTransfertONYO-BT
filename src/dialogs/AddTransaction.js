@@ -2,7 +2,7 @@ import React from 'react'
 import Leftbar from '../components/Leftbar'
 import Navbar from '../components/Navbar'
 import '../assets/Transactions.css'
-import { Button, Card, input } from '@material-ui/core'
+import { Button, Card, } from '@material-ui/core'
 import { Check, ToggleOff } from '@material-ui/icons'
 import { ToggleOn } from '@mui/icons-material'
 import { useState, useEffect } from "react";

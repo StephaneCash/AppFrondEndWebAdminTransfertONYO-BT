@@ -7,7 +7,7 @@ import authHeader from '../auth/auth-header';
 import { Button, Card } from '@material-ui/core';
 import Load from '../components/Load';
 import { Delete, ToggleOff } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import AddCode from '../dialogs/AddCode';
 import swal from "sweetalert";
 import { ToggleOn } from '@mui/icons-material';
@@ -65,8 +65,8 @@ function Comptes() {
                         </div>
                         <div className="col-12" style={{ marginTop: '80px' }}>
                             <div className="card ressources">
-                                <div className="card-header"><h5>Compte ONYO-BT, Bienvenu(e) {partenaires[max - 1].nom && partenaires[max - 1].nom}</h5></div>
-                                <Card className="p-3 mt-2">
+                                <div className="card-header"><h5>Compte ONYO-BT</h5></div>
+                                <Card className="p-3 mt-2 mb-2">
                                     <div className='d-flex'>
                                         <h6>
                                             Votre solde
@@ -74,7 +74,7 @@ function Comptes() {
                                             <h5 className='valueCompte'>
                                                 {
                                                     etatClic === false ? "******"
-                                                        : partenaires[max - 1].comptes.map((val, key) => {
+                                                        : partenaires && partenaires[max - 1].comptes.map((val, key) => {
                                                             return <span key={key}>{val.montant} OBT</span>
                                                         })
                                                 }
@@ -102,10 +102,11 @@ function Comptes() {
                                     <p>
                                         OBT Compte
                                     </p>
-                                </Card>
-                                
-                                <Card className='mt-2'>
-
+                                    <p>
+                                        <NavLink to="/transaction">
+                                            <i className="fa fa-arrow-left"></i> Retour
+                                        </NavLink>
+                                    </p>
                                 </Card>
 
                             </div>
