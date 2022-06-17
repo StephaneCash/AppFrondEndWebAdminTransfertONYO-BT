@@ -10,6 +10,7 @@ import { Delete } from '@material-ui/icons';
 import { Link, NavLink } from 'react-router-dom';
 import AddCode from '../dialogs/AddCode';
 import swal from "sweetalert";
+import '../assets/Video.css'
 
 
 function Video() {
@@ -49,22 +50,11 @@ function Video() {
 
 
                                 <div className='card'>
-                                    <table className='table table-borderless'>
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Nom</th>
-                                                <th>Catégorie</th>
-                                                <th>Numéro de téléphone</th>
-                                                <th>Adresse</th>
-                                                <th>Statut</th>
-                                                <th>Options</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <div className='grille'>
+                                        <div className='card'>
 
-                                        </tbody>
-                                    </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
