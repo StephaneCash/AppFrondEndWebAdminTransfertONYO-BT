@@ -100,7 +100,7 @@ function Ressources() {
                             <div className="card mt-3">
                                 <div className="card-header">Liste de codes {codes && codes.length}</div>
                                 <div className="card-body">
-                                    <table className="table table">
+                                    <table className="table table-borderless">
                                         <thead>
                                             <tr>
                                                 <th>#</th>

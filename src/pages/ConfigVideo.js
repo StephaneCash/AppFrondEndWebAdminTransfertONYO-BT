@@ -49,7 +49,7 @@ function ConfigVideo() {
 
                                 <div className="card mt-3">
                                     <div className='card-body'>
-                                        <table className="table">
+                                        <table className="table table-borderless">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>

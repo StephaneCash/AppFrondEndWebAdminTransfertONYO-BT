@@ -191,23 +191,6 @@ function AddTransaction() {
                                             }
                                         </p>
                                     </div>
-                                    <hr style={{ marginTop: '-10px' }} />
-                                    <div className="col-12 blocDevise">
-                                        <div className='col-2 textBloc'>
-                                            <label>Choisir la devise</label>
-                                            <select className="form-control"
-                                                onChange={handleSelect}
-                                                style={{ boxShadow: 'none', border: '2px solid #0071c0' }}>
-                                                <option>CDF</option>
-                                                <option>USD</option>
-                                            </select>
-                                        </div>
-
-                                        <h6 style={{ marginLeft: '10px' }}>
-                                            Devise courante <br />
-                                            <h6 style={{ fontWeight: 'bold', marginTop: '10px' }}>{valueSelect} </h6>
-                                        </h6>
-                                    </div>
                                 </Card>
 
                                 <Card className='card p-3 mt-2'>
@@ -298,7 +281,7 @@ function AddTransaction() {
                                     </div>
 
                                     <div className='col-12'>
-                                        <Button variant="contained" className="mb-2" onClick={handleSubmit}
+                                        <Button variant="contained" className="mb-2 mt-3" onClick={handleSubmit}
                                             style={{ color: 'white', backgroundColor: "red", float: 'right' }}>
                                             Continuer <TrendingFlatIcon />
                                         </Button>

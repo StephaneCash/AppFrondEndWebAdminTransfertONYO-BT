@@ -26,3 +26,7 @@ button:hover{
     opacity: 0.8;
 }
 
+table td, th{
+    border: 1px solid #efefef !important;
+}
+

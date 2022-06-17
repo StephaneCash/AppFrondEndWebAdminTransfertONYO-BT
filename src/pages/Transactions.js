@@ -125,25 +125,30 @@ function Transactions() {
               <Navbar />
             </div>
             <div className="col-12" style={{ marginTop: '80px' }}>
-              <div className='transaction card'>
+              <div className='transaction'>
 
-                <div className="card-body">
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-4">
-                        <input type="search" className="form-control" placeholder="Rechercher..." />
-                      </div>
-                      <div className="col-4">
-                        <NavLink to='addTransaction'>
-                          <input className='btn btn-primary' style={{ width: "100%", cursor: 'pointer' }} value='Créer une transaction' />
-                        </NavLink>
+                <div className="card">
+                  <div className="card-body">
+                    <div className="card-body">
+                      <div className="col-12">
+                        <div className="row">
+                          <div className="col-4">
+                            <input type="search" className="form-control" placeholder="Rechercher..." />
+                          </div>
+                          <div className="col-4">
+                            <NavLink to='addTransaction'>
+                              <button className='btn btn-primary' style={{ width: "100%", cursor: 'pointer' }} >
+                                Créer une transaction
+                              </button>
+                            </NavLink>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <hr style={{ marginRight: '10px' }} />
-                <div className='card'>
+                <div className='card mt-3'>
                   <table className='table table-borderless'>
                     <thead>
                       <tr>
@@ -208,11 +213,13 @@ function Transactions() {
                               )
                             })
 
-                          : <tr className="textPasData">
-                            <td colSpan='8px'>
-                              <Load />
-                            </td>
-                          </tr>
+                          :
+                          data.length === '0' ? "Aucune donnée enregistrée."
+                            : <tr className="textPasData">
+                              <td colSpan='8px'>
+                                <Load />
+                              </td>
+                            </tr>
 
                       }
                     </tbody>
