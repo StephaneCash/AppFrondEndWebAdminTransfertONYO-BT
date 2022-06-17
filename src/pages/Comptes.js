@@ -75,7 +75,7 @@ function Comptes() {
                                                 {
                                                     etatClic === false ? "******"
                                                         : partenaires && partenaires[max - 1].comptes.map((val, key) => {
-                                                            return <span key={key}>{val.montant} OBT</span>
+                                                            return <> {val.montant} <span style={{ color: 'red' }}>OBT</span></>
                                                         })
                                                 }
                                             </h5>

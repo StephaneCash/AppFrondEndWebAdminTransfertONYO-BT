@@ -33,6 +33,24 @@ function AddTransaction() {
 
     let navigate = useNavigate();
 
+    const [partenaires, setPartenaires] = useState([])
+
+    const getComptePartenaires = () => {
+        axios.get('http://localhost:5000/api/partenaires/v1/comptes/', { headers: authHeader() }).then(res => {
+            setPartenaires(res.data.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    let max = 0;
+
+    partenaires.forEach((res) => {
+        if (res.id > max) {
+            max = res.id
+        }
+    })
+
     const getAllCategories = () => {
         axios.get('http://localhost:5000/api/categories', { headers: authHeader() }).then(res => {
             setCategories(res.data)
@@ -43,6 +61,7 @@ function AddTransaction() {
 
     useEffect(() => {
         getAllCategories()
+        getComptePartenaires()
         setDataForm({ ...dataForm, "devise": valueSelect })
     }, [])
 
@@ -169,7 +188,9 @@ function AddTransaction() {
                                             <h5 className='valueCompte'>
                                                 {
                                                     etatClic === false ? "******"
-                                                        : "3500 FC"
+                                                        : partenaires && partenaires[max - 1].comptes.map((val, key) => {
+                                                            return <> {val.montant} <span style={{ color: 'red' }}>OBT</span></>
+                                                        })
                                                 }
                                             </h5>
                                         </h6>

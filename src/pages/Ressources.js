@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Leftbar from '../components/Leftbar'
 import Navbar from '../components/Navbar'
 import axios from 'axios';
@@ -7,13 +7,16 @@ import authHeader from '../auth/auth-header';
 import Load from '../components/Load';
 import AddCode from '../dialogs/AddCode';
 import swal from "sweetalert";
-import logo from '../images/logo.jpeg'
+import logo from '../images/logo.jpeg';
+import ReactToPrint from 'react-to-print';
 
 
 function Ressources() {
 
     const [codes, setCodes] = useState([]);
     const [etatModal, setEtatModal] = useState(false);
+
+    const componentRef = useRef();
 
     const getAllCodes = () => {
         axios.get('http://localhost:5000/api/generates/', { headers: authHeader() }).then(res => {
@@ -49,16 +52,36 @@ function Ressources() {
 
     }
 
+    const handleVider = () =>{
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer tous les codes ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                axios.delete(`http://localhost:5000/api/generates`, { headers: authHeader() }).then(res => {
+                    console.log('RES :: ', res)
+                    getAllCodes();
+                }).catch(err => {
+                    console.log(err)
+                })
+                swal('Codes supprimés avec succès', {
+                    icon: "success",
+                });
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     const showModalAddCode = () => {
         setEtatModal(true)
     }
 
     const closeModal = () => {
         setEtatModal(false);
-    }
-
-    const printHandle = () => {
-        return window.print()
     }
 
     useEffect(() => {
@@ -89,8 +112,16 @@ function Ressources() {
                                             </button>
                                         </div>
                                         <div>
-                                            <button className="btn btn-primary" onClick={printHandle} style={{ width: "100%" }}>
-                                                Imprimer <i className='fa fa-print'></i>
+                                            <ReactToPrint
+                                                trigger={() => <button className="btn btn-primary" style={{ width: "100%" }}>
+                                                    Imprimer <i className='fa fa-print'></i>
+                                                </button>}
+                                                content={() => componentRef.current}
+                                            />
+                                        </div>
+                                        <div style={{ marginLeft: '10px' }}>
+                                            <button className='btn' onClick={handleVider}>
+                                                Libérer l'espace
                                             </button>
                                         </div>
                                     </div>
@@ -98,58 +129,29 @@ function Ressources() {
                             </div>
                             <div className="card mt-3">
                                 <div className="card-header">Liste de codes {codes && codes.length}</div>
-                                <div className="card-body">
-                                    <table className="table table-borderless">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Code</th>
-                                                <th>Montant</th>
-                                                <th>Statut</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                codes && codes.map((value, index) => {
-                                                    return (
-                                                        <>
-                                                            <tr key={value.id}>
-                                                                <td>{index + 1}</td>
-                                                                <td id="valContent" style={{ width: '300px' }}>
-                                                                    <div className="col-12" style={{border: '2px solid #0071c1', padding: '5px'}}>
-                                                                        <div className="d-flex">
-                                                                            <div className="col-4">
-                                                                                <img src={logo} width='40' alt="Logo Onyobt" />
-                                                                            </div>
-                                                                            <div className="col-8" style={{fontWeight:'bold', textAlign:'right'}}>{value.montant} OBT</div>
-                                                                        </div>
-                                                                        <div className="d-flex">
-                                                                            <div className="col-2"></div>
-                                                                            <div className="col-10" style={{ textAlign: 'center', border: "1px solid #0071c1", padding: "4px" }}>
-                                                                                {value.content}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>{value.montant}</td>
-                                                                <td>
-                                                                    {
-                                                                        value.statut == 0 ? "Non utilisé" : "Utilisé"
-                                                                    }
-                                                                </td>
-                                                                <td style={{ width: "140px" }}>
-                                                                    <button className="btn btn-danger" onClick={(e) => deleteCodeHandle(value.id)}>
-                                                                        <i className="fa fa-trash"></i> Supprimer
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        </>
-                                                    )
-                                                })
-                                            }
-                                        </tbody>
-                                    </table>
+                                <div className="grille" ref={componentRef}>
+
+                                    {codes && codes.map((value, key) => {
+                                        return (
+                                            <div className='card' key={key} onClick={(e) => deleteCodeHandle(value.id)}>
+                                                <div className="col-12" style={{ border: '2px solid #0071c1', padding: '5px', cursor: "pointer" }}>
+                                                    <div className="d-flex">
+                                                        <div className="col-4">
+                                                            <img src={logo} width='40' alt="Logo Onyobt" />
+                                                        </div>
+                                                        <div className="col-8" style={{ fontWeight: 'bold', textAlign: 'right' }}><span className='text-danger'>{value.montant}</span> <span className='text-primary'>OBT</span></div>
+                                                    </div>
+                                                    <div className="d-flex">
+                                                        <div className="col-2"></div>
+                                                        <div className="col-10" style={{ textAlign: 'center', border: "1px solid #0071c1", padding: "4px" }}>
+                                                            {value.content}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+
                                 </div>
                             </div>
                         </div>

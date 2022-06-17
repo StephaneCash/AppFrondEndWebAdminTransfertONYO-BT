@@ -50,9 +50,11 @@ function Video() {
 
 
                                 <div className='card'>
-                                    <div className='grille'>
-                                        <div className='card'>
-
+                                    <div className='grille1'>
+                                        <div className='card1'>
+                                            <img src="https://onyo-bt.com/image_upload/maitre_gims_bella.jpg" width='300' alt='photo' />
+                                            <img src='https://onyo-bt.com/image_upload/OIP.jpg' alt='photo' width='300' />
+                                            <img src='https://onyo-bt.com/image_upload/gaz_500.jpg' alt='photo' width='270' />
                                         </div>
                                     </div>
                                 </div>
