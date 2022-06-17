@@ -131,6 +131,9 @@ function Transactions() {
                   <div className="card-body">
                     <div className="d-flex">
                       <div style={{ marginRight: '10px' }}>
+                        <h4>Transactions <i className="fa fa-usd"></i></h4>
+                      </div>
+                      <div style={{ marginRight: '10px' }}>
                         <input type="search" className="form-control" placeholder="Rechercher..." />
                       </div>
 

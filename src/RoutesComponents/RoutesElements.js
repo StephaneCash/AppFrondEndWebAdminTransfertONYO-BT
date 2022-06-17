@@ -14,6 +14,7 @@ import AccueilPartenaire from '../pages/AccueilPartenaire';
 import Categories from '../pages/Categories';
 import Comptes from '../pages/Comptes';
 import ConfigVideo from '../pages/ConfigVideo';
+import Video from '../pages/Video';
 
 
 function RoutesElements() {
@@ -34,6 +35,7 @@ function RoutesElements() {
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/comptes" element={<Comptes />} />
                 <Route path='/config' element={<ConfigVideo />} />
+                <Route path='/videos' element={<Video />} />
             </Routes>
         </BrowserRouter>
     )

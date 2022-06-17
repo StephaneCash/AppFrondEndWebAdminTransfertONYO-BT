@@ -44,6 +44,9 @@ function Partenaires() {
                                     <div className="card-body">
                                         <div className="d-flex">
                                             <div style={{ marginRight: '10px' }}>
+                                                <h4>Partenaires <i className="fa fa-users"></i></h4>
+                                            </div>
+                                            <div style={{ marginRight: '10px' }}>
                                                 <input type="search" className="form-control" placeholder="Rechercher..." />
                                             </div>
 
