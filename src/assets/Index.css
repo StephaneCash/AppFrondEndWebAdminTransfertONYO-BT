@@ -27,6 +27,7 @@ button:hover{
 
 table td, th{
     border: 1px solid #efefef !important;
+    font-size: 14px;
 }
 
 textarea{

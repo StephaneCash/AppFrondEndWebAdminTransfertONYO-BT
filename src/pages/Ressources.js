@@ -7,6 +7,7 @@ import authHeader from '../auth/auth-header';
 import Load from '../components/Load';
 import AddCode from '../dialogs/AddCode';
 import swal from "sweetalert";
+import logo from '../images/logo.jpeg'
 
 
 function Ressources() {
@@ -79,10 +80,10 @@ function Ressources() {
                             <div className="card ressources">
                                 <div className="card-body">
                                     <div className="d-flex">
-                                        <div style={{marginRight: '10px'}}>
+                                        <div style={{ marginRight: '10px' }}>
                                             <input type="search" className="form-control" placeholder="Rechercher..." />
                                         </div>
-                                        <div style={{marginRight: '10px'}}>
+                                        <div style={{ marginRight: '10px' }}>
                                             <button className="btn btn-primary" onClick={showModalAddCode} style={{ width: "100%" }}>
                                                 Ajouter un nouveau code
                                             </button>
@@ -115,7 +116,22 @@ function Ressources() {
                                                         <>
                                                             <tr key={value.id}>
                                                                 <td>{index + 1}</td>
-                                                                <td id="valContent">{value.content}</td>
+                                                                <td id="valContent" style={{ width: '300px' }}>
+                                                                    <div className="col-12" style={{border: '2px solid #0071c1', padding: '5px'}}>
+                                                                        <div className="d-flex">
+                                                                            <div className="col-4">
+                                                                                <img src={logo} width='40' alt="Logo Onyobt" />
+                                                                            </div>
+                                                                            <div className="col-8" style={{fontWeight:'bold', textAlign:'right'}}>{value.montant} OBT</div>
+                                                                        </div>
+                                                                        <div className="d-flex">
+                                                                            <div className="col-2"></div>
+                                                                            <div className="col-10" style={{ textAlign: 'center', border: "1px solid #0071c1", padding: "4px" }}>
+                                                                                {value.content}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
                                                                 <td>{value.montant}</td>
                                                                 <td>
                                                                     {

@@ -43,7 +43,7 @@ function ConfigVideo() {
                             <div className="ressources">
                                 <div className="card">
                                     <div className='card-body'>
-                                        Configuration
+                                        Configuration <i className="fa fa-cog fa-spin"></i>
                                     </div>
                                 </div>
 
