@@ -15,6 +15,8 @@ import Categories from '../pages/Categories';
 import Comptes from '../pages/Comptes';
 import ConfigVideo from '../pages/ConfigVideo';
 import Video from '../pages/Video';
+import RequireAuth from '../pages/RequireAuth';
+import NotFound from '../pages/NotFound';
 
 
 function RoutesElements() {
@@ -22,20 +24,25 @@ function RoutesElements() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
-                <Route path='/dashboardTransfert' element={<Dashboard />} />
-                <Route path='/transaction' element={<Transactions />} />
-                <Route path='/clients' element={<Clients />} />
-                <Route path='/transaction/addTransaction' element={<AddTransaction />} />
-                <Route path='/users' element={<Users />} />
-                <Route path='/ressources' element={<Ressources />} />
-                <Route path='/ressources/add' element={<AddCode />} />
-                <Route path='/partenaires' element={<Partenaires />} />
+
+                <Route element={<RequireAuth />} >
+                    <Route path='/dashboardTransfert' element={<Dashboard />} />
+                    <Route path='/transaction' element={<Transactions />} />
+                    <Route path='/clients' element={<Clients />} />
+                    <Route path='/transaction/addTransaction' element={<AddTransaction />} />
+                    <Route path='/users' element={<Users />} />
+                    <Route path='/ressources' element={<Ressources />} />
+                    <Route path='/ressources/add' element={<AddCode />} />
+                    <Route path='/partenaires' element={<Partenaires />} />
+                    <Route path='/accueil' element={<AccueilPartenaire />} />
+                </Route>
+
                 <Route path='/inscription' element={<Inscription />} />
-                <Route path='/accueil' element={<AccueilPartenaire />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/comptes" element={<Comptes />} />
                 <Route path='/config' element={<ConfigVideo />} />
                 <Route path='/videos' element={<Video />} />
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     )
