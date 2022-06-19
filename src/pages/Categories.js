@@ -151,7 +151,7 @@ function Categories() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {category && category.filter(val => {
+                                            {category.length ? category.filter(val => {
                                                 return val?.nom?.toLowerCase().includes(search);
                                             }).map((val, key) => {
                                                 return (
@@ -172,7 +172,12 @@ function Categories() {
                                                         </tr>
                                                     </>
                                                 )
-                                            })}
+                                            }) : <tr className="textPasData">
+                                                <td colSpan='4px'>
+                                                    <Load />
+                                                </td>
+                                            </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>

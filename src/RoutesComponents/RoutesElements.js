@@ -23,7 +23,6 @@ function RoutesElements() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Login />} />
                 <Route path='/dashboardTransfert' element={<Dashboard />} />
                 <Route path='/transaction' element={<Transactions />} />
                 <Route path='/clients' element={<Clients />} />
@@ -32,17 +31,19 @@ function RoutesElements() {
                 <Route path='/ressources' element={<Ressources />} />
                 <Route path='/ressources/add' element={<AddCode />} />
                 <Route path='/partenaires' element={<Partenaires />} />
-                <Route path='/inscription' element={<Inscription />} />
                 <Route path='/accueil' element={<AccueilPartenaire />} />
+
+
+                <Route path='/inscription' element={<Inscription />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/comptes" element={<Comptes />} />
                 <Route path='/config' element={<ConfigVideo />} />
                 <Route path='/videos' element={<Video />} />
+
                 <Route path='*' element={<PageNonFound />} />
-                <Route path='/corbeilleCodes' element={<CorbeilleCodes />} />
+                <Route path='/corbeilleCodes' element={<CorbeilleCodes />} />   
             </Routes>
         </BrowserRouter>
     )
 }
-
 export default RoutesElements
