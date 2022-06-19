@@ -1,6 +1,4 @@
 import { Modal } from "react-bootstrap";
-import { makeStyles } from "@material-ui/core/styles"
-import { Button } from "@material-ui/core";
 import "../assets/VerifCodeTransaction.css";
 import { Close, Done } from '@material-ui/icons'
 import axios from "axios";
@@ -9,12 +7,6 @@ import authHeader from '../auth/auth-header';
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
-
-const useStyles = makeStyles((theme) => ({
-    modal: {
-
-    },
-}))
 
 const AddCode = (props) => {
 
@@ -58,11 +50,9 @@ const AddCode = (props) => {
         setNbr(parseInt(e.target.value))
     }
 
-    const classes = useStyles();
-
     return (
         <div className="verifTransaction">
-            <Modal show={props.show} className={classes.modal} style={{ marginTop: "80px" }}>
+            <Modal show={props.show} style={{ marginTop: "80px" }}>
                 <Modal.Header>
                     <div className="col-12">
                         <div className='d-flex'>
@@ -74,7 +64,7 @@ const AddCode = (props) => {
                             </div>
                             <div className="col-2">
                                 <button
-                                    style={{ float: 'right', boxShadow: 'none', border: '1px solid silver'}}
+                                    style={{ float: 'right', boxShadow: 'none', border: '1px solid silver' }}
                                     className='btn'
                                     onClick={closeModalVerif}
                                 >
@@ -88,7 +78,7 @@ const AddCode = (props) => {
 
                     <div className="row">
                         <div className="col-6">
-                            <input className="form-control" placeholder="Entrer le nombre de fois" style={{ boxShadow: 'none' }} onChange={handleSelected} />
+                            <input className="form-control" type='number' placeholder="Entrer le nombre de fois" style={{ boxShadow: 'none' }} onChange={handleSelected} />
                         </div>
                         <div className="col-6">
                             <input className=' form-control'

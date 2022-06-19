@@ -10,11 +10,16 @@ import { Delete } from '@material-ui/icons';
 import { Link, NavLink } from 'react-router-dom';
 import AddCode from '../dialogs/AddCode';
 import swal from "sweetalert";
+import AddPartenaire from '../dialogs/AddPartenaire'
 
 
 function Partenaires() {
 
+    const initialiseValues = { id: "", nom: "", description: "", numTel: '', adresse: '', categoeyId: '' };
+    const [formData, setFormData] = useState(initialiseValues);
+
     const [data, setData] = useState([]);
+    const [show, setShow] = useState(false)
 
     const getAllPartenaires = () => {
         axios.get('http://localhost:5000/api/partenaires/v1/categories', { headers: authHeader() }).then(res => {
@@ -22,9 +27,87 @@ function Partenaires() {
         })
     }
 
+    const nom = formData.nom;
+    const numTel = formData.numTel;
+    const adresse = formData.adresse;
+    const categoeyId = formData?.categoeyId;
+
+    const submitData = () => {
+        if (formData.id) {
+            axios.put(`http://localhost:5000/api/partenaires/${formData.id}`, { nom, numTel, adresse, categoeyId }, { headers: authHeader() }).then(res => {
+                swal({ title: "Succès", icon: 'success', text: `Partenaire édité avec succès` });
+                closeModal()
+                getAllPartenaires()
+                setFormData(initialiseValues);
+            }).catch(err => {
+                console.log(err)
+            })
+        } else {
+            if (formData) {
+                axios.post('http://localhost:5000/api/partenaires/', { nom, numTel, adresse, categoeyId }, { headers: authHeader() }).then(res => {
+                    swal({ title: "Succès", icon: 'success', text: `Partenaire ajouté avec succès` });
+                    closeModal()
+                    getAllPartenaires()
+                    setFormData(initialiseValues);
+                }).catch(err => {
+                    swal({ title: "Avertissement", icon: 'warning', text: `${err.response.data.message[0].substring(18) || err.response.data.message[1].substring(18)}` });
+                    console.log(err.response.data.message)
+                })
+            } else {
+                alert('Veuillez remplir tous les champs svp')
+            }
+        }
+    }
+
+    const handleEdit = (val) => {
+        setFormData(val);
+        showModal();
+    }
+
+    const handleDelete = (id) => {
+
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer ce partenaire ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                axios.delete(`http://localhost:5000/api/partenaires/${id}`, { headers: authHeader() }).then(res => {
+                    console.log('RES :: ', res)
+                    getAllPartenaires();
+                }).catch(err => {
+                    console.log(err)
+                })
+                swal('Prix supprimé avec succès', {
+                    icon: "success",
+                });
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+
+    }
+
+    const onChange = (e) => {
+        console.log(formData)
+        const { value, id } = e.target;
+        setFormData({ ...formData, [id]: value });
+    };
+
+
     useEffect(() => {
         getAllPartenaires()
     }, [])
+
+    const showModal = () => {
+        setShow(true)
+    }
+
+    const closeModal = () => {
+        setShow(false)
+    }
 
     return (
         <div>
@@ -50,17 +133,15 @@ function Partenaires() {
                                                 <input type="search" className="form-control" placeholder="Rechercher..." />
                                             </div>
 
-                                            <NavLink to='addTransaction'>
-                                                <button className='btn btn-primary' style={{ cursor: 'pointer' }} >
-                                                    Ajouter un partenaire
-                                                </button>
-                                            </NavLink>
+                                            <button className='btn btn-primary' style={{ cursor: 'pointer' }} onClick={showModal} >
+                                                Ajouter un partenaire
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
 
 
-                                <div className='card'>
+                                <div className='card mt-2'>
                                     <table className='table table-borderless'>
                                         <thead>
                                             <tr>
@@ -75,7 +156,7 @@ function Partenaires() {
                                         </thead>
                                         <tbody>
                                             {
-                                                data && data.map((val, key) => {
+                                                data.length ? data.map((val, key) => {
                                                     return (
                                                         <tr>
                                                             <td>{key + 1}</td>
@@ -85,16 +166,20 @@ function Partenaires() {
                                                             <td>{val.adresse}</td>
                                                             <td>{val.statut === 0 ? "Non opérationnel" : "Opérationnel"}</td>
                                                             <td style={{ width: '240px' }}>
-                                                                <button className="btn">
+                                                                <button className="btn" onClick={(e) => handleDelete(val.id)}>
                                                                     <i className="fa fa-trash"></i> Supprimer
                                                                 </button>
-                                                                <button className="btn" style={{ marginLeft: "10px" }}>
+                                                                <button className="btn" style={{ marginLeft: "10px" }} onClick={(e) => handleEdit(val)}>
                                                                     <i className="fa fa-edit"></i> Editer
                                                                 </button>
                                                             </td>
                                                         </tr>
                                                     )
-                                                })
+                                                }) : <tr className="textPasData">
+                                                    <td colSpan='8px'>
+                                                        <Load />
+                                                    </td>
+                                                </tr>
                                             }
                                         </tbody>
                                     </table>
@@ -104,6 +189,13 @@ function Partenaires() {
                     </div>
                 </div>
             </div>
+            <AddPartenaire
+                show={show}
+                close={closeModal}
+                data={formData}
+                submitData={submitData}
+                onChange={onChange}
+            />
         </div>
     )
 }

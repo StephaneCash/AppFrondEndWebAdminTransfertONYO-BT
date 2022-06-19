@@ -36,8 +36,8 @@ function Login() {
         localStorage.setItem('user', JSON.stringify(res.data))
       }
 
-      if (res.data.role === 'admin') {
-        //navigate('/dashboardTransfert', { state: res.data })
+      if (res.data.role === 'Admin') {
+        navigate('/dashboardTransfert');
         //alert('admin')
       } else if (res.data.role === 'Partenaire') {
         navigate('/accueil')

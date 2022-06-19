@@ -3,14 +3,14 @@ import "../assets/VerifCodeTransaction.css";
 import { Close, Done } from '@material-ui/icons'
 
 
-const AddCategory = (props) => {
+const AddPrix = (props) => {
 
     const closeModalVerif = props.close;
     const submitData = props.submitData;
     const onChange = props.onChange;
-    const category = props.data;
+    const data = props.data;
 
-    const { id, nom, description } = category;
+    const { id, montant, description } = data;
 
     return (
         <div className="verifTransaction">
@@ -19,7 +19,7 @@ const AddCategory = (props) => {
                     <div className="col-12">
                         <div className='d-flex'>
                             <div className="col-10">
-                                <h5>{id ? 'Editer la catégoie ' + id : 'Ajout d\'une catégorie'}</h5>
+                                <h5>{id ? 'Editer le prix ' + id : 'Ajout d\'un prix'}</h5>
                             </div>
                             <div className="col-2">
                                 <button
@@ -37,14 +37,14 @@ const AddCategory = (props) => {
 
                     <div className="row">
                         <div className="col-12">
-                            <label>Entrer un nom</label>
+                            <label>Entrer un montant</label>
                             <input className=' form-control mt-1'
-                                placeholder="Entrer un nom"
-                                id='nom'
-                                type='test'
+                                placeholder="Entrer un montant"
+                                id='montant'
+                                type='number'
                                 onChange={e => onChange(e)}
                                 style={{ width: "100%", boxShadow: 'none' }}
-                                value={nom}
+                                value={montant}
                             />
 
                             <label className="mt-2">Entrer une description</label>
@@ -69,4 +69,4 @@ const AddCategory = (props) => {
     );
 }
 
-export default AddCategory;
+export default AddPrix;

@@ -16,6 +16,8 @@ function Ressources() {
     const [codes, setCodes] = useState([]);
     const [etatModal, setEtatModal] = useState(false);
 
+    const [search, setSearch] = useState('')
+
     const componentRef = useRef();
 
     const getAllCodes = () => {
@@ -52,7 +54,7 @@ function Ressources() {
 
     }
 
-    const handleVider = () =>{
+    const handleVider = () => {
         swal({
             title: "Avertissement.",
             text: "Etes-vous sûr de vouloir supprimer tous les codes ?",
@@ -88,6 +90,10 @@ function Ressources() {
         getAllCodes();
     }, [])
 
+    const handleValueSearch = (e) => {
+        setSearch(e.target.value)
+    }
+
     return (
         <>
             <div className='col-12'>
@@ -104,11 +110,11 @@ function Ressources() {
                                 <div className="card-body">
                                     <div className="d-flex">
                                         <div style={{ marginRight: '10px' }}>
-                                            <input type="search" className="form-control" placeholder="Rechercher..." />
+                                            <input type="search" onChange={handleValueSearch} className="form-control" placeholder="Rechercher..." />
                                         </div>
                                         <div style={{ marginRight: '10px' }}>
                                             <button className="btn btn-primary" onClick={showModalAddCode} style={{ width: "100%" }}>
-                                                Ajouter un nouveau code
+                                                Ajout de codes
                                             </button>
                                         </div>
                                         <div>
@@ -131,7 +137,7 @@ function Ressources() {
                                 <div className="card-header">Liste de codes {codes && codes.length}</div>
                                 <div className="grille" ref={componentRef}>
 
-                                    {codes && codes.map((value, key) => {
+                                    {codes.length ? codes.map((value, key) => {
                                         return (
                                             <div className='card' key={key} onClick={(e) => deleteCodeHandle(value.id)}>
                                                 <div className="col-12" style={{ border: '2px solid #0071c1', padding: '5px', cursor: "pointer" }}>
@@ -150,7 +156,12 @@ function Ressources() {
                                                 </div>
                                             </div>
                                         )
-                                    })}
+                                    }) : <tr className="textPasData">
+                                        <td>
+                                            <Load />
+                                        </td>
+                                    </tr>
+                                    }
 
                                 </div>
                             </div>

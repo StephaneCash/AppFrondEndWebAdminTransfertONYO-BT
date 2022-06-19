@@ -15,6 +15,8 @@ import Categories from '../pages/Categories';
 import Comptes from '../pages/Comptes';
 import ConfigVideo from '../pages/ConfigVideo';
 import Video from '../pages/Video';
+import PageNonFound from '../pages/PageNonFound';
+import CorbeilleCodes from "../pages/CorbeilleCodes";
 
 
 function RoutesElements() {
@@ -36,6 +38,8 @@ function RoutesElements() {
                 <Route path="/comptes" element={<Comptes />} />
                 <Route path='/config' element={<ConfigVideo />} />
                 <Route path='/videos' element={<Video />} />
+                <Route path='*' element={<PageNonFound />} />
+                <Route path='/corbeilleCodes' element={<CorbeilleCodes />} />
             </Routes>
         </BrowserRouter>
     )

@@ -33,9 +33,13 @@ function Inscription() {
     const handleSubmit = async (e) => {
 
         try {
-            const res = await axios.post('http://localhost:5000/api/users', { email, password, nom, role });
-            swal({ title: "Succès", icon: 'success', text: res.data.message });
-            navigate('/');
+            if (password === passRepete) {
+                const res = await axios.post('http://localhost:5000/api/users', { email, password, nom, role });
+                swal({ title: "Succès", icon: 'success', text: res.data.message });
+                navigate('/');
+            } else {
+                swal({ title: "Avertissement", icon: 'warning', text: "Les deux mots de passe ne correspondent pas." });
+            }
         } catch (err) {
             console.log(err)
             setError(err.response);
@@ -71,28 +75,20 @@ function Inscription() {
                     </div>
 
                     <div className='form-group'>
-                        <label>Choir le type de compte</label>
-                        <select className='form-control mt-1' onChange={selectHandle}>
-                            <option>Partenaire</option>
-                            <option>User-streaming</option>
-                        </select>
-                    </div>
-
-                    <div className='form-group'>
                         <label>Créer un mot de passe</label>
-                        <input className='form-control mt-1' style={styleTextField} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
+                        <input className='form-control mt-1' placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)}
                             label="Mot de passe" type="password" required />
                     </div>
 
 
                     <div className='form-group'>
                         <label>Répéter le mot de passe</label>
-                        <input className='mt-1 form-control' style={styleTextField} placeholder="Répéter le mot de passe"
+                        <input className='mt-1 form-control' placeholder="Répéter le mot de passe"
                             onChange={(e) => handlePassRepete(e)} type="password" required />
                     </div>
 
-                    {passRepete && email && password && nom ? <input type="submit" className='form-control' value="S'inscrire" onClick={handleSubmit} style={ButtonStyle} /> :
-                        <input type="submit" className='form-control' disabled value="S'inscrire" />
+                    {passRepete && password && email && nom ? <input type="submit" className='form-control mt-3' value="S'inscrire" onClick={handleSubmit} style={ButtonStyle} /> :
+                        <input type="submit" className='form-control mt-3' disabled value="S'inscrire" />
                     }
 
                     <Typography>
