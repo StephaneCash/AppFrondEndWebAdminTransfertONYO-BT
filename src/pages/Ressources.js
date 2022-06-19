@@ -137,7 +137,7 @@ function Ressources() {
                                 <div className="card-header">Liste de codes {codes && codes.length}</div>
                                 <div className="grille" ref={componentRef}>
 
-                                    {codes.length ? codes.map((value, key) => {
+                                    {codes.length && codes.map((value, key) => {
                                         return (
                                             <div className='card' key={key} onClick={(e) => deleteCodeHandle(value.id)}>
                                                 <div className="col-12" style={{ border: '2px solid #0071c1', padding: '5px', cursor: "pointer" }}>
@@ -156,13 +156,11 @@ function Ressources() {
                                                 </div>
                                             </div>
                                         )
-                                    }) : <tr className="textPasData">
-                                        <td>
-                                            <Load />
-                                        </td>
-                                    </tr>
-                                    }
+                                    })}
 
+                                </div>
+                                <div className="text-center">
+                                    {!codes.length && <Load />}
                                 </div>
                             </div>
                         </div>
