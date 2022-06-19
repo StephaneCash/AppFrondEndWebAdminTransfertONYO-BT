@@ -33,7 +33,7 @@ function CorbeilleCodes() {
             setTimeout(() => {
                 axios.delete(`http://localhost:5000/api/codesCopies/${val.id}`, { headers: authHeader() })
                     .then(res => {
-                        swal({ title: "Succès", icon: 'success', text: `Code ${val.id} vient d'être supprimé` });
+                        swal({ title: "Succès", icon: 'success', text: `Codes viennent d'être supprimé` });
                         getAllCodes();
                     })
                     .catch(err => {
