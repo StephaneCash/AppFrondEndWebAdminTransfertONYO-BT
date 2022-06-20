@@ -18,11 +18,11 @@ import Video from '../pages/Video';
 import PageNonFound from '../pages/PageNonFound';
 import CorbeilleCodes from "../pages/CorbeilleCodes";
 
-
 function RoutesElements() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path='/' element={<Login />} />
                 <Route path='/dashboardTransfert' element={<Dashboard />} />
                 <Route path='/transaction' element={<Transactions />} />
                 <Route path='/clients' element={<Clients />} />
@@ -41,7 +41,7 @@ function RoutesElements() {
                 <Route path='/videos' element={<Video />} />
 
                 <Route path='*' element={<PageNonFound />} />
-                <Route path='/corbeilleCodes' element={<CorbeilleCodes />} />   
+                <Route path='/corbeilleCodes' element={<CorbeilleCodes />} />
             </Routes>
         </BrowserRouter>
     )

@@ -2,12 +2,9 @@ import React from 'react'
 import Leftbar from '../components/Leftbar'
 import Navbar from '../components/Navbar'
 import '../assets/Transactions.css'
-import { Card, TextField } from '@material-ui/core'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { Close, DoneAll, Pending } from '@mui/icons-material'
-import { Edit, Info, AddCircle, Group, Delete, ClosedCaption, } from '@material-ui/icons'
-import { Button, } from '@mui/material';
+import { Close, Group   } from '@mui/icons-material'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { NavLink } from 'react-router-dom'
 import VerifCodeTransaction from '../dialogs/VerifCodeTransaction'
@@ -33,78 +30,13 @@ function Users() {
         axios.get("http://localhost:5000/api/users", { headers: authHeader() }).then(res => {
             if (res.data) {
                 setData(res.data.data)
-                console.log('RESULT:', res.data.data)
             }
         }).catch(error => {
             console.log(error)
         })
     }
 
-    const verifCode = (code, id) => {
-        setCode(code);
-        setId(id);
-        setShowModalVerif(true);
-        setEtat(1);
-    }
-
-    const onChange = (e) => {
-        if (e.target.value === "") {
-            setVerifInput(true)
-        } else {
-            setValueInputCode(e.target.value);
-            setVerifInput(false)
-        }
-    }
-
-    const confirmVerif = () => {
-        if (verifInput) {
-            setEtat(4);
-        } else {
-            if (code === valueInputCode) {
-                setEtat(2);
-                setShowModalVerif(false);
-                axios.put(`http://localhost:5000/api/transactions/${id}`, { statut: 1 }, { headers: authHeader() }).then(res => {
-                    getAllTransaction()
-                }).catch(err => {
-                    console.log('ERROR : ', err);
-                })
-            } else {
-                setEtat(3)
-            }
-        }
-    }
-
-    // Mettre à jour une transaction
-
-    const handleUpdateTransaction = (id) => {
-        alert(id)
-    }
-
-    const stopperTransaction = (id) => {
-
-        swal({
-            title: "Avertissement.",
-            text: "Etes-vous sûr de vouloir bloquer cette transaction ?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then((willDelete) => {
-            if (willDelete) {
-                axios.put(`http://localhost:5000/api/transactions/${id}`, { statut: 3 }, { headers: authHeader() }).then(res => {
-                    getAllTransaction()
-                }).catch(err => {
-                    console.log('ERROR : ', err);
-                })
-                swal('Transaction bloquée avec succès', {
-                    icon: "success",
-                });
-            }
-        }).catch((error) => {
-            console.log(error);
-        })
-
-    }
-
+   
     const closeModalVerif = () => {
         setShowModalVerif(false);
     }

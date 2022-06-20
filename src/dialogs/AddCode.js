@@ -53,14 +53,11 @@ const AddCode = (props) => {
     return (
         <div className="verifTransaction">
             <Modal show={props.show} style={{ marginTop: "80px" }}>
-                <Modal.Header>
+                <Modal.Header style={{ backgroundColor: '#0071c1', color: '#fff' }}>
                     <div className="col-12">
                         <div className='d-flex'>
                             <div className="col-10">
                                 <h5>Création du code</h5>
-                                <h6 style={{ marginTop: "30px" }} id="h6">
-                                    Entrer le montant pour le code
-                                </h6>
                             </div>
                             <div className="col-2">
                                 <button
@@ -74,13 +71,15 @@ const AddCode = (props) => {
                         </div>
                     </div>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style={{ padding: '40px 20px' }}>
 
                     <div className="row">
                         <div className="col-6">
+                            <label>Le nombre de fois à produire </label>
                             <input className="form-control" type='number' placeholder="Entrer le nombre de fois" style={{ boxShadow: 'none' }} onChange={handleSelected} />
                         </div>
                         <div className="col-6">
+                            <label>Entrer le montant</label>
                             <input className=' form-control'
                                 placeholder="Entrer le montant"
                                 type='number'
@@ -94,18 +93,16 @@ const AddCode = (props) => {
                             </div>
                         </div>
                     </div>
-
+                </Modal.Body>
+                <Modal.Footer>
                     <button className="btn"
                         onClick={ajouterCode}
                         style={{
                             marginTop: '10px',
-                            backgroundColor: "red", color: 'white', width: "100%",
+                            backgroundColor: "red", color: 'white', width: "auto"
                         }}>
                         Ajouter
                     </button>
-
-                </Modal.Body>
-                <Modal.Footer style={{ paddingRight: "30px" }}>
                 </Modal.Footer>
             </Modal>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Leftbar from '../components/Leftbar'
 import Navbar from '../components/Navbar'
 import swal from "sweetalert";
@@ -14,31 +14,48 @@ function AccueilPartenaire() {
     const [adresse, setAdresse] = useState('')
     const [numTel, setTel] = useState("");
     const [desc, setDesc] = useState('')
+    const [categories, setCategories] = useState([])
+
+    const [cat, setCat] = useState(0)
 
     let navigate = useNavigate();
 
     const [montant, setMontant] = useState(0);
+    const [id, setId] = useState(0)
 
-    const compteAdd = () => {
-        axios.post('http://localhost:5000/api/comptes/', { montant }, { headers: authHeader() }).then(res => {
-
+    const getAllCategories = () => {
+        axios.get('http://localhost:5000/api/categories', { headers: authHeader() }).then(res => {
+            setCategories(res.data)
         }).catch(err => {
-            console.log(err)
+            console.log('ERROR : ', err)
         })
     }
 
+    useEffect(() => {
+        getAllCategories()
+    }, [])
+
     const submitData = () => {
         if (nom) {
-            axios.post('http://localhost:5000/api/partenaires/', { nom, adresse, numTel, desc }, { headers: authHeader() }).then(res => {
+            axios.post('http://localhost:5000/api/partenaires/', { nom, adresse, numTel, desc, categoryId: cat, validate: 1 }, { headers: authHeader() }).then(res => {
                 swal({ title: "Succès", icon: 'success', text: `Vos données ont été soumises avec succès` });
-                compteAdd()
+
+                axios.post('http://localhost:5000/api/comptes/', { montant, nom: 'Compte-Partenaire', partenaireId: res.data.data.id }, { headers: authHeader() }).then(res => {
+
+                }).catch(err => {
+                    console.log(err)
+                })
                 if (res.data) {
-                    navigate('/comptes');
+                    //navigate('/comptes');
                 }
             }).catch(err => {
                 console.log(err)
             })
         }
+    }
+
+    const onChange = (e) => {
+        setCat(e.target.value)
     }
 
     return (
@@ -82,6 +99,25 @@ function AccueilPartenaire() {
                                                         <input type="text" className="form-control" placeholder="Entrer une adresse"
                                                             onChange={(e) => setAdresse(e.target.value)} />
                                                     </div>
+
+                                                    <label>Choisir une catégorie</label>
+                                                    <select className='form-control' id="categoryId"
+                                                        onChange={e => onChange(e)}
+                                                        style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '5px' }}>
+                                                        <option>--Choisir une option--</option>
+                                                        {
+
+                                                            categories ?
+                                                                categories.map(val => {
+                                                                    return (
+                                                                        <>
+                                                                            <option key={val.id} value={val.id}>{val.nom}</option>
+                                                                        </>
+                                                                    )
+                                                                })
+                                                                : ""
+                                                        }
+                                                    </select>
 
                                                     <div className='form-group mt-1'>
                                                         <label>Description</label>

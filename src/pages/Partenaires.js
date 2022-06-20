@@ -30,7 +30,7 @@ function Partenaires() {
     const nom = formData.nom;
     const numTel = formData.numTel;
     const adresse = formData.adresse;
-    const categoeyId = formData?.categoeyId;
+    const categoeyId = formData.categoeyId;
 
     const submitData = () => {
         if (formData.id) {

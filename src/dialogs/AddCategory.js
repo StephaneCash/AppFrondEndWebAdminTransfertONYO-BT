@@ -15,7 +15,7 @@ const AddCategory = (props) => {
     return (
         <div className="verifTransaction">
             <Modal show={props.show} style={{ marginTop: "80px" }}>
-                <Modal.Header>
+                <Modal.Header style={{ backgroundColor: '#0071c1', color: '#fff' }}>
                     <div className="col-12">
                         <div className='d-flex'>
                             <div className="col-10">
@@ -33,7 +33,7 @@ const AddCategory = (props) => {
                         </div>
                     </div>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style={{ padding: '40px 20px' }}>
 
                     <div className="row">
                         <div className="col-12">
@@ -52,17 +52,15 @@ const AddCategory = (props) => {
                         </div>
                     </div>
 
+                </Modal.Body>
+                <Modal.Footer>
                     <button className="btn"
                         onClick={submitData}
                         style={{
-                            marginTop: '10px',
-                            backgroundColor: "red", color: 'white', width: "100%",
+                            backgroundColor: "red", color: 'white', width: "auto",
                         }}>
                         {id ? "Editer" : "Ajouter"}
                     </button>
-
-                </Modal.Body>
-                <Modal.Footer style={{ paddingRight: "30px" }}>
                 </Modal.Footer>
             </Modal>
         </div>

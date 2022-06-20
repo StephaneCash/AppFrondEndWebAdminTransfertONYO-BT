@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Grid, Paper, Avatar, TextField, FormControlLabel, Button, Typography, Link } from "@material-ui/core"
-import Checkbox from '@mui/material/Checkbox';
+import { Grid, Paper, Typography, Link } from "@material-ui/core"
 import '../assets/Login.css';
 import logo from '../images/logo.jpeg';
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import authHeader from '../auth/auth-header';
+import swal from "sweetalert";
 
 
 function Login() {
@@ -23,9 +24,14 @@ function Login() {
   const styleTextField = { marginBottom: '10px' }
   const ButtonStyle = { margin: '8px 0', backgroundColor: 'red', color: '#fff', boxShadow: 'none', content: 'Se connecter' }
 
-  const formControlLabel = {
-    marginLeft: 0,
-    marginBottom: '15px'
+  const [montant, setMontant] = useState(0);
+
+  const compteAdd = () => {
+    axios.post('http://localhost:5000/api/comptes/', { montant, userId: user.id }, { headers: authHeader() }).then(res => {
+      navigate('/dashboardTransfert');
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   const handleSubmit = async (e) => {
@@ -37,7 +43,9 @@ function Login() {
       }
 
       if (res.data.role === 'Admin') {
+        //console.log("user : ", res)
         navigate('/dashboardTransfert');
+        //compteAdd()
         //alert('admin')
       } else if (res.data.role === 'Partenaire') {
         navigate('/accueil')
@@ -48,6 +56,7 @@ function Login() {
     } catch (err) {
       console.log(err)
       setError(err.response);
+      swal({ title: "Avertissement", icon: 'warning', text: "Erreur de connexion au serveur." });
     }
   }
 
@@ -73,18 +82,7 @@ function Login() {
               required />
           </div>
 
-          <FormControlLabel
-            style={formControlLabel}
-            control={
-              <Checkbox
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label="Se souvenir de moi"
-          />
-
-          <input type="submit" className='form-control' value="Se connecter" onClick={handleSubmit} style={ButtonStyle} />
+          <input type="submit" className='form-control mt-3' value="Se connecter" onClick={handleSubmit} style={ButtonStyle} />
 
           <Typography>
             <Link href="#">

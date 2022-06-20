@@ -28,8 +28,7 @@ function Inscription() {
     const selectHandle = (e) => {
         setRole(e.target.value)
     }
-
-
+    
     const handleSubmit = async (e) => {
 
         try {

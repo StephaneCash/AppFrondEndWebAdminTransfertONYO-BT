@@ -6,9 +6,8 @@ import '../assets/Ressources.css';
 import authHeader from '../auth/auth-header';
 import { Card } from '@material-ui/core';
 import Load from '../components/Load';
-import { Delete, ToggleOff } from '@material-ui/icons';
+import { ToggleOff } from '@material-ui/icons';
 import { Link, NavLink } from 'react-router-dom';
-import swal from "sweetalert";
 import { ToggleOn } from '@mui/icons-material';
 
 
@@ -51,6 +50,39 @@ function Comptes() {
         }
     })
 
+    const [dataUser, setDataUser] = useState([])
+    const [montantUser, setMontantUser] = useState(0)
+
+    const getComptes = () => {
+        axios.get("http://localhost:5000/api/users", { headers: authHeader() }).then(res => {
+            if (res.data) {
+                setDataUser(res.data.data)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    useEffect(() => {
+        getComptes();
+    }, [])
+
+    const dataComptesU = () => {
+        dataUser.map((val => {
+            if (val.role === 'Admin') {
+                val.comptes.map((res => {
+                    setMontantUser(res.montant)
+                }))
+            }
+        }))
+    }
+
+    useEffect(() => {
+        dataComptesU()
+    })
+
+    const userRole = JSON.parse(localStorage.getItem('user'));
+    console.log(partenaires)
     return (
         <>
             <div className='col-12'>
@@ -71,11 +103,11 @@ function Comptes() {
                                             Votre solde
                                             <br />
                                             <h5 className='valueCompte'>
-                                                {
-                                                    etatClic === false ? "******"
-                                                        : partenaires && partenaires[max - 1].comptes.map((val, key) => {
-                                                            return <> {val.montant} <span style={{ color: 'red' }}>OBT</span></>
-                                                        })
+                                                {etatClic ?
+                                                    userRole.role === 'Admin' ? montantUser :
+                                                    partenaires[max - 1]?.comptes?.map((val, key) => {
+                                                        return <> {val.montant} <span style={{ color: 'red' }}>OBT</span></>
+                                                    }) : "******"
                                                 }
                                             </h5>
                                         </h6>
