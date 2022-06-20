@@ -1,4 +1,4 @@
-import { Dashboard } from "@material-ui/icons";
+import { Dashboard, DriveEta } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import '../assets/Leftbar.css';
 import { useState, useEffect } from "react";
@@ -9,6 +9,8 @@ const Leftbar = () => {
 
     const [showTransfet, setShowTransfert] = useState(false)
     const [changeBtn, setChangeBtn] = useState(false);
+
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const handleTransfert = () => {
         setShowTransfert(!showTransfet);
@@ -22,6 +24,13 @@ const Leftbar = () => {
     return (
         <div className="menuLeft">
             <div className="vertical-menu">
+                <div style={{ border: '1px solid silver', padding: '5px', margin: '5px', color: "silver" }}>
+                    <div className='mb-3'>
+                        <i className="fa fa-user-o fa-2x mt-2" style={{ marginLeft: '45%' }}></i>
+                        <div className="text" style={{ marginLeft: '15%' }}><h5>Salut {user?.nom},</h5></div>
+                    </div>
+                </div>
+
                 {roleUser().role === 'Partenaire'
                     ? <NavLink to="/accueil" >
                         <div className='d-flex'>

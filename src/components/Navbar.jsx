@@ -24,6 +24,10 @@ function Navbar() {
 
   const classes = useStyles();
 
+  const deconnectHandle = () => {
+    alert('Vous serez déconnecté dans 10 sec')
+  }
+
   return (
     <div className='navbar'>
       <AppBar style={{ backgroundColor: '#fff' }}>
@@ -40,7 +44,8 @@ function Navbar() {
             <Badge badgeContent={7} color="secondary" className={classes.badge}>
               <Notifications style={{ color: "#333" }} />
             </Badge>
-            <Avatar style={{ backgroundColor: "#555", marginTop: '-10px', marginLeft: '25px' }} alt={'O'} src="s" />
+            
+            <button className="btn" onClick={deconnectHandle}>Déconnexion</button>
           </div>
         </Toolbar>
       </AppBar>
