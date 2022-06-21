@@ -78,7 +78,32 @@ function Politiques() {
                                     <ul>
                                         <li>Informations sur l'inscription et l'utilisation : lorsque vous vous inscrivez pour
                                             utiliser nos Services en créant un Compte, nous collectons les Données personnelles nécessaires pour vous proposer et vous fournir les Services que vous demandez. Selon les Services que vous choisissez, nous pouvons vous demander de nous communiquer vos nom, adresse postale, numéro de téléphone, adresse email et informations d'identification pour créer un Compte. Nous pouvons aussi vous demander de nous fournir des
-                                            Données personnelles supplémentaires lorsque vous utilisez nos Services</li>
+                                            Données personnelles supplémentaires lorsque vous utilisez nos Services
+                                        </li>
+                                        <li>
+                                            Informations sur les transactions et l'expérience : lorsque vous utilisez nos Services ou accédez à nos Sites, par exemple pour effectuer des achats auprès de marchands, recevoir de l'argent, traiter des paiements ou envoyer de l'argent à vos proches, nous collectons des informations sur la transaction, ainsi que d'autres informations associées à la transaction, telles que le montant envoyé ou demandé, le montant payé pour les produits ou services, des informations sur le marchand, y compris des informations sur les instruments de paiement utilisés pour effectuer la transaction, des informations sur l'appareil, des données
+                                            techniques sur l'utilisation et des informations de géolocalisation.
+                                        </li>
+                                        <li>
+                                            Données personnelles sur les participants : lorsque vous utilisez nos Services ou accédez à nos Sites, nous collectons les Données
+                                            personnelles que vous nous fournissez sur les participants associés à la transaction.
+                                        </li>
+                                        <li>
+                                            Envoyer ou demander de l'argent : lorsque vous envoyez ou demandez de l'argent via les Services, nous collectons des Données personnelles telles que le nom, l'adresse postale, le numéro de téléphone et les informations de compte du
+                                            participant qui reçoit de l'argent de votre part ou vous envoie de l'argent. Les Données personnelles collectées sur un participant peuvent varier selon les Services que vous utilisez pour envoyer ou demander de l'argent.
+                                        </li>
+                                        <li>
+                                            Payer ou demander à un tiers de payer une facture : si vous utilisez nos Services pour payer une facture au bénéfice d'un tiers ou si vous demandez à un Utilisateur de payer une facture pour votre compte, nous collectons des Données personnelles sur le titulaire du compte, telles que le nom, l'adresse postale, le numéro de téléphone, l'adresse email et le numéro de compte,
+                                            de la facture que vous souhaitez payer ou dont vous demandez le paiement.
+                                        </li>
+                                        <li>
+                                            Créditer vos comptes : si vous utilisez nos Services pour créditer votre Compte ou tout autre compte en votre possession, ou si vous demandez à un Utilisateur de créditer l'un de vos comptes, nous pourrons collecter des Données personnelles auprès de vous concernant ledit Utilisateur, ou auprès dudit Utilisateur vous concernant, afin de donner suite à la demande. Par exemple, si vous utilisez nos Services pour recharger un téléphone portable ou pour créditer votre compte mobile, nous pourrons collecter des Données personnelles et d'autres
+                                            informations, y compris le numéro du compte mobile, auprès de l'autre participant.
+                                        </li>
+                                        <li>
+                                            Informations concernant votre profil public, vos
+                                            proches et vos contacts : pour vous aider à effectuer des transactions avec vos proches et vos contacts, nous pourrons vous proposer d'associer les
+                                        </li>
                                     </ul>
                                 </p>
 
