@@ -33,6 +33,16 @@ function Comptes() {
         })
     }
 
+    const [users, setUsers] = useState([])
+
+    const getUsers = () => {
+        axios.get('http://localhost:5000/api/users/', { headers: authHeader() }).then(res => {
+            setUsers(res.data.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     const handleClick = () => {
         setEtatClic(!etatClic)
     }
@@ -40,6 +50,7 @@ function Comptes() {
     useEffect(() => {
         getComptePartenaires()
         getCompte()
+        getUsers()
     }, [])
 
     let max = 0;
@@ -81,8 +92,22 @@ function Comptes() {
         dataComptesU()
     })
 
+    const [id, setId] = useState(0)
+    const [compteP, setCompteP] = useState({})
+
+    useEffect(() => {
+        partenaires.forEach(el => {
+            setId(el.id)
+        })
+    }, [])
+
+
     const userRole = JSON.parse(localStorage.getItem('user'));
-    console.log(partenaires)
+
+    //console.log(' ID localhost : ', partenaires
+
+
+
     return (
         <>
             <div className='col-12'>
@@ -96,7 +121,7 @@ function Comptes() {
                         </div>
                         <div className="col-12" style={{ marginTop: '80px' }}>
                             <div className="card ressources">
-                                <div className="card-header"><h5>Compte ONYO-BT</h5></div>
+                                <div className="card-header"><h5>{compteP?.nom && compteP.nom}</h5></div>
                                 <Card className="p-3 mt-2 mb-2">
                                     <div className='d-flex'>
                                         <h6>
@@ -105,9 +130,12 @@ function Comptes() {
                                             <h5 className='valueCompte'>
                                                 {etatClic ?
                                                     userRole.role === 'Admin' ? montantUser :
-                                                    partenaires[max - 1]?.comptes?.map((val, key) => {
-                                                        return <> {val.montant} <span style={{ color: 'red' }}>OBT</span></>
-                                                    }) : "******"
+                                                    comptes.map(val=>{
+                                                        if(val.partenaireId == id){
+                                                            return val.montant
+                                                        }
+                                                    }) : '****'
+                                                    
                                                 }
                                             </h5>
                                         </h6>

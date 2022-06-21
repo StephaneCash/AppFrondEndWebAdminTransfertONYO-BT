@@ -1,9 +1,10 @@
 import React from 'react'
 import AppBar from '@mui/material/AppBar';
-import { Toolbar, Badge, makeStyles, Avatar } from "@material-ui/core";
+import { Toolbar, Badge, makeStyles } from "@material-ui/core";
 import { Menu, Mail, Notifications } from "@material-ui/icons";
 import '../assets/Navbar.css';
 import logo from '../images/logo.jpeg'
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   tooBar: {
@@ -24,8 +25,11 @@ function Navbar() {
 
   const classes = useStyles();
 
+  let navigate = useNavigate()
+
   const deconnectHandle = () => {
-    alert('Vous serez déconnecté dans 10 sec')
+    localStorage.removeItem('user');
+    navigate('/')
   }
 
   return (
@@ -44,7 +48,7 @@ function Navbar() {
             <Badge badgeContent={7} color="secondary" className={classes.badge}>
               <Notifications style={{ color: "#333" }} />
             </Badge>
-            
+
             <button className="btn" onClick={deconnectHandle}>Déconnexion</button>
           </div>
         </Toolbar>

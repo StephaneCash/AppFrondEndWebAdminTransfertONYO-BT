@@ -108,6 +108,13 @@ const Leftbar = () => {
                                 <div className="text">Comptes</div>
                             </div>
                         </NavLink>
+
+                        <NavLink to="/politiques">
+                            <div className='d-flex'>
+                                <div className="icon"><i className="fa fa-user-secret "></i></div>
+                                <div className="text">Politique de <br />confidentialité</div>
+                            </div>
+                        </NavLink>
                     </> : <>
                         <NavLink to="/transaction">
                             <div className='d-flex'>
@@ -119,6 +126,13 @@ const Leftbar = () => {
                             <div className='d-flex'>
                                 <div className="icon"><i className="fa fa-lock"></i></div>
                                 <div className="text">Comptes</div>
+                            </div>
+                        </NavLink>
+
+                        <NavLink to="/politiques">
+                            <div className='d-flex'>
+                                <div className="icon"><i className="fa fa-user-secret "></i></div>
+                                <div className="text">Politique de <br /> confidentialité</div>
                             </div>
                         </NavLink>
 

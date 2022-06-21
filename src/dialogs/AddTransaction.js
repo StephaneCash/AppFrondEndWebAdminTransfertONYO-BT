@@ -190,9 +190,7 @@ function AddTransaction() {
                                             <h5 className='valueCompte'>
                                                 {
                                                     etatClic === false ? "******"
-                                                        : partenaires.length && partenaires[max - 1]?.comptes.map((val, key) => {
-                                                            return <> {val?.montant} <span style={{ color: 'red' }}>OBT</span></>
-                                                        })
+                                                        : "1500 OBT"
                                                 }
                                             </h5>
                                         </h6>

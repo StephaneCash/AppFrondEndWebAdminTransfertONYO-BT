@@ -17,6 +17,8 @@ import ConfigVideo from '../pages/ConfigVideo';
 import Video from '../pages/Video';
 import PageNonFound from '../pages/PageNonFound';
 import CorbeilleCodes from "../pages/CorbeilleCodes";
+import Politiques from "../pages/Politiques";
+
 
 function RoutesElements() {
     return (
@@ -42,6 +44,7 @@ function RoutesElements() {
 
                 <Route path='*' element={<PageNonFound />} />
                 <Route path='/corbeilleCodes' element={<CorbeilleCodes />} />
+                <Route path='/politiques' element={<Politiques />} />
             </Routes>
         </BrowserRouter>
     )
