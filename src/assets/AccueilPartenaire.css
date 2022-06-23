@@ -6,3 +6,103 @@
     margin-right: 10px;
     padding: 5px;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+
+.sidebar {
+    height: 100vh;
+    width: 260px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    background-color: #111b21;
+    color: #555;
+    overflow-y: auto;
+    transition: right 0.8s;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0rem 1rem;
+}
+
+.sidebar-menu {
+    padding: 1rem;
+}
+
+.sidebar ul li {
+    margin-bottom: 1.3rem;
+}
+
+.main-content {
+    position: relative;
+    transition: 0.5s;
+    margin-left: auto;
+}
+
+main {
+    padding: 14px 25px;
+}
+
+.PrivateNotchedOutline-root-4:focus{
+    padding-bottom: 5px !important;
+}
+
+.recent {
+    margin-bottom: 3rem;
+    border: 1px solid silver;
+    height: auto;
+    background-color: #fff;
+    transition: left 0.8s;
+}
+
+.MuiInputBase-input:focus{
+    border: red !important;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .sidebar {
+        width: 60px;
+        z-index: 150;
+    }
+
+    .sidebar .sidebar-header h3 span, .sidebar ul li a span:last-child {
+        display: none;
+    }
+
+    .sidebar .sidebar-header, .sidebar ul li {
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-content {
+        margin-left: 50px !important;
+    }
+
+    .main-content header {
+        left: 60px;
+        width: cal(100% - 60px);
+    }
+}
+
+@media (max-width: 600px){
+   .sidebar{
+       width: 0 !important;
+   }
+
+   .main-content{
+       margin-left: 0 !important;
+   }
+}

@@ -50,8 +50,8 @@ function Partenaires() {
                     getAllPartenaires()
                     setFormData(initialiseValues);
                 }).catch(err => {
-                    swal({ title: "Avertissement", icon: 'warning', text: `${err.response.data.message[0].substring(18) || err.response.data.message[1].substring(18)}` });
-                    console.log(err.response.data.message)
+                    swal({ title: "Avertissement", icon: 'warning', text: `${err.response?.data.message.substring(8) || err.response.data.message[1].substring(18)}` });
+                    //console.log(err.response.data.message)
                 })
             } else {
                 alert('Veuillez remplir tous les champs svp')
@@ -158,7 +158,7 @@ function Partenaires() {
                                             {
                                                 data.length ? data.map((val, key) => {
                                                     return (
-                                                        <tr>
+                                                        <tr key={key}>
                                                             <td>{key + 1}</td>
                                                             <td>{val.nom}</td>
                                                             <td>{val.categories ? val.categories.nom : 'Aucune catégorie assigée'} </td>
