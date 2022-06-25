@@ -7,7 +7,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import authHeader from '../auth/auth-header';
 import swal from "sweetalert";
 
-
 function Login() {
 
   const [user, setUser] = useState(null);
@@ -24,16 +23,6 @@ function Login() {
   const styleTextField = { marginBottom: '10px' }
   const ButtonStyle = { margin: '8px 0', backgroundColor: 'red', color: '#fff', boxShadow: 'none', content: 'Se connecter' }
 
-  const [montant, setMontant] = useState(0);
-
-  const compteAdd = () => {
-    axios.post('http://localhost:5000/api/comptes/', { montant, userId: user.id }, { headers: authHeader() }).then(res => {
-      navigate('/dashboardTransfert');
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
   const handleSubmit = async (e) => {
     try {
       const res = await axios.post('http://localhost:5000/api/login', { email, password });
@@ -42,17 +31,23 @@ function Login() {
         localStorage.setItem('user', JSON.stringify(res.data))
       }
 
-      if (res.data.role === 'Admin') {
-        //console.log("user : ", res)
-        navigate('/dashboardTransfert');
-        //compteAdd()
-        //alert('admin')
-      } else if (res.data.role === 'Partenaire') {
-        navigate('/accueil')
-      } else if (res.data.role === 'User-streaming') {
-        alert('hh')
-      }
-      //console.log('RES : ', res.data);
+      axios.get(`http://localhost:5000/api/users`, { headers: authHeader() }).then(val => {
+        val?.data?.data.map(val => {
+          if (val.id === res?.data.id) {
+            localStorage.setItem('data', JSON.stringify(val))
+            if (res?.data.role === 'Admin') {
+              navigate('/dashboardTransfert', {
+                state: val
+              });
+            } else if (res.data.role === 'Partenaire') {
+              navigate('/dashboardTransfert')
+            }
+          }
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+
     } catch (err) {
       console.log(err)
       setError(err.response);

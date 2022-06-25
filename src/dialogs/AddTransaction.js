@@ -25,31 +25,35 @@ function AddTransaction() {
 
     // Data récupérés dans les inputs
 
-    const [dataForm, setDataForm] = useState({});
+    const userIdGet = JSON.parse(localStorage.getItem('user'));
+    const userId = userIdGet.id
+
+    const [dataForm, setDataForm] = useState({ userId: userId });
 
     const [categories, setCategories] = useState([]);
     const [isValdCategory, setIsValdCategory] = useState(false);
     const [validBenif, setValidBenif] = useState(false);
 
+    const [comptes, setComptes] = useState([])
+
     let navigate = useNavigate();
 
-    const [partenaires, setPartenaires] = useState([])
+    const compte = JSON.parse(localStorage.getItem('data'));
+    let idCompte = compte?.comptes[0]?.id
 
-    const getComptePartenaires = () => {
-        axios.get('http://localhost:5000/api/partenaires/v1/comptes/', { headers: authHeader() }).then(res => {
-            setPartenaires(res.data.data)
+    let max = 0;
+
+    const getComptes = () => {
+        axios.get(`http://localhost:5000/api/comptes/${idCompte}`, { headers: authHeader() }).then(res => {
+            setComptes(res.data)
         }).catch(err => {
             console.log(err)
         })
     }
 
-    let max = 0;
-
-    partenaires.forEach((res) => {
-        if (res.id > max) {
-            max = res.id
-        }
-    })
+    useEffect(() => {
+        getComptes()
+    }, [])
 
     const getAllCategories = () => {
         axios.get('http://localhost:5000/api/categories', { headers: authHeader() }).then(res => {
@@ -61,7 +65,6 @@ function AddTransaction() {
 
     useEffect(() => {
         getAllCategories()
-        getComptePartenaires()
         setDataForm({ ...dataForm, "devise": valueSelect })
     }, [])
 
@@ -79,7 +82,7 @@ function AddTransaction() {
         } else {
             if (e.target.value.match(pattern)) {
                 setValidNum(true)
-                setDataForm({ ...dataForm, "numTel": e.target.value })
+                setDataForm({ ...dataForm, "numTel": e.target.value, })
             } else {
                 setPattNum(true)
                 setValidNum(false)
@@ -105,11 +108,12 @@ function AddTransaction() {
     }
 
     const handleMontant = (e) => {
+        const value = e.target.value
         if (e.target.value === "") {
             setValidMontant(false)
         } else {
             setValidMontant(true);
-            setDataForm({ ...dataForm, "montant": e.target.value })
+            setDataForm({ ...dataForm, "montant": value });
         }
     }
 
@@ -136,30 +140,37 @@ function AddTransaction() {
         chrono()
     }, 1000);
 
+    const montant = compte?.comptes[0]?.montant;
+
     const handleSubmit = (e) => {
 
-        console.log(dataForm)
+        if (validNum && validMontant && isValdCategory) {
+            if (parseInt(montant) >= parseInt(dataForm.montant)) {
+                let netMontant = montant - dataForm.montant;
+                axios.put(`http://localhost:5000/api/comptes/${idCompte}`, { montant: netMontant }, { headers: authHeader() }).then(res => {
+
+                }).catch(err => {
+                    console.log('ERROR : ', err);
+                })
+
+                axios.post("http://localhost:5000/api/transactions", dataForm, { headers: authHeader() }).then((response) => {
+                    swal({ title: "Succès", icon: 'success', text: `Transaction effectuée avec succès` });
+                    navigate('/transaction');
+                }).catch((error) => {
+                    console.error(error.message)
+                });
+            } else {
+                swal({ title: "Avertissement", icon: 'error', text: `Transaction n'a pas réussi car votre solde est insuffisant.` });
+            }
+        }
 
         setClicBtn(true);
-        if (validNum && validMontant && isValdCategory) {
-            axios.post("http://localhost:5000/api/transactions", dataForm, { headers: authHeader() }).then((response) => {
-                swal({ title: "Succès", icon: 'success', text: `Transaction effectuée avec succès` });
-                navigate('/transaction');
-            }).catch((error) => {
-                console.error(error.message)
-            })
-        }
-    }
-
-    const handleSelect = (e) => {
-        setValueSelect(e.target.value);
-        setDataForm({ ...dataForm, 'devise': e.target.value })
     }
 
     const errSelectCategory = {
         fontSize: "12.5px",
         marginLeft: "15px",
-        color: 'gray'
+        color: 'red'
     }
 
     return (
@@ -190,7 +201,9 @@ function AddTransaction() {
                                             <h5 className='valueCompte'>
                                                 {
                                                     etatClic === false ? "******"
-                                                        : "1500 OBT"
+                                                        :
+                                                        <>  {comptes?.data?.montant}
+                                                            <span style={{ color: 'red' }}> {compte?.comptes[0]?.devise}</span> </>
                                                 }
                                             </h5>
                                         </h6>
@@ -222,41 +235,42 @@ function AddTransaction() {
                                             <h6>Nom du bénéficiaire</h6>
                                             <input onChange={handleNomBenef}
                                                 style={{ width: "100%", }}
-                                                helperText={
-                                                    clicBtn === true && (
-                                                        <>
-                                                            {validBenif === false ?
-                                                                "Veuillez renseigner un le nom du bénéficiaire svp !" :
-                                                                <Check style={{ fontSize: '15px', color: 'green', }} />}
-                                                        </>
-                                                    )
-                                                }
-                                                className='mb-2 form-control mt-1' placeholder='Entrer le nom du bénéficiaire' />
+                                                className='form-control mt-1' placeholder='Entrer le nom du bénéficiaire' />
+                                            {
+                                                clicBtn === true && (
+                                                    <>
+                                                        {validBenif === false ?
+                                                            <span style={errSelectCategory}>Veuillez renseigner un le nom du bénéficiaire svp !</span> :
+                                                            <Check style={{ fontSize: '15px', color: 'green', }} />}
+                                                    </>
+                                                )
+                                            }
                                         </div>
 
                                         <div className='col-6'>
                                             <h6>Numéro de téléphone</h6>
                                             <input onChange={handleNumPhone} type="text"
                                                 style={{ width: "100%", }}
-                                                helperText={
-                                                    clicBtn === true && (
-                                                        <>
-                                                            {validNum ?
-                                                                "" : pattNum === false ? "Veuillez renseigner un numéro de téléphone svp" :
-                                                                    "Entrer un numéro de téléphone valide"
-                                                            }
-                                                        </>
-                                                    )
-                                                }
-                                                className='mb-2 form-control mt-1' placeholder='Entrer un numéro de téléphone' />
+                                                className='form-control mt-1' placeholder='Entrer un numéro de téléphone' />
+                                            {
+                                                clicBtn === true && (
+                                                    <>
+                                                        {validNum ?
+                                                            "" : pattNum === false ?
+                                                                <span style={errSelectCategory}>Veuillez renseigner un numéro de téléphone svp !</span> :
+                                                                <span style={errSelectCategory}>Entrer un numéro de téléphone valide</span>
+                                                        }
+                                                    </>
+                                                )
+                                            }
                                         </div>
                                     </div>
 
 
                                     <div className='row'>
 
-                                        <div className='col-6'>
-                                            <h6>Choisir un motif</h6>
+                                        <div className='col-6 '>
+                                            <h6 className='mt-2'>Choisir un motif</h6>
                                             <select className='form-control'
                                                 onChange={(e) => (setDataForm({ ...dataForm, 'categoryId': e.target.value }),
                                                     handleCategory(e))} style={{ boxShadow: 'none', border: '2px solid #0071c0', marginTop: '5px' }}>
@@ -285,19 +299,21 @@ function AddTransaction() {
                                         </div>
 
                                         <div className='col-6'>
-                                            <h6>Montant</h6>
-                                            <input onChange={handleMontant}
+                                            <h6 className='mt-2'>Montant</h6>
+                                            <input onChange={(e) => {
+                                                handleMontant(e);
+                                            }}
                                                 style={{ width: "100%", }} type='number'
-                                                helperText={
-                                                    clicBtn === true && (
-                                                        <>
-                                                            {validMontant === false ?
-                                                                "Veuillez renseigner un montant svp !" :
-                                                                <Check style={{ fontSize: '15px', color: 'green', }} />}
-                                                        </>
-                                                    )
-                                                }
-                                                className="mt-1 mb-2 form-control" placeholder='Entrer un montant' />
+                                                className="mt-1 form-control" placeholder='Entrer un montant' />
+                                            {
+                                                clicBtn === true && (
+                                                    <>
+                                                        {validMontant === false ?
+                                                            <span style={errSelectCategory}>Veuillez renseigner un montant svp !</span> :
+                                                            <Check style={{ fontSize: '15px', color: 'green', }} />}
+                                                    </>
+                                                )
+                                            }
                                         </div>
                                     </div>
 

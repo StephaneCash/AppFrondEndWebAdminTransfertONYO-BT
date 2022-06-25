@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 
 import Leftbar from "../components/Leftbar";
-import NavBar from "../components/Navbar";
 import { Card, CardContent } from '@material-ui/core';
 import { Line, Bar } from "react-chartjs-2";
 import { Chart, registerables } from 'chart.js';
@@ -11,19 +10,40 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
 import AppsIcon from '@mui/icons-material/Apps';
-
+import authHeader from '../auth/auth-header';
 import PublicIcon from '@mui/icons-material/Public';
-
+import axios from 'axios'
 import '../assets/Dashboard.css';
 import Navbar from '../components/Navbar';
 Chart.register(...registerables);
 
 function Dashboard() {
 
-    const location = useLocation();
+    const { state } = useLocation();
 
-    //console.log('USER CONNECTED : ', location.state.data.nom)
+    const [data, setData] = useState([])
 
+    const userIdGet = JSON.parse(localStorage.getItem('user'));
+    const userId = userIdGet.id
+
+    console.log(userId)
+
+    const getAllTransaction = () => {
+        axios.get("http://localhost:5000/api/transactions/v1/categories", { headers: authHeader() }).then(res => {
+            if (res.data) {
+                setData(res.data)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    useEffect(() => {
+        getAllTransaction()
+    }, [])
+
+
+    console.log('DATA : ', data)
     const data4 = {
         labels: ['Nov 01', 'Nov 02', 'Nov 03', 'Nov 04', 'Nov 05', 'Nov 06', 'Nov 07', "Dec 1", "Dec4", 'Dec 6', 'Dec 7', 'Dec 8', 'Dec 9', 'Jan 1'],
         datasets: [
@@ -97,7 +117,13 @@ function Dashboard() {
                                                     <Link to='/transaction'>Transactions</Link>
                                                 </h6>
                                                 <hr />
-                                                <h4>12</h4>
+                                                <h4>
+                                                    {
+                                                        data.data && data?.data.map(res => {
+                                                            return res.userId == userId ? res.length : 0
+                                                        })
+                                                    }
+                                                </h4>
                                             </div>
                                             <div className='iconCard'>
                                                 <AttachMoneyIcon />

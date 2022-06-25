@@ -39,11 +39,14 @@ function Transactions() {
     })
   }
 
-  const verifCode = (code, id) => {
+  const [mt, setMt] = useState(0) // MONTANT RECUPERE DANS LA TABLE
+
+  const verifCode = (code, id, montant) => {
     setCode(code);
     setId(id);
     setShowModalVerif(true);
     setEtat(1);
+    setMt(montant)
   }
 
   const onChange = (e) => {
@@ -55,6 +58,23 @@ function Transactions() {
     }
   }
 
+  const [comptes, setComptes] = useState([])
+
+  const compte = JSON.parse(localStorage.getItem('data'));
+  let idCompte = compte?.comptes[0]?.id
+
+  const getComptes = () => {
+    axios.get(`http://localhost:5000/api/comptes/${idCompte}`, { headers: authHeader() }).then(res => {
+      setComptes(res.data)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  useEffect(() => {
+    getComptes()
+  }, [])
+
   const confirmVerif = () => {
     if (verifInput) {
       setEtat(4);
@@ -62,7 +82,12 @@ function Transactions() {
       if (code === valueInputCode) {
         setEtat(2);
         setShowModalVerif(false);
-        axios.put(`http://localhost:5000/api/transactions/${id}`, { statut: 1 }, { headers: authHeader() }).then(res => {
+        axios.put(`http://localhost:5000/api/comptes/${idCompte}`, { montant: parseInt(comptes?.data?.montant) + parseInt(mt) }, { headers: authHeader() }).then(res => {
+
+        }).catch(err => {
+          console.log('ERROR : ', err);
+        })
+        axios.put(`http://localhost:5000/api/transactions/${id}`, { statut: 1, }, { headers: authHeader() }).then(res => {
           getAllTransaction()
         }).catch(err => {
           console.log('ERROR : ', err);
@@ -73,10 +98,27 @@ function Transactions() {
     }
   }
 
-  // Mettre à jour une transaction
-
-  const handleUpdateTransaction = (id) => {
-    alert(id)
+  const debloquerTransaction = (id) => {
+    swal({
+      title: "Avertissement.",
+      text: "Etes-vous sûr de vouloir débloquer cette transaction ?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios.put(`http://localhost:5000/api/transactions/${id}`, { statut: 0 }, { headers: authHeader() }).then(res => {
+          getAllTransaction()
+        }).catch(err => {
+          console.log('ERROR : ', err);
+        })
+        swal('Transaction débloquée avec succès', {
+          icon: "success",
+        });
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
   const stopperTransaction = (id) => {
@@ -111,6 +153,9 @@ function Transactions() {
   useEffect(() => {
     getAllTransaction()
   }, [])
+
+  const userIdGet = JSON.parse(localStorage.getItem('user'));
+  const userId = userIdGet.id
 
   return (
     <div>
@@ -163,54 +208,75 @@ function Transactions() {
                       {
                         data.data ?
 
-                          data.data.filter(val => {
-                            return (
-                              val.exp_name.toLowerCase().includes(valSearch) ? val.exp_name.toLowerCase().includes(valSearch) : "Aucune donnée trouvée."
-                            )
-                          })
-                            .map((val, key) => {
-                              return (
-                                <tr key={key}>
-                                  <td>{val.id}</td>
-                                  <td>
-                                    {
-                                      etat === 2 && id === val.id && code === valueInputCode ? val.content_code : "***************"
-                                    }
-                                  </td>
-                                  <td>{val.exp_name}</td>
-                                  <td>
-                                    {val.statut === 0 && <span style={{ color: 'orane' }}>En cours...</span>}
-                                    {val.statut === 1 && <span style={{ color: 'green', }}>Effectuée. </span>}
-                                    {val.statut === 3 && <span style={{ color: "red", }}>Bloquée. </span>}
-                                  </td>
-                                  <td>
-                                    {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " " + val.devise : "***********"}
-                                  </td>
-                                  <td>{val.createdAt}</td>
-                                  <td style={{ maxWidth: '190px' }}>
+                          data?.data.length ?
 
-                                    <div className="box">
-                                      <input type='checkbox' id='checkbox' />
+                            data.data.filter(val => {
+                              return val.exp_name.toLowerCase().includes(valSearch) ? val.exp_name.toLowerCase().includes(valSearch) : "Aucune donnée trouvée."
 
-                                      <div className="menu">
-                                        <div className="menuItems" onClick={() => verifCode(val.content_code, val.id)} style={{ cursor: 'pointer' }}>
-                                          <DoneAll className="iconAction"
-                                          /> Vérifier
+                            }).map((val, key) => {
+                              if (val.userId === userId) {
+                                return (
+                                  <tr key={key}>
+                                    <td>{val.id}</td>
+                                    <td>
+                                      {
+                                        etat === 2 && id === val.id && code === valueInputCode ? val.content_code : "***************"
+                                      }
+                                    </td>
+                                    <td>{val.exp_name}</td>
+                                    <td>
+                                      {val.statut === 0 && <span style={{ color: 'orane' }}>En cours...</span>}
+                                      {val.statut === 1 && <span style={{ color: 'green', }}>Effectuée. </span>}
+                                      {val.statut === 3 && <span style={{ color: "red", }}>Bloquée. </span>}
+                                    </td>
+                                    <td>
+                                      {etat === 2 && id === val.id && code === valueInputCode ? val.montant + " " + val.devise : "***********"}
+                                    </td>
+                                    <td>{val.createdAt}</td>
+                                    <td style={{ maxWidth: '190px' }}>
+
+                                      <div className="box">
+                                        <input type='checkbox' id='checkbox' />
+
+                                        <div className="menu">
+                                          {val.statut === 3 ?
+                                            <div className="menuItems" style={{ cursor: 'pointer' }} onClick={(e) => debloquerTransaction(val.id)}>
+                                              <Close className="iconAction" />
+                                              Débloquer
+                                            </div> : <>
+                                              {val.statut === 1 ? <span style={{ color: 'green', marginLeft: '7px', backgroundColor: 'green', color: 'white', padding: '5px', borderRadius: '5px' }}>
+                                                Transaction effectuée</span> :
+                                                <>
+                                                  <div className="menuItems" onClick={() => verifCode(val.content_code, val.id, val.montant)} style={{ cursor: 'pointer' }}>
+                                                    <DoneAll className="iconAction"
+                                                    /> Vérifier
+                                                  </div>
+
+                                                  <div className="menuItems" style={{ cursor: 'pointer' }} onClick={(e) => stopperTransaction(val.id)}>
+                                                    <Close className="iconAction" />
+                                                    Stopper
+                                                  </div>
+                                                </>
+                                              }
+
+                                            </>
+                                          }
+
                                         </div>
-
-                                        <div className="menuItems" style={{ cursor: 'pointer' }} onClick={(e) => stopperTransaction(val.id)}>
-                                          <Close className="iconAction" />
-                                          Stopper
-                                        </div>
-
                                       </div>
-                                    </div>
 
-                                  </td>
-                                </tr>
-                              )
+                                    </td>
+                                  </tr>
+                                )
+                              }
                             })
 
+                            :
+                            <tr className="textPasData">
+                              <td colSpan='8px'>
+                                Aucune transaction disponible
+                              </td>
+                            </tr>
                           :
                           data.length === '0' ? "Aucune donnée enregistrée."
                             : <tr className="textPasData">

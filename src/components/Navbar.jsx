@@ -29,8 +29,11 @@ function Navbar() {
 
   const deconnectHandle = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('data');
     navigate('/')
   }
+
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className='navbar'>
@@ -42,6 +45,7 @@ function Navbar() {
             <h5 style={{ color: '#444' }}>ONYO-BT</h5>
           </div>
           <div className={classes.icons}>
+            <span style={{ color: '#333', marginRight: '5px' }}>Salut {user?.user.nom}</span>
             <Badge badgeContent={4} color="secondary" className={classes.badge}>
               <Mail style={{ color: "#333" }} />
             </Badge>

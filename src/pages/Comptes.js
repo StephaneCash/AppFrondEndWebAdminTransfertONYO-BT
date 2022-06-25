@@ -7,106 +7,33 @@ import authHeader from '../auth/auth-header';
 import { Card } from '@material-ui/core';
 import Load from '../components/Load';
 import { ToggleOff } from '@material-ui/icons';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ToggleOn } from '@mui/icons-material';
 
 
 function Comptes() {
 
-    const [comptes, setComptes] = useState([])
     const [etatClic, setEtatClic] = useState(false)
-    const [partenaires, setPartenaires] = useState([])
-
-    const getComptePartenaires = () => {
-        axios.get('http://localhost:5000/api/partenaires/v1/comptes/', { headers: authHeader() }).then(res => {
-            setPartenaires(res.data.data)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-
-    const getCompte = () => {
-        axios.get('http://localhost:5000/api/comptes/', { headers: authHeader() }).then(res => {
-            setComptes(res.data.data)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-
-    const [users, setUsers] = useState([])
-
-    const getUsers = () => {
-        axios.get('http://localhost:5000/api/users/', { headers: authHeader() }).then(res => {
-            setUsers(res.data.data)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
+    const [comptes, setComptes] = useState([])
 
     const handleClick = () => {
         setEtatClic(!etatClic)
     }
 
-    useEffect(() => {
-        getComptePartenaires()
-        getCompte()
-        getUsers()
-    }, [])
-
-    let max = 0;
-
-    partenaires.forEach((res) => {
-        if (res.id > max) {
-            max = res.id
-        }
-    })
-
-    const [dataUser, setDataUser] = useState([])
-    const [montantUser, setMontantUser] = useState(0)
+    const compte = JSON.parse(localStorage.getItem('data'));
+    let idCompte = compte?.comptes[0]?.id
 
     const getComptes = () => {
-        axios.get("http://localhost:5000/api/users", { headers: authHeader() }).then(res => {
-            if (res.data) {
-                setDataUser(res.data.data)
-            }
-        }).catch(error => {
-            console.log(error)
+        axios.get(`http://localhost:5000/api/comptes/${idCompte}`, { headers: authHeader() }).then(res => {
+            setComptes(res.data)
+        }).catch(err => {
+            console.log(err)
         })
     }
 
     useEffect(() => {
-        getComptes();
+        getComptes()
     }, [])
-
-    const dataComptesU = () => {
-        dataUser.map((val => {
-            if (val.role === 'Admin') {
-                val.comptes.map((res => {
-                    setMontantUser(res.montant)
-                }))
-            }
-        }))
-    }
-
-    useEffect(() => {
-        dataComptesU()
-    })
-
-    const [id, setId] = useState(0)
-    const [compteP, setCompteP] = useState({})
-
-    useEffect(() => {
-        partenaires.forEach(el => {
-            setId(el.id)
-        })
-    }, [])
-
-
-    const userRole = JSON.parse(localStorage.getItem('user'));
-
-    //console.log(' ID localhost : ', partenaires
-
-
 
     return (
         <>
@@ -121,7 +48,11 @@ function Comptes() {
                         </div>
                         <div className="col-12" style={{ marginTop: '80px' }}>
                             <div className="card ressources">
-                                <div className="card-header"><h5>{compteP?.nom && compteP.nom}</h5></div>
+                                <div className="card-header">
+                                    <h5>
+                                        Compte ONYO-BT pour {compte?.nom}
+                                    </h5>
+                                </div>
                                 <Card className="p-3 mt-2 mb-2">
                                     <div className='d-flex'>
                                         <h6>
@@ -129,13 +60,10 @@ function Comptes() {
                                             <br />
                                             <h5 className='valueCompte'>
                                                 {etatClic ?
-                                                    userRole.role === 'Admin' ? montantUser :
-                                                    comptes.map(val=>{
-                                                        if(val.partenaireId == id){
-                                                            return val.montant
-                                                        }
-                                                    }) : '****'
-                                                    
+                                                    <>  {comptes?.data?.montant}
+                                                        <span style={{ color: 'red' }}> {compte?.comptes[0]?.devise}</span> </>
+                                                    : '****'
+
                                                 }
                                             </h5>
                                         </h6>

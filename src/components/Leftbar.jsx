@@ -10,8 +10,6 @@ const Leftbar = () => {
     const [showTransfet, setShowTransfert] = useState(false)
     const [changeBtn, setChangeBtn] = useState(false);
 
-    const user = JSON.parse(localStorage.getItem('user'));
-
     const handleTransfert = () => {
         setShowTransfert(!showTransfet);
         setChangeBtn(!changeBtn);
@@ -24,20 +22,14 @@ const Leftbar = () => {
     return (
         <div className="menuLeft">
             <div className="vertical-menu">
-                <div style={{ border: '1px solid silver', padding: '5px', margin: '5px', color: "silver" }}>
-                    <div className='mb-3'>
-                        <i className="fa fa-user-o fa-2x mt-2" style={{ marginLeft: '45%' }}></i>
-                        <div className="text" style={{ marginLeft: '15%' }}><h5>Salut {user?.nom},</h5></div>
-                    </div>
-                </div>
 
                 {roleUser().role === 'Partenaire'
-                    ? <NavLink to="/accueil" >
-                        <div className='d-flex'>
-                            <div className="icon"><i className="fa fa-home"></i> </div>
-                            <div className="text"> Accueil</div>
-                        </div>
-                    </NavLink> : ''
+                    ? <NavLink to="/dashboardTransfert" >
+                    <div className='d-flex'>
+                        <div className="icon"><i className="fa fa-dashboard"></i> </div>
+                        <div className="text"> Dashboard</div>
+                    </div>
+                </NavLink>: ''
                 }
 
                 {roleUser().role === 'Admin' ?
@@ -112,7 +104,7 @@ const Leftbar = () => {
                         <NavLink to="/politiques">
                             <div className='d-flex'>
                                 <div className="icon"><i className="fa fa-user-secret "></i></div>
-                                <div className="text">Politique de <br />confidentialité</div>
+                                <div className="text">Politique de confid.</div>
                             </div>
                         </NavLink>
                     </> : <>
@@ -132,7 +124,7 @@ const Leftbar = () => {
                         <NavLink to="/politiques">
                             <div className='d-flex'>
                                 <div className="icon"><i className="fa fa-user-secret "></i></div>
-                                <div className="text">Politique de <br /> confidentialité</div>
+                                <div className="text">Politiques de confid.</div>
                             </div>
                         </NavLink>
 

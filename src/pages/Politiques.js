@@ -102,7 +102,20 @@ function Politiques() {
                                         </li>
                                         <li>
                                             Informations concernant votre profil public, vos
-                                            proches et vos contacts : pour vous aider à effectuer des transactions avec vos proches et vos contacts, nous pourrons vous proposer d'associer les
+                                            proches et vos contacts : pour vous aider à effectuer des transactions avec vos proches et vos contacts, nous pourrons vous proposer d'associer les informations de votre liste de contacts à votre Compte ou de rendre publiques les Préférences de votre Compte. Si vous associez le compte de votre appareil ou d'une plateforme de réseau social à votre Compte, nous utiliserons les informations de votre liste de contacts (par exemple, nom, adresse, adresse email) pour améliorer votre expérience lorsque vous utilisez les Services. Si les Préférences de votre Compte sont rendues publiques, d'autres utilisateurs pourront y accéder pour vous envoyer de l'argent en vous recherchant par votre nom, nom d'utilisateur, email ou numéro de mobile sur Onyo-bt. Votre photo leur permettra également de s'assurer qu'il s'agit bien de vous. Vous pouvez rendre privées les Préférences de votre Compte à tout moment
+                                            dans vos paramètres Onyo-bt.
+                                        </li>
+                                        <li>
+                                            Données personnelles que vous choisissez de nous communiquer pour obtenir des Services supplémentaires ou des Services en ligne spécifiques : si vous demandez ou utilisez une fonctionnalité facultative du Site, ou demandez des Services étendus ou toute autre fonctionnalité facultative, nous pourrons collecter des informations complémentaires vous concernant. Nous vous adresserons une notification spécifique au moment de la collecte si l'utilisation desdites Données personnelles ne rentre pas dans le cadre des utilisations prévues en vertu de la présente Politique de confidentialité.
+                                        </li>
+                                        <li>
+                                            Données personnelles vous concernant si vous utilisez des Services qui ne portent pas le nom de notre
+                                            marque : certains Services sont disponibles sans que vous ayez à vous connecter ou à ouvrir un Compte. Nous collectons des Données personnelles lorsque vous interagissez avec des marchands et effectuez des paiements en leur faveur à l'aide de nos services de paiement par carte qui ne portent pas le nom de marque Onyo-bt et lorsque vous payez avec Onyo-bt sans vous connecter à un compte. Dans le cadre desdits services de paiement, vous interagissez avec le marchand sur sa plateforme. Si vous êtes titulaire d'un compte ou si vous créez un Compte à une date ultérieure, nous pouvons recueillir des informations sur les transactions sans marque et les associer à votre Compte pour améliorer votre expérience client en tant que titulaire du compte, et à des fins de conformité et d'analyse. Si vous n'êtes pas titulaire d'un compte, nous collectons et stockons toutes les informations que vous fournissez et utilisons lesdites informations
+                                            conformément à la présente Politique de confidentialité.
+                                        </li>
+                                        <li>
+                                            Données personnelles vous concernant provenant de sources externes : nous obtenons des informations auprès de sources externes, telles que les marchands, les fournisseurs de données et les agences de crédit,
+                                            dans la mesure où la loi le permet.
                                         </li>
                                     </ul>
                                 </p>
