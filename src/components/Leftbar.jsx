@@ -32,7 +32,7 @@ const Leftbar = () => {
                 </NavLink>: ''
                 }
 
-                {roleUser().role === 'Admin' ?
+                {roleUser().role === 'Admin' || 'Partenaire' ?
                     <>
                         <NavLink to="/dashboardTransfert" >
                             <div className='d-flex'>
